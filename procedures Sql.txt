@@ -1,0 +1,5 @@
+PROCEDURE `RegistrarUsuario`(IN `nombre` VARCHAR(50), IN `contra` VARCHAR(50), IN `edad` INT(50), IN `genero` VARCHAR(50), IN `tipo` VARCHAR(50)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER INSERT INTO usuario (NombreUsu,Pass,Edad,Genero,TipoUsuario) VALUES (nombre,contra,edad,genero,tipo)
+
+
+
+CREATE PROCEDURE `EliminarUsuario`(IN `idus` INT(3), IN `nombre` VARCHAR(50), IN `genero` VARCHAR(50), IN `tipo` VARCHAR(50)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER DELETE FROM usuario WHERE idUsuario= idus
