@@ -3,3 +3,9 @@ PROCEDURE `RegistrarUsuario`(IN `nombre` VARCHAR(50), IN `contra` VARCHAR(50), I
 
 
 CREATE PROCEDURE `EliminarUsuario`(IN `idus` INT(3), IN `nombre` VARCHAR(50), IN `genero` VARCHAR(50), IN `tipo` VARCHAR(50)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER DELETE FROM usuario WHERE idUsuario= idus
+
+
+CREATE PROCEDURE `RegistrarMesa`(IN `idM` INT(3), IN `estado` VARCHAR(20)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER INSERT INTO mesa VALUES (idM,estado)
+
+DROP PROCEDURE `RegistrarMesa`; CREATE DEFINER=`root`@`localhost` PROCEDURE `RegistrarMesa`(IN `idM` INT(3), IN `estado` VARCHAR(20)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER INSERT INTO mesa(IdMesa,EdoMesa) VALUES (idM,estado)
+
