@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.ParseConversionEvent;
 
 /**
  *
@@ -17,19 +18,20 @@ import java.util.logging.Logger;
  */
 public class UsuarioSQL  extends Conexion {
     
-    public boolean Registrar(Usuario usr){
+    public boolean Registrar(user usr){
         try {
             PreparedStatement ps=null;
             Connection con = getConexion();
             
-            String sql="call RegistrarUsuario(?,?,?,?,?)";
+            String sql="call AgregarUsuario(?,?,?,?)";
+            //String sql=" INSERT INTO usuario (IdUsuario,Nombre,Contraseña,Edad) VALUES ("+usr.getIdUser()+",'"+usr.getName()+"','"+usr.getPass()+"',"+usr.getEdad()+")";
             //nombre,password,edad,genero,tipo
+            
             ps=con.prepareCall(sql);
-            ps.setString(1, usr.getNombreUsu());
-            ps.setString(2, usr.getPass());
-            ps.setInt(3, usr.getEdad());
-            ps.setString(4, usr.getGenero());
-            ps.setString(5,usr.getTipoUsuario());
+            ps.setInt(1, usr.getIdUser());//id
+            ps.setString(2, usr.getName());//nombre
+            ps.setString(3, usr.getPass());//contrase;a
+            ps.setInt(4, usr.getEdad());//edad
             ps.execute();
             return true;
      
@@ -43,7 +45,7 @@ public class UsuarioSQL  extends Conexion {
      
     }
     
-    public boolean Eliminar(Usuario usr){
+    /*public boolean Eliminar(Usuario usr){
      try {
             PreparedStatement ps=null;
             Connection con = getConexion();
@@ -68,7 +70,7 @@ public class UsuarioSQL  extends Conexion {
         }
      
     
-    }
+    }*/
     
     
     

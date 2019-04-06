@@ -17,7 +17,25 @@ public class PruebaDeConsultas {
 
     
     public static void main(String[] args) {
-            Usuario usuario= new Usuario();
+        user use=new user();
+        UsuarioSQL SqlU=new UsuarioSQL();
+        
+        use.setIdUser(1);
+        use.setName("Cesar");
+        use.setPass("1234");
+        use.setEdad(20);
+        
+        
+        if(SqlU.Registrar(use)){
+                    System.out.println("registro exitoso");
+                }else{
+                    System.out.println("error");
+                
+                }
+        
+        
+        
+        /*  Usuario usuario= new Usuario();
     UsuarioSQL SqlU= new UsuarioSQL();
     
         int op=0;
@@ -69,7 +87,7 @@ public class PruebaDeConsultas {
                 
                 break;
         
-        }
+        }*/
     }
     
 }
