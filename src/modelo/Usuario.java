@@ -8,7 +8,8 @@ package modelo;
 
 public class Usuario {
     private int idUsuario;
-    private String NombreUsu;
+    private String Nombre;
+    private String Usuario;
     private String Pass;
     private int edad;
     private String Genero;
@@ -31,12 +32,12 @@ public class Usuario {
         this.idUsuario = idUsuario;
     }
 
-    public String getNombreUsu() {
-        return NombreUsu;
+    public String getNombre() {
+        return Nombre;
     }
 
-    public void setNombreUsu(String NombreUsu) {
-        this.NombreUsu = NombreUsu;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     public int getEdad() {
@@ -61,6 +62,14 @@ public class Usuario {
 
     public void setTipoUsuario(String TipoUsuario) {
         this.TipoUsuario = TipoUsuario;
+    }
+
+    public String getUsuario() {
+        return Usuario;
+    }
+
+    public void setUsuario(String Usuario) {
+        this.Usuario = Usuario;
     }
 
 
