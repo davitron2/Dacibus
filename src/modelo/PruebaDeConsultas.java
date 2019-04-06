@@ -25,13 +25,16 @@ public class PruebaDeConsultas {
         op=datos.nextInt();
         switch(op){
             case 1:
-        System.out.println("nombre usuario");
+        System.out.println("usuario");
         
-        usuario.setNombreUsu("yo");
+        usuario.setUsuario("davitron2");
        
                 System.out.println("contraseña");
                 String contra= "queso123";
                  String npass = hash.sha1(contra);
+                 
+                 System.out.println("nomrbe");
+                 usuario.setNombre("david alberto");
                  
                  usuario.setPass(npass);
                  System.out.println("edad");
@@ -58,7 +61,7 @@ public class PruebaDeConsultas {
                    break;
             case 2:
                 System.out.println("id a borrar");
-                usuario.setIdUsuario(3);
+                usuario.setIdUsuario(5);
               
                 SqlU.Eliminar(usuario);
                
