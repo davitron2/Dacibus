@@ -9,10 +9,8 @@ package modelo;
 import java.util.HashSet;
 import java.util.Scanner;
 import modelo.hash;
-/**
- *
- * @author HP
- */
+
+
 public class PruebaDeConsultas {
 
     
