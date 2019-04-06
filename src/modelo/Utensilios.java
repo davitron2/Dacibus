@@ -3,7 +3,7 @@ package modelo;
 
 public class Utensilios {
     private int IdUtensilios;
-    private int Tipo;
+    private String Tipo;
     private int CantDispo;
     private int IdProducto;
 
@@ -15,14 +15,7 @@ public class Utensilios {
         this.IdUtensilios = IdUtensilios;
     }
 
-    public int getTipo() {
-        return Tipo;
-    }
-
-    public void setTipo(int Tipo) {
-        this.Tipo = Tipo;
-    }
-
+ 
     public int getCantDispo() {
         return CantDispo;
     }
@@ -37,6 +30,14 @@ public class Utensilios {
 
     public void setIdProducto(int IdProducto) {
         this.IdProducto = IdProducto;
+    }
+
+    public String getTipo() {
+        return Tipo;
+    }
+
+    public void setTipo(String Tipo) {
+        this.Tipo = Tipo;
     }
     
     
