@@ -20,10 +20,10 @@ public class PruebaDeConsultas {
         user use=new user();
         UsuarioSQL SqlU=new UsuarioSQL();
         
-        use.setIdUser(1);
-        use.setName("Cesar");
+        use.setIdUser(2);
+        use.setName("Cr7");
         use.setPass("1234");
-        use.setEdad(20);
+        use.setEdad(21);
         
         
         if(SqlU.Registrar(use)){

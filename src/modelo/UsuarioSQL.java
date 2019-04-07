@@ -7,9 +7,16 @@ package modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 import javax.xml.bind.ParseConversionEvent;
 
 /**
@@ -17,6 +24,8 @@ import javax.xml.bind.ParseConversionEvent;
  * @author HP
  */
 public class UsuarioSQL  extends Conexion {
+
+    
     
     public boolean Registrar(user usr){
         try {
@@ -44,6 +53,69 @@ public class UsuarioSQL  extends Conexion {
       
      
     }
+    
+    
+    
+
+          
+        
+        
+    
+
+
+    
+    
+    
+    
+    public JTable MostrarTabla(JTable tabla) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+            PreparedStatement ps=null;
+            Connection con = getConexion();
+            Statement s=con.createStatement();
+            ResultSet rs=s.executeQuery("SELECT * FROM mesas");
+            
+            DefaultTableModel modelo=new DefaultTableModel();
+            JTable tab=new JTable(modelo);
+            
+           
+            ResultSetMetaData metaDatos=rs.getMetaData();
+            int NumeroColumnas=metaDatos.getColumnCount();
+            
+            Object[] etiquetas=new Object[NumeroColumnas];
+            
+            for (int i = 0; i < NumeroColumnas; i++) {
+                etiquetas[i]=metaDatos.getColumnLabel(i+1);    
+            }
+            modelo.setColumnIdentifiers(etiquetas);            
+            //Creamos las columnas
+            //modelo.addColumn("IdMesa");
+            //modelo.addColumn("EstadoMesa");
+
+            //Recuperar cada resultado
+            
+                while(rs.next()){
+                Object[] fila=new Object[modelo.getColumnCount()];
+                
+                for (int i = 0; i < modelo.getColumnCount(); i++) {
+                    fila[i]=rs.getObject(i+1);
+                }
+                modelo.addRow(fila);
+            }
+                
+               /* while(rs.next()){
+                String fila[]=new String[modelo.getColumnCount()];
+                for(int j=0;j<modelo.getColumnCount();j++){
+                    fila[j]=rs.getString(j+1);
+                }
+                modelo.addRow(fila);
+            }*/
+               rs.close();
+               tabla.setModel(modelo);
+                
+        return tabla;    
+        
+    }    
+    
+    
     
     /*public boolean Eliminar(Usuario usr){
      try {
