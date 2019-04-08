@@ -6,6 +6,7 @@
 package Vistas;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.Usuario;
 import modelo.UsuarioSQL;
 import modelo.hash;
@@ -136,17 +137,31 @@ public class Login extends javax.swing.JFrame {
 
                 
                 ///login piloto mejorar luego para no recrear objeto de formulario, validaciones, etc.
+                //checar lo de permisos etc.
+                //pusible cambio a switch en lugar de if para no repetir evaluacion e imprimir tiple
+                ///o almacenar resultado del metodo en una variable int
                 if(SqlU.Login(usuario)==1){
                  
                     
                     if (men==null) {
                         men = new Menu();
                         men.setVisible(true);
+                        this.dispose();
                     }
-                
+                   
                 
                 }
         
+                if(SqlU.Login(usuario)==10){
+                JOptionPane.showMessageDialog(null,"Usuario invalido");
+                
+                }
+        
+              
+                if(SqlU.Login(usuario)==9){
+                JOptionPane.showMessageDialog(null,"contraseña invalida");
+                
+                }
         
         
         
