@@ -7,6 +7,7 @@ package modelo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,12 @@ public class UsuarioSQL extends Conexion {
         }
 
     }
+    
+    
+    
+    
+    
+    
 
     public boolean Eliminar(Usuario usr) {
         try {
@@ -61,4 +68,71 @@ public class UsuarioSQL extends Conexion {
 
     }
 
+
+    
+
+    public int Login(Usuario usr) {
+        try {
+            PreparedStatement ps = null;
+            Connection con = getConexion();
+            ResultSet rs=null;
+
+            ///procedure que eliminar usuario con id recivido
+            String sql = "call ExisteUsuario(?)";
+            //id,usuario,nombre,edad,genero,tipo
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usr.getUsuario());
+            rs= ps.executeQuery();
+            
+            if (rs.next()) {
+                rs=null;
+                ps=null;
+                 // String sql2 = "select Pass from usuario where Usuario=? and Pass=?";
+            
+              String sql2 = "call VerificaPass(?,?)";
+                 
+               
+            ps = con.prepareStatement(sql2);
+            ps.setString(1, usr.getUsuario());
+            ps.setString(2,usr.getPass());
+            rs= ps.executeQuery();
+                
+                   
+                
+                    if(rs.next()) {
+                        System.out.println("valida");
+                        return 1;
+                    
+                }else{
+                
+                
+                    System.out.println("contraseña invalida");
+                    return 9;
+                }
+                
+               
+            }else{
+            
+            
+            
+                System.out.println("usuario no existe");
+                return 10;
+            }
+             
+        
+            
+        
+        
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
+           return 10;
+        }
+    }
+    
+    
+    
+    
+    
+    
 }

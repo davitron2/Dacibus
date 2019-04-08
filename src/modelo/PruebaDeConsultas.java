@@ -6,6 +6,7 @@
 package modelo;
 
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Scanner;
 import modelo.hash;
@@ -14,7 +15,7 @@ import modelo.hash;
 public class PruebaDeConsultas {
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
             Usuario usuario= new Usuario();
     UsuarioSQL SqlU= new UsuarioSQL();
     
@@ -22,6 +23,7 @@ public class PruebaDeConsultas {
         Scanner datos= new Scanner(System.in);
         System.out.println("1-registrar");
         System.out.println("2-eliminar");
+        System.out.println("3- login");
         op=datos.nextInt();
         switch(op){
             case 1:
@@ -30,7 +32,7 @@ public class PruebaDeConsultas {
         usuario.setUsuario("davitron2");
        
                 System.out.println("contraseña");
-                String contra= "queso123";
+                String contra= "hola";
                  String npass = hash.sha1(contra);
                  
                  System.out.println("nomrbe");
@@ -65,6 +67,19 @@ public class PruebaDeConsultas {
               
                 SqlU.Eliminar(usuario);
                
+                
+                
+                
+                break;
+            case 3:
+               
+               usuario.setUsuario("davitron2");
+               
+               
+               contra= "hola";
+                 npass = hash.sha1(contra);
+               usuario.setPass(npass);
+               SqlU.Login(usuario);
                 
                 
                 
