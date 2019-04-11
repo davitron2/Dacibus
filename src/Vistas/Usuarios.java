@@ -157,7 +157,11 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        this.dispose(); //cerrar la ventana
+          if (men==null) {
+                        men = new Menu();
+                        men.setVisible(true);
+                        this.dispose();
+                    }//cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
