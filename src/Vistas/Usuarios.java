@@ -16,6 +16,7 @@ public class Usuarios extends javax.swing.JFrame {
     /**
      * Creates new form Usuarios
      */
+    Menu men;
     public Usuarios() {
         initComponents();
         //this.setLocationRelativeTo(null); //centro de la pantalla
@@ -134,6 +135,11 @@ public class Usuarios extends javax.swing.JFrame {
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
         btnVolverMenu.setBorder(null);
         btnVolverMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(845, 675, 200, 50));
 
         lblUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Usuarios.png"))); // NOI18N
@@ -151,8 +157,19 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        System.exit(0); //cerrar la ventana
+        this.dispose(); //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+  if (men==null) {
+                        men = new Menu();
+                        men.setVisible(true);
+                        this.dispose();
+                    }
+        
+        
+               // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     /**
      * @param args the command line arguments

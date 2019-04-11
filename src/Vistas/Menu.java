@@ -12,7 +12,7 @@ import javax.swing.JFrame;
  * @author JOCELYNE
  */
 public class Menu extends javax.swing.JFrame {
-
+Usuarios usu;
     /**
      * Creates new form Menu
      */
@@ -62,6 +62,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 200, 100));
 
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnUsuarios.png"))); // NOI18N
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 200, 100));
 
         btnAtender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnAtender.png"))); // NOI18N
@@ -147,6 +152,14 @@ public class Menu extends javax.swing.JFrame {
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         System.exit(0); //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+ if (usu==null) {
+                        usu = new Usuarios();
+                        usu.setVisible(true);
+                        this.dispose();
+                    }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
