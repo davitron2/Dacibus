@@ -49,7 +49,7 @@ public class PruebaDeConsultas {
                 usuario.setTipoUsuario("admin");
             
                 
-                if(SqlU.Registrar(usuario)){
+             /*   if(SqlU.Registrar(usuario)){
                     System.out.println("registro exitoso");
                 
                 
@@ -60,7 +60,7 @@ public class PruebaDeConsultas {
                 
                 }
                 
-                   break;
+                   break;*/
             case 2:
                 System.out.println("id a borrar");
                 usuario.setIdUsuario(5);
