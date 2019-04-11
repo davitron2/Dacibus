@@ -172,7 +172,7 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-      if (men == null) {
+        if (men == null) {
             men = new Menu();
             men.setVisible(true);
             this.dispose();
@@ -193,18 +193,16 @@ public class Usuarios extends javax.swing.JFrame {
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
         ///falta revisar validaciones de datos para no aceptar numeros en ciertos campos
         //o letras en la edad y campos vacios
-        
+
         rbtnMasculino.setActionCommand("M");
         rbtnFemenino.setActionCommand("F");
-        
+
         usuario.setEdad(Integer.parseInt(txtEdadPersonal.getText()));
 
-        if (buttonGroup1.getSelection()==null) {
+        if (buttonGroup1.getSelection() == null) {
             JOptionPane.showMessageDialog(null, "Selecione un genero");
         } else {
 
-            
-            
             usuario.setGenero(buttonGroup1.getSelection().getActionCommand());
             System.out.println(buttonGroup1.getSelection().getActionCommand());
         }
@@ -214,26 +212,25 @@ public class Usuarios extends javax.swing.JFrame {
         String npass = hash.sha1(contra);
 
         usuario.setPass(npass);
-        if (cmbTipoUsuario.getSelectedIndex() ==0){
+        if (cmbTipoUsuario.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Selecione un tipo");
         } else {
             usuario.setTipoUsuario(cmbTipoUsuario.getSelectedItem().toString());
-         
+
             System.out.println(usuario.getTipoUsuario());
 
         }
-           usuario.setUsuario(txtUsuario.getText());
+        usuario.setUsuario(txtUsuario.getText());
 
-      if(SqlU.Registrar(usuario)==1){
-      txtEdadPersonal.setText(null);
-      txtNombrePersonal.setText(null);
-      txtUsuario.setText(null);
-      pswPass.setText(null);
-      buttonGroup1.clearSelection();
-      cmbTipoUsuario.setSelectedIndex(0);
-      
-      
-      }
+        if (SqlU.Registrar(usuario) == 1) {
+            txtEdadPersonal.setText(null);
+            txtNombrePersonal.setText(null);
+            txtUsuario.setText(null);
+            pswPass.setText(null);
+            buttonGroup1.clearSelection();
+            cmbTipoUsuario.setSelectedIndex(0);
+
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
