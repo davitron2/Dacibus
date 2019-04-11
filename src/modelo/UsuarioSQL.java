@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,35 +19,49 @@ import java.util.logging.Logger;
  */
 public class UsuarioSQL extends Conexion {
 
-    public boolean Registrar(Usuario usr) {
+    public int Registrar(Usuario usr) {
+   
+       
+        
+        
         try {
             PreparedStatement ps = null;
             Connection con = getConexion();
+            ResultSet rs = null;
 
-            String sql = "call RegistrarUsuario(?,?,?,?,?,?)";
-            //usuario,pass,nombre,edad,genero,tipo
-            ps = con.prepareCall(sql);
+            String sql = "call ExisteUsuario(?)";
+            //id,usuario,nombre,edad,genero,tipo
+            ps = con.prepareStatement(sql);
             ps.setString(1, usr.getUsuario());
-            ps.setString(2, usr.getPass());
-            ps.setString(3, usr.getNombre());
-            ps.setInt(4, usr.getEdad());
-            ps.setString(5, usr.getGenero());
-            ps.setString(6, usr.getTipoUsuario());
-            ps.execute();
-            return true;
+            rs = ps.executeQuery();
+            if (rs.next()) {
+
+                JOptionPane.showMessageDialog(null, "Ya existe alguien con ese nombre usuario");
+                return 10;
+
+            } else {
+
+                sql = "call RegistrarUsuario(?,?,?,?,?,?)";
+                //usuario,pass,nombre,edad,genero,tipo
+                ps = con.prepareCall(sql);
+                ps.setString(1, usr.getUsuario());
+                ps.setString(2, usr.getPass());
+                ps.setString(3, usr.getNombre());
+                ps.setInt(4, usr.getEdad());
+                ps.setString(5, usr.getGenero());
+                ps.setString(6, usr.getTipoUsuario());
+                rs = ps.executeQuery();
+                 JOptionPane.showMessageDialog(null, "Registro exitoso");
+                return 1;
+
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return 33;
         }
 
     }
-    
-    
-    
-    
-    
-    
 
     public boolean Eliminar(Usuario usr) {
         try {
@@ -68,71 +83,79 @@ public class UsuarioSQL extends Conexion {
 
     }
 
-
-    
-
-    public int Login(Usuario usr) {
+    public boolean ExisteUsuario(Usuario usr) {
         try {
             PreparedStatement ps = null;
             Connection con = getConexion();
-            ResultSet rs=null;
+            ResultSet rs = null;
 
             ///procedure que eliminar usuario con id recivido
             String sql = "call ExisteUsuario(?)";
             //id,usuario,nombre,edad,genero,tipo
             ps = con.prepareStatement(sql);
             ps.setString(1, usr.getUsuario());
-            rs= ps.executeQuery();
-            
+            rs = ps.executeQuery();
             if (rs.next()) {
-                rs=null;
-                ps=null;
-                 // String sql2 = "select Pass from usuario where Usuario=? and Pass=?";
-            
-              String sql2 = "call VerificaPass(?,?)";
-                 
-               
-            ps = con.prepareStatement(sql2);
+
+                return true;
+            } else {
+
+                return false;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+
+    }
+
+    public int Login(Usuario usr) {
+        try {
+            PreparedStatement ps = null;
+            Connection con = getConexion();
+            ResultSet rs = null;
+
+            ///procedure que eliminar usuario con id recivido
+            String sql = "call ExisteUsuario(?)";
+            //id,usuario,nombre,edad,genero,tipo
+            ps = con.prepareStatement(sql);
             ps.setString(1, usr.getUsuario());
-            ps.setString(2,usr.getPass());
-            rs= ps.executeQuery();
-                
-                   
-                
-                    if(rs.next()) {
-                        System.out.println("valida");
-                        return 1;
-                    
-                }else{
-                
-                
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                rs = null;
+                ps = null;
+                // String sql2 = "select Pass from usuario where Usuario=? and Pass=?";
+
+                String sql2 = "call VerificaPass(?,?)";
+
+                ps = con.prepareStatement(sql2);
+                ps.setString(1, usr.getUsuario());
+                ps.setString(2, usr.getPass());
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    System.out.println("valida");
+                    return 1;
+
+                } else {
+
                     System.out.println("contraseña invalida");
                     return 9;
                 }
-                
-               
-            }else{
-            
-            
-            
+
+            } else {
+
                 System.out.println("usuario no existe");
                 return 10;
             }
-             
-        
-            
-        
-        
-        
+
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
-           return 10;
+            return 10;
         }
     }
-    
-    
-    
-    
-    
-    
+
 }

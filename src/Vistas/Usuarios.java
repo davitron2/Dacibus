@@ -5,7 +5,13 @@
  */
 package Vistas;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
+import modelo.UsuarioSQL;
+import modelo.hash;
 
 /**
  *
@@ -13,10 +19,14 @@ import javax.swing.JFrame;
  */
 public class Usuarios extends javax.swing.JFrame {
 
+    Usuario usuario = new Usuario();
+    UsuarioSQL SqlU = new UsuarioSQL();
+
     /**
      * Creates new form Usuarios
      */
     Menu men;
+
     public Usuarios() {
         initComponents();
         //this.setLocationRelativeTo(null); //centro de la pantalla
@@ -40,8 +50,8 @@ public class Usuarios extends javax.swing.JFrame {
         rbtnMasculino = new javax.swing.JRadioButton();
         rbtnFemenino = new javax.swing.JRadioButton();
         cmbTipoUsuario = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtUsuario = new javax.swing.JTextField();
+        pswPass = new javax.swing.JPasswordField();
         lblDatosPersonales = new javax.swing.JLabel();
         lblDatosTipoUsuario = new javax.swing.JLabel();
         btnVerUsuarios = new javax.swing.JButton();
@@ -106,13 +116,13 @@ public class Usuarios extends javax.swing.JFrame {
         cmbTipoUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(cmbTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(825, 270, 350, 50));
 
-        jTextField1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(839, 380, 330, 50));
+        txtUsuario.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
+        txtUsuario.setBorder(null);
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(839, 380, 330, 50));
 
-        jPasswordField1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
-        jPasswordField1.setBorder(null);
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(891, 490, 270, 50));
+        pswPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
+        pswPass.setBorder(null);
+        jPanel1.add(pswPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(891, 490, 270, 50));
 
         lblDatosPersonales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/datosUsuario.png"))); // NOI18N
         lblDatosPersonales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -130,6 +140,11 @@ public class Usuarios extends javax.swing.JFrame {
         btnRegistrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegistrar.png"))); // NOI18N
         btnRegistrarUsuario.setBorder(null);
         btnRegistrarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarUsuarioActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 675, -1, -1));
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
@@ -157,23 +172,74 @@ public class Usuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-          if (men==null) {
-                        men = new Menu();
-                        men.setVisible(true);
-                        this.dispose();
-                    }//cerrar la ventana
+        if (men == null) {
+            men = new Menu();
+            men.setVisible(true);
+            this.dispose();
+        }
+        //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-  if (men==null) {
-                        men = new Menu();
-                        men.setVisible(true);
-                        this.dispose();
-                    }
-        
-        
-               // TODO add your handling code here:
+        if (men == null) {
+            men = new Menu();
+            men.setVisible(true);
+            this.dispose();
+        }
+
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverMenuActionPerformed
+
+    private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
+        ///falta revisar validaciones de datos para no aceptar numeros en ciertos campos
+        //o letras en la edad y campos vacios
+        try {
+            rbtnMasculino.setActionCommand("M");
+            rbtnFemenino.setActionCommand("F");
+
+            usuario.setNombre(txtNombrePersonal.getText());
+
+            usuario.setEdad(Integer.parseInt(txtEdadPersonal.getText()));
+
+            if (buttonGroup1.getSelection() == null) {
+                JOptionPane.showMessageDialog(null, "Selecione un genero");
+            } else {
+
+                usuario.setGenero(buttonGroup1.getSelection().getActionCommand());
+                System.out.println(buttonGroup1.getSelection().getActionCommand());
+            }
+          
+            if (cmbTipoUsuario.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Selecione un tipo");
+            } else {
+                usuario.setTipoUsuario(cmbTipoUsuario.getSelectedItem().toString());
+
+                System.out.println(usuario.getTipoUsuario());
+
+            }
+           
+            usuario.setUsuario(txtUsuario.getText());
+
+            String contra = new String(pswPass.getPassword());
+            String npass = hash.sha1(contra);
+
+            usuario.setPass(npass);
+
+            if (SqlU.Registrar(usuario) == 1) {
+                txtEdadPersonal.setText(null);
+                txtNombrePersonal.setText(null);
+                txtUsuario.setText(null);
+                pswPass.setText(null);
+                buttonGroup1.clearSelection();
+                cmbTipoUsuario.setSelectedIndex(0);
+
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Introduzca una edad valida");
+
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,16 +283,16 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbTipoUsuario;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblDatosPersonales;
     private javax.swing.JLabel lblDatosTipoUsuario;
     private javax.swing.JLabel lblMinimizar;
     private javax.swing.JLabel lblUsuarios;
+    private javax.swing.JPasswordField pswPass;
     private javax.swing.JRadioButton rbtnFemenino;
     private javax.swing.JRadioButton rbtnMasculino;
     private javax.swing.JTextField txtEdadPersonal;
     private javax.swing.JTextField txtNombrePersonal;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
