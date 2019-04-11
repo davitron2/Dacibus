@@ -7,11 +7,24 @@ package Vistas;
 
 import javax.swing.JFrame;
 
+
+import javax.swing.JOptionPane;
+import modelo.Usuario;
+import modelo.UsuarioSQL;
+import modelo.hash;
+/////
+
 /**
  *
  * @author JOCELYNE
  */
 public class Login extends javax.swing.JFrame {
+
+          Usuario usuario= new Usuario();
+    UsuarioSQL SqlU= new UsuarioSQL();
+    
+    Menu men;
+    
 
     /**
      * Creates new form Login
@@ -60,6 +73,13 @@ public class Login extends javax.swing.JFrame {
         btnIniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnIniciarSesion.png"))); // NOI18N
         btnIniciarSesion.setBorder(null);
         btnIniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
+
         jPanel1.add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 450, 300, 50));
 
         lblMinimizar.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
@@ -112,6 +132,52 @@ public class Login extends javax.swing.JFrame {
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
         this.setState(JFrame.ICONIFIED); //minimizar la ventana
     }//GEN-LAST:event_lblMinimizarMouseClicked
+
+
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+         usuario.setUsuario(txtUsuario.getText());
+               
+       
+               
+               String pass= new String(pswContraseña.getPassword());
+               String    npass = hash.sha1(pass);
+                usuario.setPass(npass);
+
+                
+                ///login piloto mejorar luego para no recrear objeto de formulario, validaciones, etc.
+                //checar lo de permisos etc.
+                //pusible cambio a switch en lugar de if para no repetir evaluacion e imprimir tiple
+                ///o almacenar resultado del metodo en una variable int
+                if(SqlU.Login(usuario)==1){
+                 
+                    
+                    if (men==null) {
+                        men = new Menu();
+                        men.setVisible(true);
+                        this.dispose();
+                    }
+                   
+                
+                }
+        
+                if(SqlU.Login(usuario)==10){
+                JOptionPane.showMessageDialog(null,"Usuario invalido");
+                
+                }
+        
+              
+                if(SqlU.Login(usuario)==9){
+                JOptionPane.showMessageDialog(null,"contraseña invalida");
+                
+                }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
 
     /**
      * @param args the command line arguments
