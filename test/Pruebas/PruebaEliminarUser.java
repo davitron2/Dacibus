@@ -24,9 +24,11 @@ public class PruebaEliminarUser {
     public void ElimnaU(){
         modelo.UsuarioSQL obj=new UsuarioSQL();
         modelo.Usuario usr=new Usuario();
-        usr.setIdUsuario(8);
+        usr.setUsuario("CesarH");
         
-        obj.Eliminar(usr);
+        boolean result=obj.Eliminar(usr);
+        
+        assertTrue(result);
     }
 
     // TODO add test methods here.
