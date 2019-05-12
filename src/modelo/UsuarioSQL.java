@@ -70,12 +70,12 @@ public class UsuarioSQL extends Conexion {
             Connection con = getConexion();
 
             ///procedure que eliminar usuario con id recivido
-            String sql = "call EliminarUsuario(?)";
+            String sql = "call EliminarUser(?)";
             //id,usuario,nombre,edad,genero,tipo
             ps = con.prepareCall(sql);
             //La eliminacion del usuario se hace con IDUSER pero es un dato autonumerico podemos cambiar a eliminar por nombre de usuario
             
-            ps.setInt(1, usr.getIdUsuario());
+            ps.setString(1, usr.getUsuario());
             ps.execute();
             return true;
 
