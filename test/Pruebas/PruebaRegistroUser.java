@@ -7,6 +7,7 @@ package Pruebas;
 
 import modelo.Usuario;
 import modelo.UsuarioSQL;
+import modelo.hash;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,12 +30,15 @@ public class PruebaRegistroUser {
         modelo.UsuarioSQL ob=new UsuarioSQL();
         
         modelo.Usuario usr=new Usuario();
-        usr.setNombre("Cesar");
+        usr.setNombre("Cesar01");
         usr.setEdad(21);
         usr.setGenero("H");
         usr.setTipoUsuario("Administrdor");
-        usr.setUsuario("CesarH");
-        usr.setPass("123");
+        usr.setUsuario("CesarDxD");
+        String contra = new String("123");
+        String npass = hash.sha1(contra);
+        usr.setPass(npass);
+        
         
         
         
