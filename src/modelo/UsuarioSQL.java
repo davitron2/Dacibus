@@ -20,10 +20,6 @@ import javax.swing.JOptionPane;
 public class UsuarioSQL extends Conexion {
 
     public int Registrar(Usuario usr) {
-   
-       
-        
-        
         try {
             PreparedStatement ps = null;
             Connection con = getConexion();
@@ -37,7 +33,7 @@ public class UsuarioSQL extends Conexion {
             if (rs.next()) {
 
                 JOptionPane.showMessageDialog(null, "Ya existe alguien con ese nombre usuario");
-                return 10;
+                return 3;
 
             } else {
 
@@ -52,7 +48,7 @@ public class UsuarioSQL extends Conexion {
                 ps.setString(6, usr.getTipoUsuario());
                 rs = ps.executeQuery();
                  JOptionPane.showMessageDialog(null, "Registro exitoso");
-                return 1;
+                return 10;
 
             }
 
@@ -64,6 +60,7 @@ public class UsuarioSQL extends Conexion {
     }
 
     public boolean Eliminar(Usuario usr) {
+                        
         try {
             PreparedStatement ps = null;
             Connection con = getConexion();
@@ -72,6 +69,8 @@ public class UsuarioSQL extends Conexion {
             String sql = "call EliminarUsuario(?)";
             //id,usuario,nombre,edad,genero,tipo
             ps = con.prepareCall(sql);
+            //La eliminacion del usuario se hace con IDUSER pero es un dato autonumerico podemos cambiar a eliminar por nombre de usuario
+            
             ps.setInt(1, usr.getIdUsuario());
             ps.execute();
             return true;
@@ -157,5 +156,6 @@ public class UsuarioSQL extends Conexion {
             return 10;
         }
     }
+    
 
 }
