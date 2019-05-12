@@ -156,7 +156,6 @@ public class UsuarioSQL extends Conexion {
             PreparedStatement ps = null;
             Connection con = getConexion();
             ResultSet rs = null;
-
             ///procedure que eliminar usuario con id recivido
             String sql = "call ExisteUsuario(?)";
             //id,usuario,nombre,edad,genero,tipo
@@ -168,9 +167,7 @@ public class UsuarioSQL extends Conexion {
                 rs = null;
                 ps = null;
                 // String sql2 = "select Pass from usuario where Usuario=? and Pass=?";
-
                 String sql2 = "call VerificaPass(?,?)";
-
                 ps = con.prepareStatement(sql2);
                 ps.setString(1, usr.getUsuario());
                 ps.setString(2, usr.getPass());
