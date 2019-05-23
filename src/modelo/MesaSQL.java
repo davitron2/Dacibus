@@ -34,7 +34,7 @@ public class MesaSQL extends Conexion{
             String sql = "call ExisteMesa(?)";
             
             ps = con.prepareStatement(sql);
-            ps.setInt(1, mesa.getIdMesa());
+            ps.setInt(1, mesa.getNumMe());
             rs = ps.executeQuery();
             if (rs.next()) {
 
@@ -43,11 +43,12 @@ public class MesaSQL extends Conexion{
 
             } else {
 
-                sql = "call RegistrarMesa(?,?)";
+                sql = "call RegistrarMesa(?,?,?)";
                 //usuario,pass,nombre,edad,genero,tipo
                 ps = con.prepareCall(sql);
-                ps.setInt(1, mesa.getIdMesa());
-                ps.setString(2, mesa.getEdoMesa());
+                ps.setInt(1, mesa.getNumMe());
+                ps.setInt(2, mesa.getCapacidad());
+                ps.setString(3, mesa.getEdoMesa());
                
                 rs = ps.executeQuery();
                  JOptionPane.showMessageDialog(null, "Registro exitoso");

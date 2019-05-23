@@ -28,19 +28,18 @@ public class PruebaRegistroUser {
     @Test
     public void testRegistro(){
         modelo.UsuarioSQL ob=new UsuarioSQL();
-        
         modelo.Usuario usr=new Usuario();
-        usr.setNombre("Cesar01");
+        
+        usr.setNombre("Cesar");
         usr.setEdad(21);
         usr.setGenero("H");
         usr.setTipoUsuario("Administrdor");
         usr.setUsuario("CesarDxD");
+        
         String contra = new String("123");
         String npass = hash.sha1(contra);
+        
         usr.setPass(npass);
-        
-        
-        
         
         int result=ob.Registrar(usr);
         

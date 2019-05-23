@@ -118,7 +118,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         txtUsuario.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtUsuario.setBorder(null);
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(839, 380, 330, 50));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 330, 50));
 
         pswPass.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         pswPass.setBorder(null);
