@@ -35,6 +35,7 @@ public class Ventas extends javax.swing.JFrame {
         tblVentas = new javax.swing.JTable();
         btnVolverMenu = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         txtNVenta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblMinimizar = new javax.swing.JLabel();
@@ -69,6 +70,7 @@ public class Ventas extends javax.swing.JFrame {
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnBuscar.png"))); // NOI18N
         btnBuscar.setBorder(null);
         jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 200, 50));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 200, 50));
 
         txtNVenta.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNVenta.setBorder(null);
@@ -154,6 +156,7 @@ public class Ventas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnVolverMenu;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

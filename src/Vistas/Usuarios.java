@@ -125,11 +125,21 @@ public class Usuarios extends javax.swing.JFrame {
         btnVerUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVerUsuarios.png"))); // NOI18N
         btnVerUsuarios.setBorder(null);
         btnVerUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerUsuariosActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVerUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 675, 200, 50));
 
         btnRegistrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegistrar.png"))); // NOI18N
         btnRegistrarUsuario.setBorder(null);
         btnRegistrarUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarUsuarioActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 675, -1, -1));
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
@@ -174,6 +184,14 @@ public class Usuarios extends javax.swing.JFrame {
         
                // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverMenuActionPerformed
+
+    private void btnVerUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerUsuariosActionPerformed
+
+    private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
