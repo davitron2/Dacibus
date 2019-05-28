@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.MesaSQL;
+import modelo.ProductoSQL;
 import modelo.UsuarioSQL;
 
 /**
@@ -39,6 +40,9 @@ public class PruebaTablas extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,7 +60,7 @@ public class PruebaTablas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(231, 94, 650, 476));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 650, 476));
 
         jButton1.setText("MostrarTabla");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +77,19 @@ public class PruebaTablas extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Mesa");
         getContentPane().add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setText("Productos");
+        getContentPane().add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 110, 30));
+
+        jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 70, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,6 +129,21 @@ public class PruebaTablas extends javax.swing.JFrame {
                 Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        if (jRadioButton3.isSelected()) {
+            modelo.ProductoSQL ob=new ProductoSQL();
+            
+            try {
+                ob.SoloTabla(jTable1);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
         
         
@@ -126,6 +158,32 @@ public class PruebaTablas extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        
+        modelo.ProductoSQL obj=new ProductoSQL();
+        
+        String dato;
+        
+        dato=jTextField1.getText();
+        
+        try {
+            obj.BuscarTabla(jTable1, dato);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PruebaTablas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,9 +223,12 @@ public class PruebaTablas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
