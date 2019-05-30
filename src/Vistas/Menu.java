@@ -111,6 +111,11 @@ Usuarios usu;
         lblUsuarios.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         lblUsuarios.setText("Usuarios");
+        lblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUsuariosMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 90, -1));
 
         lblAtender.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
@@ -160,6 +165,17 @@ Usuarios usu;
                         this.dispose();
                     }        // TODO add your handling code here:
     }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void lblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuariosMouseClicked
+if (usu==null) {
+                        usu = new Usuarios();
+                        usu.setVisible(true);
+                        this.dispose();
+                    }        
+        
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_lblUsuariosMouseClicked
 
     /**
      * @param args the command line arguments
