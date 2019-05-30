@@ -12,14 +12,15 @@ import javax.swing.JFrame;
  * @author JOCELYNE
  */
 public class Menu extends javax.swing.JFrame {
-Usuarios usu;
+
+    Usuarios usu;
+
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
-        
-        
+
     }
 
     /**
@@ -159,20 +160,19 @@ Usuarios usu;
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
- if (usu==null) {
-                        usu = new Usuarios();
-                        usu.setVisible(true);
-                        this.dispose();
-                    }        // TODO add your handling code here:
+        if (usu == null) {
+            usu = new Usuarios();
+            usu.setVisible(true);
+            this.dispose();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void lblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuariosMouseClicked
-if (usu==null) {
-                        usu = new Usuarios();
-                        usu.setVisible(true);
-                        this.dispose();
-                    }        
-        
+        if (usu == null) {
+            usu = new Usuarios();
+            usu.setVisible(true);
+            this.dispose();
+        }
 
 // TODO add your handling code here:
     }//GEN-LAST:event_lblUsuariosMouseClicked

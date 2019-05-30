@@ -135,6 +135,11 @@ public class Usuarios extends javax.swing.JFrame {
         btnVerUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVerUsuarios.png"))); // NOI18N
         btnVerUsuarios.setBorder(null);
         btnVerUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerUsuariosActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVerUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 675, 200, 50));
 
         btnRegistrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegistrar.png"))); // NOI18N
@@ -190,6 +195,7 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
+
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
         ///falta revisar validaciones de datos para no aceptar numeros en ciertos campos
         //o letras en la edad y campos vacios
@@ -240,6 +246,10 @@ public class Usuarios extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
+
+    private void btnVerUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
