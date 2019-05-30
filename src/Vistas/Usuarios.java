@@ -247,6 +247,10 @@ public class Usuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
+    private void btnVerUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerUsuariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
