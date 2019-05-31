@@ -5,14 +5,26 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import modelo.Producto;
+import modelo.ProductoSQL;
 
 /**
  *
  * @author JOCELYNE
  */
 public class Productos extends javax.swing.JFrame {
-
+    
+    
+    modelo.Producto produc=new Producto();
+    modelo.ProductoSQL obj=new ProductoSQL();
+    
+    
     /**
      * Creates new form Productos
      */
@@ -49,23 +61,49 @@ public class Productos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 670, 200, 50));
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnEliminar.png"))); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 200, 200, 50));
 
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnModificar.png"))); // NOI18N
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 100, 200, 50));
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnAgregar.png"))); // NOI18N
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 200, 50));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnBuscar.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 200, 200, 50));
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -76,9 +114,14 @@ public class Productos extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "IDPRODUCTO", "NOMBRE", "CATEGORIA", "PRECIO"
+                "IdProducto", "NombrePro", "Categoria", "Precio"
             }
         ));
+        tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProductos);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, 780, 240));
@@ -106,6 +149,11 @@ public class Productos extends javax.swing.JFrame {
         jPanel1.add(lblMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 10, 20, 30));
 
         txtNProducto.setBorder(null);
+        txtNProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNProductoKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtNProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 150, 80, 50));
 
         txtProducto.setBorder(null);
@@ -125,7 +173,7 @@ public class Productos extends javax.swing.JFrame {
 
         lblProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Productos.png"))); // NOI18N
         lblProductos.setText("jLabel1");
-        jPanel1.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
+        jPanel1.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 1390, 800));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1390, 810);
@@ -135,11 +183,182 @@ public class Productos extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         //cerrar la ventana
+        this.hide();
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
-        this.setState(JFrame.ICONIFIED); //minimizar la ventana
+        //this.setState(JFrame.ICONIFIED); //minimizar la ventana
     }//GEN-LAST:event_lblMinimizarMouseClicked
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        try {
+            
+            if (txtProducto.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Por favor introduzca el nombre del producto");
+            }
+            else{
+                produc.setNombreProducto(txtProducto.getText());
+            }
+            
+            if (cmbCategoria.getSelectedIndex()==0) {
+                JOptionPane.showMessageDialog(this, "Por favor selecciona una categoria para el producto");
+            }
+            else{
+                produc.setCategoriaProducto(cmbCategoria.getSelectedItem().toString());
+            }
+            
+            if (txtPrecio.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Por favor introduzca un precio para el producto");
+            }
+            else{
+                
+                produc.setPrecioProducto(Integer.parseInt(txtPrecio.getText()));
+            }
+            //obj.RegistrarProducto(produc);
+            
+            if (obj.RegistrarProducto(produc)==10) {
+                //Se debe enviar unas "comillas" o se envia un null para limpiar
+                limpiar();
+            }
+            
+            obj.SoloTabla(tblProductos);
+          
+        } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Por Favor introduzca un precio valido");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       
+        String dato;
+        //dato=txtProducto.getText();
+        
+        dato=JOptionPane.showInputDialog("Introduce el nombre del producto");
+        try {
+            obj.BuscarTabla(tblProductos,dato);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtNProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNProductoKeyPressed
+        if (evt.getKeyChar()=='\b') {
+            txtProducto.setText(null);
+            txtPrecio.setText("");
+            cmbCategoria.setSelectedItem(0);
+        }
+    }//GEN-LAST:event_txtNProductoKeyPressed
+    
+    
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        
+        
+        
+        
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
+        if(evt.getButton()==1){
+            int fila=tblProductos.getSelectedRow();
+            String idProducto=(tblProductos.getValueAt(fila, 0).toString());
+            String nombreProducto=(tblProductos.getValueAt(fila, 1).toString());
+            String categoriaProducto=(tblProductos.getValueAt(fila, 2).toString());
+            String precioProducto=(tblProductos.getValueAt(fila, 3).toString());
+            
+            txtNProducto.setText(idProducto);
+            txtProducto.setText(nombreProducto);
+            if(categoriaProducto.equals("Entradas")){
+                cmbCategoria.setSelectedIndex(1);
+            }
+            if(categoriaProducto.equals("Ensaladas")){
+                cmbCategoria.setSelectedIndex(2);
+            }
+            if(categoriaProducto.equals("Bebidas")){
+                cmbCategoria.setSelectedIndex(3);
+            }
+            if(categoriaProducto.equals("Postres")){
+                cmbCategoria.setSelectedIndex(4);
+            }
+            txtPrecio.setText(precioProducto);
+            
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_tblProductosMouseClicked
+    
+    public void limpiar(){
+        txtNProducto.setText("");
+        txtProducto.setText("");
+        cmbCategoria.setSelectedIndex(0);
+        txtPrecio.setText("");
+        
+        try {
+            obj.SoloTabla(tblProductos);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+        
+        int borra;
+        
+        int fila=tblProductos.getSelectedRow();
+        
+        if (fila==-1) {
+            JOptionPane.showMessageDialog(this, "Por Favor selecciones un Producto de la tabla");
+        }
+        if (fila!=-1) {
+            // 0 para si
+            // 1 para no
+            // 2 para cancelar
+            borra=JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar este Producto");
+            String NomPro=(tblProductos.getValueAt(fila, 1).toString());
+            
+            produc.setNombreProducto(NomPro);
+            obj.Eliminar(produc);   
+        }
+        
+        limpiar();
+        
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+        Menu men=new Menu();
+        men.show();
+        this.hide();
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     /**
      * @param args the command line arguments

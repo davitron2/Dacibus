@@ -14,7 +14,13 @@ public class Producto {
     String nombreProducto;
     String categoriaProducto;
     int precioProducto;
-
+    
+    
+    public Producto(){
+        
+    }
+    
+    
     public Producto(String nombreProducto, String categoriaProducto, int precioProducto) {
         this.nombreProducto = nombreProducto;
         this.categoriaProducto = categoriaProducto;
