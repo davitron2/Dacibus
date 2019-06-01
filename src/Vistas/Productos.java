@@ -19,18 +19,18 @@ import modelo.ProductoSQL;
  * @author JOCELYNE
  */
 public class Productos extends javax.swing.JFrame {
-    
-    
-    modelo.Producto produc=new Producto();
-    modelo.ProductoSQL obj=new ProductoSQL();
-    
-    
+
+    modelo.Producto produc = new Producto();
+    modelo.ProductoSQL obj = new ProductoSQL();
+    Menu men;
+
     /**
      * Creates new form Productos
      */
     public Productos() {
         initComponents();
         this.setLocationRelativeTo(null);
+        cargarTabla();
     }
 
     /**
@@ -114,7 +114,7 @@ public class Productos extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "IdProducto", "NombrePro", "Categoria", "Precio"
+                "IdProducto", "Nombre", "Categoria", "Precio"
             }
         ));
         tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,7 +148,14 @@ public class Productos extends javax.swing.JFrame {
         });
         jPanel1.add(lblMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 10, 20, 30));
 
+        txtNProducto.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNProducto.setBorder(null);
+        txtNProducto.setEnabled(false);
+        txtNProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNProductoActionPerformed(evt);
+            }
+        });
         txtNProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNProductoKeyPressed(evt);
@@ -156,7 +163,13 @@ public class Productos extends javax.swing.JFrame {
         });
         jPanel1.add(txtNProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 150, 80, 50));
 
+        txtProducto.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtProducto.setBorder(null);
+        txtProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtProductoKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 250, 130, 50));
 
         cmbCategoria.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
@@ -173,7 +186,7 @@ public class Productos extends javax.swing.JFrame {
 
         lblProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Productos.png"))); // NOI18N
         lblProductos.setText("jLabel1");
-        jPanel1.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 1390, 800));
+        jPanel1.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1390, 810);
@@ -182,49 +195,20 @@ public class Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        //cerrar la ventana
-        this.hide();
+        if (men == null) {
+            men = new Menu();
+            men.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
         //this.setState(JFrame.ICONIFIED); //minimizar la ventana
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    public void cargarTabla() {
         try {
-            
-            if (txtProducto.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Por favor introduzca el nombre del producto");
-            }
-            else{
-                produc.setNombreProducto(txtProducto.getText());
-            }
-            
-            if (cmbCategoria.getSelectedIndex()==0) {
-                JOptionPane.showMessageDialog(this, "Por favor selecciona una categoria para el producto");
-            }
-            else{
-                produc.setCategoriaProducto(cmbCategoria.getSelectedItem().toString());
-            }
-            
-            if (txtPrecio.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Por favor introduzca un precio para el producto");
-            }
-            else{
-                
-                produc.setPrecioProducto(Integer.parseInt(txtPrecio.getText()));
-            }
-            //obj.RegistrarProducto(produc);
-            
-            if (obj.RegistrarProducto(produc)==10) {
-                //Se debe enviar unas "comillas" o se envia un null para limpiar
-                limpiar();
-            }
-            
             obj.SoloTabla(tblProductos);
-          
-        } catch (NumberFormatException numberFormatException) {
-                JOptionPane.showMessageDialog(this, "Por Favor introduzca un precio valido");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -234,18 +218,65 @@ public class Productos extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+    }
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        try {
+
+            if (txtProducto.getText() != "" && cmbCategoria.getSelectedIndex() != 0 && txtPrecio.getText() != "") {
+                produc.setNombreProducto(txtProducto.getText());
+                produc.setCategoriaProducto(cmbCategoria.getSelectedItem().toString());
+                produc.setPrecio(Double.parseDouble(txtPrecio.getText()));
+
+                if (obj.RegistrarProducto(produc) == 10) {
+                    limpiar();
+                }
+
+            } else {
+
+                if (txtProducto.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por favor introduce un nombre para el producto");
+                }
+
+                if (cmbCategoria.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(this, "Por favor selecciona una categoria para el producto");
+                }
+
+                if (txtPrecio.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por favor introduzca un precio para el producto");
+                }
+            }
+
+            obj.SoloTabla(tblProductos);
+
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(this, "Por Favor introduzca un precio valido");
+            limpiar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+            limpiar();
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+            limpiar();
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+            limpiar();
+        } catch (SQLException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+            limpiar();
+        }
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       
+
         String dato;
         //dato=txtProducto.getText();
-        
-        dato=JOptionPane.showInputDialog("Introduce el nombre del producto");
+
+        dato = JOptionPane.showInputDialog("Introduce el nombre del producto");
         try {
-            obj.BuscarTabla(tblProductos,dato);
+            obj.BuscarTabla(tblProductos, dato);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -255,63 +286,98 @@ public class Productos extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtNProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNProductoKeyPressed
-        if (evt.getKeyChar()=='\b') {
-            txtProducto.setText(null);
-            txtPrecio.setText("");
-            cmbCategoria.setSelectedItem(0);
-        }
+
     }//GEN-LAST:event_txtNProductoKeyPressed
-    
-    
+
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        
-        
-        
-        
+        //modificar
+        int idproducto = 0;
+
+        try {
+            int fila = tblProductos.getSelectedRow();
+            if (fila == -1) {
+                JOptionPane.showMessageDialog(this, "Por Favor Seleccione un Campo de la Tabla");
+            } else {
+                idproducto = Integer.parseInt(txtNProducto.getText());
+                if (txtProducto.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por favor introduzca el nombre del producto");
+                } else {
+                    produc.setNombreProducto(txtProducto.getText());
+                }
+                if (cmbCategoria.getSelectedIndex() == 0) {
+                    JOptionPane.showMessageDialog(this, "Por favor selecciona una categoria para el producto");
+                } else {
+                    produc.setCategoriaProducto(cmbCategoria.getSelectedItem().toString());
+                }
+                if (txtPrecio.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por favor introduzca un precio para el producto");
+                } else {
+                    produc.setPrecio(Double.parseDouble(txtPrecio.getText()));
+                }
+            }
+
+            if (obj.ActualizarProducto(produc, idproducto) == 10) {
+                //Se debe enviar unas "comillas" o se envia un null para limpiar
+                limpiar();
+            }
+
+            obj.SoloTabla(tblProductos);
+
+        } catch (NumberFormatException numberFormatException) {
+            JOptionPane.showMessageDialog(this, "Por Favor introduzca un precio valido");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
-        if(evt.getButton()==1){
-            int fila=tblProductos.getSelectedRow();
-            String idProducto=(tblProductos.getValueAt(fila, 0).toString());
-            String nombreProducto=(tblProductos.getValueAt(fila, 1).toString());
-            String categoriaProducto=(tblProductos.getValueAt(fila, 2).toString());
-            String precioProducto=(tblProductos.getValueAt(fila, 3).toString());
-            
+        if (evt.getButton() == 1) {
+            int fila = tblProductos.getSelectedRow();
+            String idProducto = (tblProductos.getValueAt(fila, 0).toString());
+            String nombreProducto = (tblProductos.getValueAt(fila, 1).toString());
+            String categoriaProducto = (tblProductos.getValueAt(fila, 2).toString());
+            String precioProducto = (tblProductos.getValueAt(fila, 3).toString());
+
             txtNProducto.setText(idProducto);
             txtProducto.setText(nombreProducto);
-            if(categoriaProducto.equals("Entradas")){
+            if (categoriaProducto.equals("Entradas")) {
                 cmbCategoria.setSelectedIndex(1);
             }
-            if(categoriaProducto.equals("Ensaladas")){
+            if (categoriaProducto.equals("Ensaladas")) {
                 cmbCategoria.setSelectedIndex(2);
             }
-            if(categoriaProducto.equals("Bebidas")){
+            if (categoriaProducto.equals("Bebidas")) {
                 cmbCategoria.setSelectedIndex(3);
             }
-            if(categoriaProducto.equals("Postres")){
+            if (categoriaProducto.equals("Postres")) {
                 cmbCategoria.setSelectedIndex(4);
             }
             txtPrecio.setText(precioProducto);
-            
-            
+
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_tblProductosMouseClicked
-    
-    public void limpiar(){
+
+    public void limpiar() {
         txtNProducto.setText("");
         txtProducto.setText("");
         cmbCategoria.setSelectedIndex(0);
         txtPrecio.setText("");
-        
+
         try {
             obj.SoloTabla(tblProductos);
         } catch (ClassNotFoundException ex) {
@@ -323,42 +389,55 @@ public class Productos extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Productos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    
+
+
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
-        
+
         int borra;
-        
-        int fila=tblProductos.getSelectedRow();
-        
-        if (fila==-1) {
-            JOptionPane.showMessageDialog(this, "Por Favor selecciones un Producto de la tabla");
+
+        int fila = tblProductos.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Por Favor seleccione un Producto de la tabla");
         }
-        if (fila!=-1) {
+        if (fila != -1) {
             // 0 para si
             // 1 para no
             // 2 para cancelar
-            borra=JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar este Producto");
-            String NomPro=(tblProductos.getValueAt(fila, 1).toString());
-            
+            borra = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar este Producto");
+            String NomPro = (tblProductos.getValueAt(fila, 1).toString());
+
             produc.setNombreProducto(NomPro);
-            obj.Eliminar(produc);   
+            obj.Eliminar(produc);
         }
-        
+
         limpiar();
-        
-        
-        
+
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-        Menu men=new Menu();
+        Menu men = new Menu();
         men.show();
         this.hide();
     }//GEN-LAST:event_btnVolverMenuActionPerformed
+
+    private void txtNProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNProductoActionPerformed
+        //error
+
+    }//GEN-LAST:event_txtNProductoActionPerformed
+
+    private void txtProductoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductoKeyPressed
+        if (evt.getKeyChar() == '\b' && txtProducto.getText().equals("")) {
+            txtNProducto.setText("");
+            cmbCategoria.setSelectedIndex(0);
+            txtPrecio.setText("");
+        }
+
+
+    }//GEN-LAST:event_txtProductoKeyPressed
 
     /**
      * @param args the command line arguments

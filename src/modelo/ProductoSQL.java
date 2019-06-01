@@ -42,7 +42,7 @@ public class ProductoSQL extends Conexion{
                 ps = con.prepareCall(sql);
                 ps.setString(1, produc.getNombreProducto());
                 ps.setString(2,produc.getCategoriaProducto() );
-                ps.setInt(3, produc.getPrecioProducto());
+                ps.setDouble(3, produc.getPrecio());
                
                 rs = ps.executeQuery();
                  JOptionPane.showMessageDialog(null, "Registro exitoso");
@@ -95,7 +95,7 @@ public class ProductoSQL extends Conexion{
             Connection con = getConexion();
             Statement s=con.createStatement();
                                             //Nombre de la tabla
-            ResultSet rs=s.executeQuery("SELECT * FROM producto WHERE NombrePro LIKE '%"+dato+"%'");
+            ResultSet rs=s.executeQuery("SELECT * FROM producto WHERE Nombre LIKE '%"+dato+"%'");
             
             DefaultTableModel modelo=new DefaultTableModel();
             JTable tab=new JTable(modelo);
@@ -189,6 +189,51 @@ public class ProductoSQL extends Conexion{
         }
 
     }
+         
+         
+         
+         public int ActualizarProducto(Producto produc,int idProducto){
+       try {
+            PreparedStatement ps = null;
+            Connection con;
+            con = getConexion();
+            ResultSet rs = null;
+
+            String sql = "call ExisteProducto(?)";
+            
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idProducto);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                sql = "call ActualizarProducto(?,?,?,?)";
+                
+                ps = con.prepareCall(sql);
+                ps.setInt(1, idProducto);
+                ps.setString(2, produc.getNombreProducto());
+                ps.setString(3,produc.getCategoriaProducto() );
+                ps.setDouble(4, produc.getPrecio());
+               
+                rs = ps.executeQuery();
+                 JOptionPane.showMessageDialog(null, "Actalizacion exitosa");
+                return 10;
+                
+                
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe ese producto");
+                return 3;
+
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return 33;
+        }
+    }
+         
          
          
          
