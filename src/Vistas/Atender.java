@@ -12,7 +12,7 @@ import javax.swing.JFrame;
  * @author JOCELYNE
  */
 public class Atender extends javax.swing.JFrame {
-
+Menu menu;
     /**
      * Creates new form Atender
      */
@@ -47,7 +47,13 @@ public class Atender extends javax.swing.JFrame {
         lblAtender = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(1390, 800));
+        setMinimumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1390, 800));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,7 +94,12 @@ public class Atender extends javax.swing.JFrame {
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
         btnVolverMenu.setBorder(null);
-        jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 720, -1, -1));
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 670, -1, -1));
 
         tblAtender.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,6 +144,7 @@ public class Atender extends javax.swing.JFrame {
 
         lblAtender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atender.png"))); // NOI18N
         lblAtender.setText("jLabel1");
+        lblAtender.setPreferredSize(new java.awt.Dimension(1390, 800));
         jPanel1.add(lblAtender, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
         getContentPane().add(jPanel1);
@@ -146,8 +158,20 @@ public class Atender extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        //cerrar la ventana
+      if (menu == null) {
+            menu = new Menu();
+            menu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+          if (menu == null) {
+            menu = new Menu();
+            menu.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     /**
      * @param args the command line arguments

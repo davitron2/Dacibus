@@ -52,7 +52,11 @@ public class Ventas extends javax.swing.JFrame {
         lblVentas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);
+        setResizable(false);
+        setSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -229,9 +233,11 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_jDateChooser1KeyPressed
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-        Menu men = new Menu();
-        men.show();
-        this.hide();
+      if (menu == null) {
+            menu = new Menu();
+            menu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     /**

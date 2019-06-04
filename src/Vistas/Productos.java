@@ -60,8 +60,13 @@ public class Productos extends javax.swing.JFrame {
         lblProductos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(1390, 800));
+        setMinimumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1390, 800));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -186,6 +191,9 @@ public class Productos extends javax.swing.JFrame {
 
         lblProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Productos.png"))); // NOI18N
         lblProductos.setText("jLabel1");
+        lblProductos.setMaximumSize(new java.awt.Dimension(1390, 800));
+        lblProductos.setMinimumSize(new java.awt.Dimension(1390, 800));
+        lblProductos.setPreferredSize(new java.awt.Dimension(1390, 800));
         jPanel1.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
         getContentPane().add(jPanel1);
@@ -203,7 +211,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
-        //this.setState(JFrame.ICONIFIED); //minimizar la ventana
+     this.setState(JFrame.ICONIFIED); 
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     public void cargarTabla() {
@@ -419,9 +427,11 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-        Menu men = new Menu();
-        men.show();
-        this.hide();
+          if (menu == null) {
+            menu = new Menu();
+            menu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     private void txtNProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNProductoActionPerformed
