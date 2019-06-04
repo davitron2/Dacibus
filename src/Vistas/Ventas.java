@@ -5,7 +5,12 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.VentaSQL;
 
 /**
  *
@@ -13,12 +18,16 @@ import javax.swing.JFrame;
  */
 public class Ventas extends javax.swing.JFrame {
 
+    modelo.VentaSQL obj = new VentaSQL();
+    Menu menu;
+
     /**
      * Creates new form Ventas
      */
     public Ventas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        Tabla();
     }
 
     /**
@@ -50,13 +59,13 @@ public class Ventas extends javax.swing.JFrame {
 
         tblVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "N° VENTA", "ORDEN", "TOTAL ($)", "FECHA"
+                "IdCuenta", "CostoTotal", "IdMesa", "IdOrden", "IdUsuario", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(tblVentas);
@@ -65,15 +74,41 @@ public class Ventas extends javax.swing.JFrame {
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
         btnVolverMenu.setBorder(null);
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 710, -1, -1));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnBuscar.png"))); // NOI18N
         btnBuscar.setBorder(null);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 200, 50));
+
+        jDateChooser1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jDateChooser1KeyPressed(evt);
+            }
+        });
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 200, 50));
 
         txtNVenta.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNVenta.setBorder(null);
+        txtNVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNVentaActionPerformed(evt);
+            }
+        });
+        txtNVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNVentaKeyPressed(evt);
+            }
+        });
         jPanel1.add(txtNVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 80, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deVentas.png"))); // NOI18N
@@ -110,13 +145,94 @@ public class Ventas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public final void Tabla() {
+        try {
+            obj.SoloTabla(tblVentas);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
         this.setState(JFrame.ICONIFIED); //minimizar la ventana
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        //cerrar la ventana
+        if (menu == null) {
+            menu = new Menu();
+            menu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void txtNVentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNVentaKeyPressed
+        //keypressed
+    }//GEN-LAST:event_txtNVentaKeyPressed
+
+    private void txtNVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNVentaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+
+        String[] opcion = {"N°Venta", "Fecha"};
+
+        int x = JOptionPane.showOptionDialog(this, "Selecciona con que deseas realizar la busqueda", "Elige", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcion, opcion[0]);
+        if (x == 0) {
+            if (!"".equals(txtNVenta.getText())) {
+                try {
+                    obj.BuscarTabla(tblVentas, txtNVenta.getText());
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Por Favor introduzca el numero de orden");
+            }
+        }
+        if (x == 1) {
+            if (jDateChooser1.getDate()!=null){    
+                String fecha = jDateChooser1.getDate().toLocaleString();
+                String[] partes = fecha.split(" ");    
+                try {
+                    obj.BuscarTablaFecha(tblVentas, partes[0]);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jDateChooser1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChooser1KeyPressed
+
+
+    }//GEN-LAST:event_jDateChooser1KeyPressed
+
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+        Menu men = new Menu();
+        men.show();
+        this.hide();
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     /**
      * @param args the command line arguments

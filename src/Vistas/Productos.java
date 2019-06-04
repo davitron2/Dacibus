@@ -22,7 +22,7 @@ public class Productos extends javax.swing.JFrame {
 
     modelo.Producto produc = new Producto();
     modelo.ProductoSQL obj = new ProductoSQL();
-    Menu men;
+    Menu menu;
 
     /**
      * Creates new form Productos
@@ -195,9 +195,9 @@ public class Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        if (men == null) {
-            men = new Menu();
-            men.setVisible(true);
+        if (menu == null) {
+            menu = new Menu();
+            menu.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_lblCerrarMouseClicked
