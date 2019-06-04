@@ -14,7 +14,9 @@ import javax.swing.JFrame;
 public class Menu extends javax.swing.JFrame {
 
     Usuarios usu;
-
+  Atender aten;
+    Productos produ;
+    Ventas vent;
     /**
      * Creates new form Menu
      */
@@ -60,6 +62,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnProductos.png"))); // NOI18N
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 200, 100));
 
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnUsuarios.png"))); // NOI18N
@@ -71,6 +78,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 200, 100));
 
         btnAtender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnAtender.png"))); // NOI18N
+        btnAtender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtenderActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAtender, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 620, 200, 100));
 
         btnCubiertos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnCubiertos.png"))); // NOI18N
@@ -80,6 +92,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(btnMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 620, 200, 100));
 
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVentas.png"))); // NOI18N
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 620, 200, 100));
 
         lblMinimizar.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
@@ -122,11 +139,21 @@ public class Menu extends javax.swing.JFrame {
         lblAtender.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblAtender.setForeground(new java.awt.Color(255, 255, 255));
         lblAtender.setText("Atender");
+        lblAtender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAtenderMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblAtender, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 80, -1));
 
         lblProductos.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblProductos.setForeground(new java.awt.Color(255, 255, 255));
         lblProductos.setText("Productos");
+        lblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblProductosMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 110, -1));
 
         lblCubiertos.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
@@ -137,6 +164,11 @@ public class Menu extends javax.swing.JFrame {
         lblVentas.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblVentas.setForeground(new java.awt.Color(255, 255, 255));
         lblVentas.setText("Ventas");
+        lblVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblVentasMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 70, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Baja.png"))); // NOI18N
@@ -176,6 +208,54 @@ public class Menu extends javax.swing.JFrame {
 
 // TODO add your handling code here:
     }//GEN-LAST:event_lblUsuariosMouseClicked
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+             if (vent == null) {
+            vent = new Ventas();
+            vent.setVisible(true);
+            this.dispose();
+        }    
+    }//GEN-LAST:event_btnVentasActionPerformed
+
+    private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
+            if (vent == null) {
+            vent = new Ventas();
+            vent.setVisible(true);
+            this.dispose();
+        }    
+    }//GEN-LAST:event_lblVentasMouseClicked
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+     if (produ == null) {
+            produ = new Productos();
+            produ.setVisible(true);
+            this.dispose();
+        }            // TODO add your handling code here:
+    }//GEN-LAST:event_btnProductosActionPerformed
+
+    private void lblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductosMouseClicked
+if (produ == null) {
+            produ = new Productos();
+            produ.setVisible(true);
+            this.dispose();
+        }             // TODO add your handling code here:
+    }//GEN-LAST:event_lblProductosMouseClicked
+
+    private void lblAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtenderMouseClicked
+if (aten== null) {
+            aten = new Atender();
+            aten.setVisible(true);
+            this.dispose();
+        }             // TODO add your handling code here:
+    }//GEN-LAST:event_lblAtenderMouseClicked
+
+    private void btnAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtenderActionPerformed
+if (aten== null) {
+            aten = new Atender();
+            aten.setVisible(true);
+            this.dispose();
+        }           // TODO add your handling code here:
+    }//GEN-LAST:event_btnAtenderActionPerformed
 
     /**
      * @param args the command line arguments
