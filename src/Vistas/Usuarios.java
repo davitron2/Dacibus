@@ -26,6 +26,7 @@ public class Usuarios extends javax.swing.JFrame {
      * Creates new form Usuarios
      */
     Menu men;
+    VerUsuarios  VerUs;
 
     public Usuarios() {
         initComponents();
@@ -60,8 +61,13 @@ public class Usuarios extends javax.swing.JFrame {
         lblUsuarios = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setExtendedState(6);
+        setAlwaysOnTop(true);
+        setMaximumSize(new java.awt.Dimension(1390, 800));
+        setMinimumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1390, 800));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,6 +141,11 @@ public class Usuarios extends javax.swing.JFrame {
         btnVerUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVerUsuarios.png"))); // NOI18N
         btnVerUsuarios.setBorder(null);
         btnVerUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerUsuariosActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVerUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 675, 200, 50));
 
         btnRegistrarUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegistrar.png"))); // NOI18N
@@ -159,7 +170,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         lblUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Usuarios.png"))); // NOI18N
         lblUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
+        jPanel1.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1390, 800));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1390, 800);
@@ -189,6 +200,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverMenuActionPerformed
+
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
         ///falta revisar validaciones de datos para no aceptar numeros en ciertos campos
@@ -240,6 +252,17 @@ public class Usuarios extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
+
+    private void btnVerUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUsuariosActionPerformed
+           if (VerUs == null) {
+            VerUs = new VerUsuarios();
+            VerUs.setVisible(true);
+            this.dispose();
+        }
+        
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnVerUsuariosActionPerformed
 
     /**
      * @param args the command line arguments

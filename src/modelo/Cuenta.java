@@ -1,60 +1,69 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
+import javafx.scene.chart.PieChart;
+
+/**
+ *
+ * @author Cesar
+ */
 public class Cuenta {
+    
+    int costoTotal;
+    int idMesa;
+    int idUsuario;
+    String fecha;
 
-    private int IdCuenta;
-    private int CostT;
-    private int IdMesa;
-    private int IdOrden;
-    private int IdUsuario;
-    private String Fecha;
-
-    public int getIdCuenta() {
-        return IdCuenta;
+    
+    public Cuenta(){
+        
+    }
+    
+    
+    
+    public Cuenta(int costoTotal, int idMesa, int idUsuario, String fecha) {
+        this.costoTotal = costoTotal;
+        this.idMesa = idMesa;
+        this.idUsuario = idUsuario;
+        this.fecha = fecha;
     }
 
-    public void setIdCuenta(int IdCuenta) {
-        this.IdCuenta = IdCuenta;
+    public int getCostoTotal() {
+        return costoTotal;
     }
 
-    public int getCostT() {
-        return CostT;
-    }
-
-    public void setCostT(int CostT) {
-        this.CostT = CostT;
+    public void setCostoTotal(int costoTotal) {
+        this.costoTotal = costoTotal;
     }
 
     public int getIdMesa() {
-        return IdMesa;
+        return idMesa;
     }
 
-    public void setIdMesa(int IdMesa) {
-        this.IdMesa = IdMesa;
-    }
-
-    public int getIdOrden() {
-        return IdOrden;
-    }
-
-    public void setIdOrden(int IdOrden) {
-        this.IdOrden = IdOrden;
+    public void setIdMesa(int idMesa) {
+        this.idMesa = idMesa;
     }
 
     public int getIdUsuario() {
-        return IdUsuario;
+        return idUsuario;
     }
 
-    public void setIdUsuario(int IdUsuario) {
-        this.IdUsuario = IdUsuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getFecha() {
-        return Fecha;
+        return fecha;
     }
 
-    public void setFecha(String Fecha) {
-        this.Fecha = Fecha;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
-
+    
+    
+    
 }

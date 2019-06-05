@@ -2,23 +2,42 @@ package modelo;
 
 public class Mesa {
 
-    private int IdMesa;
-    private String EdoMesa;
+int numeroMesa;
+int capacidadMesa;
+String estadoMesa;
 
-    public int getIdMesa() {
-        return IdMesa;
+
+    public Mesa(){
+        
     }
 
-    public void setIdMesa(int IdMesa) {
-        this.IdMesa = IdMesa;
+    public Mesa(int numeroMesa, int capacidadMesa, String estadoMesa) {
+        this.numeroMesa = numeroMesa;
+        this.capacidadMesa = capacidadMesa;
+        this.estadoMesa = estadoMesa;
     }
 
-    public String getEdoMesa() {
-        return EdoMesa;
+    public int getNumeroMesa() {
+        return numeroMesa;
     }
 
-    public void setEdoMesa(String EdoMesa) {
-        this.EdoMesa = EdoMesa;
+    public void setNumeroMesa(int numeroMesa) {
+        this.numeroMesa = numeroMesa;
     }
 
+    public int getCapacidadMesa() {
+        return capacidadMesa;
+    }
+
+    public void setCapacidadMesa(int capacidadMesa) {
+        this.capacidadMesa = capacidadMesa;
+    }
+
+    public String getEstadoMesa() {
+        return estadoMesa;
+    }
+
+    public void setEstadoMesa(String estadoMesa) {
+        this.estadoMesa = estadoMesa;
+    }
 }
