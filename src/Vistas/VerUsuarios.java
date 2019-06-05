@@ -19,7 +19,7 @@ import modelo.hash;
  * @author HP
  */
 public class VerUsuarios extends javax.swing.JFrame {
-    
+
     Usuarios us;
     modelo.UsuarioSQL obj = new UsuarioSQL();
     modelo.Usuario user = new Usuario();
@@ -45,7 +45,7 @@ public class VerUsuarios extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblVentas = new javax.swing.JTable();
+        tblUsuario = new javax.swing.JTable();
         lblMinimizar = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
         btnModificar = new javax.swing.JButton();
@@ -85,7 +85,7 @@ public class VerUsuarios extends javax.swing.JFrame {
             }
         });
 
-        tblVentas.setModel(new javax.swing.table.DefaultTableModel(
+        tblUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -96,7 +96,7 @@ public class VerUsuarios extends javax.swing.JFrame {
                 "IdUsuario", "Usuario", "Pass", "Nombre", "Edad", "Genero", "TipoUsuario"
             }
         ));
-        jScrollPane2.setViewportView(tblVentas);
+        jScrollPane2.setViewportView(tblUsuario);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 850, 250));
 
@@ -209,7 +209,7 @@ public class VerUsuarios extends javax.swing.JFrame {
 
     public final void ActualizarTabla() {
         try {
-            obj.SoloTabla(tblVentas);
+            obj.SoloTabla(tblUsuario);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -222,13 +222,13 @@ public class VerUsuarios extends javax.swing.JFrame {
     }
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        int fila = tblVentas.getSelectedRow();
-        int id=Integer.parseInt(tblVentas.getValueAt(fila, 0).toString());
+        int fila = tblUsuario.getSelectedRow();
+        int id = Integer.parseInt(tblUsuario.getValueAt(fila, 0).toString());
         if (fila != -1) {
             try {
                 user.setIdUsuario(id);
                 user.setUsuario(txtUsuario.getText());
-                
+
                 String npass = hash.sha1(pswPass.getText());
                 user.setPass(npass);
                 user.setNombre(txtNombrePersonal.getText());
@@ -241,26 +241,26 @@ public class VerUsuarios extends javax.swing.JFrame {
                     user.setGenero("F");
                 }
                 user.setTipoUsuario(cmbTipoUsuario.getSelectedItem().toString());
-                
+
                 obj.ActualizarProducto(user, id);
             } catch (Exception e) {
-                
+
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "Por Favor seleccione un usuario de la tabla");
         }
         ActualizarTabla();
-        
+
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblVentas.getSelectedRow();
-        
+        int fila = tblUsuario.getSelectedRow();
+
         if (fila != -1) {
             int borra = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar el usuario");
             if (borra == 0) {
                 user.setUsuario((txtUsuario.getText()));
-                user.setIdUsuario((int) tblVentas.getValueAt(fila, 0));
+                user.setIdUsuario((int) tblUsuario.getValueAt(fila, 0));
                 user.setNombre(txtNombrePersonal.getText());
                 obj.Eliminar(user);
             }
@@ -268,7 +268,7 @@ public class VerUsuarios extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "El Usuario no fue eliminado");
             }
             ActualizarTabla();
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "Por Favor seleccione un registro de la tabla");
         }
@@ -278,7 +278,7 @@ public class VerUsuarios extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
             String nom = JOptionPane.showInputDialog(this, "Ingresa el nombre del usuario a buscar");
-            obj.BuscarTabla(tblVentas, nom);
+            obj.BuscarTabla(tblUsuario, nom);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, "El usuario no existe");
         } catch (InstantiationException ex) {
@@ -296,12 +296,11 @@ public class VerUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        System.exit(0);
-        /*if (us == null) {
+        if (us == null) {
             us = new Usuarios();
             us.setVisible(true);
             this.dispose();
-        }*/
+        }
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
@@ -314,37 +313,39 @@ public class VerUsuarios extends javax.swing.JFrame {
 
     private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
         String genero, tipo;
-        
-        int fila = tblVentas.getSelectedRow();
-        txtNombrePersonal.setText((tblVentas.getValueAt(fila, 3).toString()));
-        txtEdadPersonal.setText((tblVentas.getValueAt(fila, 4).toString()));
-        txtUsuario.setText((tblVentas.getValueAt(fila, 1).toString()));
-        pswPass.setText((tblVentas.getValueAt(fila, 2).toString()));
-        
-        tipo = (tblVentas.getValueAt(fila, 6).toString());
-        
-        if (tipo.equals("Administrador")) {
-            cmbTipoUsuario.setSelectedIndex(1);
+        int fila = tblUsuario.getSelectedRow();
+        if (fila != -1) {
+            txtNombrePersonal.setText((tblUsuario.getValueAt(fila, 3).toString()));
+            txtEdadPersonal.setText((tblUsuario.getValueAt(fila, 4).toString()));
+            txtUsuario.setText((tblUsuario.getValueAt(fila, 1).toString()));
+            pswPass.setText((tblUsuario.getValueAt(fila, 2).toString()));
+
+            tipo = (tblUsuario.getValueAt(fila, 6).toString());
+
+            if (tipo.equals("Administrador")) {
+                cmbTipoUsuario.setSelectedIndex(1);
+            }
+            if (tipo.equals("Cajero")) {
+                cmbTipoUsuario.setSelectedIndex(2);
+            }
+
+            genero = (tblUsuario.getValueAt(fila, 5).toString());
+
+            if (genero.equals("M")) {
+                rbtnMasculino.setSelected(true);
+                rbtnFemenino.setSelected(false);
+            }
+            if (genero.equals("F")) {
+                rbtnFemenino.setSelected(true);
+                rbtnMasculino.setSelected(false);
+            }
         }
-        if (tipo.equals("Cajero")) {
-            cmbTipoUsuario.setSelectedIndex(2);
-        }
-        
-        genero = (tblVentas.getValueAt(fila, 5).toString());
-        
-        if (genero.equals("M")) {
-            rbtnMasculino.setSelected(true);
-            rbtnFemenino.setSelected(false);
-        }
-        if (genero.equals("F")) {
-            rbtnFemenino.setSelected(true);
-            rbtnMasculino.setSelected(false);
-        }
+
 
     }//GEN-LAST:event_jScrollPane2MouseClicked
 
     private void jScrollPane2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MousePressed
-        
+
     }//GEN-LAST:event_jScrollPane2MousePressed
 
     /**
@@ -399,7 +400,7 @@ public class VerUsuarios extends javax.swing.JFrame {
     private javax.swing.JPasswordField pswPass;
     private javax.swing.JRadioButton rbtnFemenino;
     private javax.swing.JRadioButton rbtnMasculino;
-    private javax.swing.JTable tblVentas;
+    private javax.swing.JTable tblUsuario;
     private javax.swing.JTextField txtEdadPersonal;
     private javax.swing.JTextField txtNombrePersonal;
     private javax.swing.JTextField txtUsuario;
