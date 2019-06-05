@@ -8,10 +8,14 @@ package modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,10 +24,7 @@ import javax.swing.JOptionPane;
 public class UsuarioSQL extends Conexion {
 
     public int Registrar(Usuario usr) {
-   
-       
-        
-        
+
         try {
             PreparedStatement ps = null;
             Connection con = getConexion();
@@ -51,7 +52,7 @@ public class UsuarioSQL extends Conexion {
                 ps.setString(5, usr.getGenero());
                 ps.setString(6, usr.getTipoUsuario());
                 rs = ps.executeQuery();
-                 JOptionPane.showMessageDialog(null, "Registro exitoso");
+                JOptionPane.showMessageDialog(null, "Registro exitoso");
                 return 1;
 
             }
@@ -155,6 +156,120 @@ public class UsuarioSQL extends Conexion {
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
             return 10;
+        }
+    }
+
+    public JTable BuscarTabla(JTable tabla, String dato) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        Statement s = con.createStatement();
+        //Nombre de la tabla
+
+        String sql = "call ExisteUsuario(?)";
+        ResultSet rs = s.executeQuery("SELECT * FROM usuario WHERE Nombre LIKE '%" + dato + "%'");
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        JTable tab = new JTable(modelo);
+
+        ResultSetMetaData metaDatos = rs.getMetaData();
+        int NumeroColumnas = metaDatos.getColumnCount();
+
+        Object[] etiquetas = new Object[NumeroColumnas];
+
+        for (int i = 0; i < NumeroColumnas; i++) {
+            etiquetas[i] = metaDatos.getColumnLabel(i + 1);
+        }
+        modelo.setColumnIdentifiers(etiquetas);
+
+        while (rs.next()) {
+            Object[] fila = new Object[modelo.getColumnCount()];
+
+            for (int i = 0; i < modelo.getColumnCount(); i++) {
+                fila[i] = rs.getObject(i + 1);
+            }
+            modelo.addRow(fila);
+        }
+
+        rs.close();
+        tabla.setModel(modelo);
+
+        return tabla;
+
+    }
+
+    public JTable SoloTabla(JTable tabla) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        Statement s = con.createStatement();
+        //Nombre de la tabla
+        ResultSet rs = s.executeQuery("SELECT * FROM usuario");
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        JTable tab = new JTable(modelo);
+
+        ResultSetMetaData metaDatos = rs.getMetaData();
+        int NumeroColumnas = metaDatos.getColumnCount();
+
+        Object[] etiquetas = new Object[NumeroColumnas];
+
+        for (int i = 0; i < NumeroColumnas; i++) {
+            etiquetas[i] = metaDatos.getColumnLabel(i + 1);
+        }
+        modelo.setColumnIdentifiers(etiquetas);
+
+        while (rs.next()) {
+            Object[] fila = new Object[modelo.getColumnCount()];
+
+            for (int i = 0; i < modelo.getColumnCount(); i++) {
+                fila[i] = rs.getObject(i + 1);
+            }
+            modelo.addRow(fila);
+        }
+        rs.close();
+        tabla.setModel(modelo);
+
+        return tabla;
+
+    }
+
+    public int ActualizarProducto(Usuario user, int IdUser) {
+        try {
+            PreparedStatement ps = null;
+            Connection con;
+            con = getConexion();
+            ResultSet rs = null;
+
+            String sql = "call ExisteUsuario(?)";
+
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, IdUser);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+
+                sql = "call ActualizarUsuario(?,?,?,?,?,?,?)";
+
+                ps = con.prepareCall(sql);
+                ps.setInt(1, IdUser);
+                ps.setString(2, user.getUsuario());
+                ps.setString(3, user.getPass());
+                ps.setString(4, user.getNombre());
+                ps.setInt(5, user.getEdad());
+                ps.setString(6, user.getGenero());
+                ps.setString(7, user.getTipoUsuario());
+
+                rs = ps.executeQuery();
+                JOptionPane.showMessageDialog(null, "Actalizacion exitosa");
+                return 10;
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe ese usuario");
+                return 3;
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return 33;
         }
     }
 

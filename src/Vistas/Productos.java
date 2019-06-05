@@ -211,7 +211,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
-     this.setState(JFrame.ICONIFIED); 
+        this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     public void cargarTabla() {
@@ -410,15 +410,24 @@ public class Productos extends javax.swing.JFrame {
         if (fila == -1) {
             JOptionPane.showMessageDialog(this, "Por Favor seleccione un Producto de la tabla");
         }
+
         if (fila != -1) {
             // 0 para si
             // 1 para no
             // 2 para cancelar
             borra = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar este Producto");
             String NomPro = (tblProductos.getValueAt(fila, 1).toString());
+            if (borra == 0) {
+                produc.setNombreProducto(NomPro);
+                obj.Eliminar(produc);
+            }
+            if (borra==1) {
+                JOptionPane.showMessageDialog(this, "El producto no fue eliminado");
+            }
+            if (borra==2) {
+                JOptionPane.showMessageDialog(this, "El producto no fue eliminado");
+            }
 
-            produc.setNombreProducto(NomPro);
-            obj.Eliminar(produc);
         }
 
         limpiar();
@@ -427,7 +436,7 @@ public class Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-          if (menu == null) {
+        if (menu == null) {
             menu = new Menu();
             menu.setVisible(true);
             this.dispose();

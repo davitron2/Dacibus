@@ -5,20 +5,32 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
+import modelo.UsuarioSQL;
+import modelo.hash;
 
 /**
  *
  * @author HP
  */
 public class VerUsuarios extends javax.swing.JFrame {
-Usuarios us;
+    
+    Usuarios us;
+    modelo.UsuarioSQL obj = new UsuarioSQL();
+    modelo.Usuario user = new Usuario();
+
     /**
      * Creates new form VerUsuarios
      */
     public VerUsuarios() {
         initComponents();
-               this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
+        ActualizarTabla();
     }
 
     /**
@@ -30,6 +42,7 @@ Usuarios us;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
@@ -63,15 +76,24 @@ Usuarios us;
         jPanel1.setMinimumSize(new java.awt.Dimension(1390, 800));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane2MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jScrollPane2MousePressed(evt);
+            }
+        });
+
         tblVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "IdCuenta", "CostoTotal", "IdMesa", "IdOrden", "IdUsuario", "Fecha"
+                "IdUsuario", "Usuario", "Pass", "Nombre", "Edad", "Genero", "TipoUsuario"
             }
         ));
         jScrollPane2.setViewportView(tblVentas);
@@ -133,12 +155,14 @@ Usuarios us;
         jPanel1.add(txtEdadPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 238, 65, 25));
 
         rbtnFemenino.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbtnFemenino);
         rbtnFemenino.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         rbtnFemenino.setText("F");
         rbtnFemenino.setBorder(null);
         jPanel1.add(rbtnFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(502, 310, 30, 20));
 
         rbtnMasculino.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rbtnMasculino);
         rbtnMasculino.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         rbtnMasculino.setText("M");
         rbtnMasculino.setBorder(null);
@@ -183,39 +207,145 @@ Usuarios us;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public final void ActualizarTabla() {
+        try {
+            obj.SoloTabla(tblVentas);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-    
+        int fila = tblVentas.getSelectedRow();
+        int id=Integer.parseInt(tblVentas.getValueAt(fila, 0).toString());
+        if (fila != -1) {
+            try {
+                user.setIdUsuario(id);
+                user.setUsuario(txtUsuario.getText());
+                
+                String npass = hash.sha1(pswPass.getText());
+                user.setPass(npass);
+                user.setNombre(txtNombrePersonal.getText());
+                user.setEdad(Integer.parseInt(txtEdadPersonal.getText()));
+                //JOptionPane.showMessageDialog(this, ""+user.getEdad());
+                if (rbtnMasculino.isSelected()) {
+                    user.setGenero("M");
+                }
+                if (rbtnFemenino.isSelected()) {
+                    user.setGenero("F");
+                }
+                user.setTipoUsuario(cmbTipoUsuario.getSelectedItem().toString());
+                
+                obj.ActualizarProducto(user, id);
+            } catch (Exception e) {
+                
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Por Favor seleccione un usuario de la tabla");
+        }
+        ActualizarTabla();
+        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
+        int fila = tblVentas.getSelectedRow();
+        
+        if (fila != -1) {
+            int borra = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar el usuario");
+            if (borra == 0) {
+                user.setUsuario((txtUsuario.getText()));
+                user.setIdUsuario((int) tblVentas.getValueAt(fila, 0));
+                user.setNombre(txtNombrePersonal.getText());
+                obj.Eliminar(user);
+            }
+            if (borra == 1) {
+                JOptionPane.showMessageDialog(this, "El Usuario no fue eliminado");
+            }
+            ActualizarTabla();
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Por Favor seleccione un registro de la tabla");
+        }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try {
+            String nom = JOptionPane.showInputDialog(this, "Ingresa el nombre del usuario a buscar");
+            obj.BuscarTabla(tblVentas, nom);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, "El usuario no existe");
+        } catch (InstantiationException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(VerUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-      
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
- this.setState(JFrame.ICONIFIED);        
+        this.setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        System.exit(0);
+        /*if (us == null) {
+            us = new Usuarios();
+            us.setVisible(true);
+            this.dispose();
+        }*/
+    }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
         if (us == null) {
             us = new Usuarios();
             us.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_lblCerrarMouseClicked
-
-    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-          if (us == null) {
-            us = new Usuarios();
-            us.setVisible(true);
-            this.dispose();
-        }
     }//GEN-LAST:event_btnVolverMenuActionPerformed
+
+    private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
+        String genero, tipo;
+        
+        int fila = tblVentas.getSelectedRow();
+        txtNombrePersonal.setText((tblVentas.getValueAt(fila, 3).toString()));
+        txtEdadPersonal.setText((tblVentas.getValueAt(fila, 4).toString()));
+        txtUsuario.setText((tblVentas.getValueAt(fila, 1).toString()));
+        pswPass.setText((tblVentas.getValueAt(fila, 2).toString()));
+        
+        tipo = (tblVentas.getValueAt(fila, 6).toString());
+        
+        if (tipo.equals("Administrador")) {
+            cmbTipoUsuario.setSelectedIndex(1);
+        }
+        if (tipo.equals("Cajero")) {
+            cmbTipoUsuario.setSelectedIndex(2);
+        }
+        
+        genero = (tblVentas.getValueAt(fila, 5).toString());
+        
+        if (genero.equals("M")) {
+            rbtnMasculino.setSelected(true);
+            rbtnFemenino.setSelected(false);
+        }
+        if (genero.equals("F")) {
+            rbtnFemenino.setSelected(true);
+            rbtnMasculino.setSelected(false);
+        }
+
+    }//GEN-LAST:event_jScrollPane2MouseClicked
+
+    private void jScrollPane2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MousePressed
+        
+    }//GEN-LAST:event_jScrollPane2MousePressed
 
     /**
      * @param args the command line arguments
@@ -257,6 +387,7 @@ Usuarios us;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnVolverMenu;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbTipoUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

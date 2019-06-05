@@ -213,9 +213,9 @@ public class ProductoSQL extends Conexion{
                 ps.setString(2, produc.getNombreProducto());
                 ps.setString(3,produc.getCategoriaProducto() );
                 ps.setDouble(4, produc.getPrecio());
-               
+                
                 rs = ps.executeQuery();
-                 JOptionPane.showMessageDialog(null, "Actalizacion exitosa");
+                 JOptionPane.showMessageDialog(null,"Actalizacion exitosa");
                 return 10;
                 
                 
