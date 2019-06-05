@@ -96,6 +96,11 @@ public class VerUsuarios extends javax.swing.JFrame {
                 "IdUsuario", "Usuario", "Pass", "Nombre", "Edad", "Genero", "TipoUsuario"
             }
         ));
+        tblUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblUsuarioMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblUsuario);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 850, 250));
@@ -312,6 +317,14 @@ public class VerUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
+           //
+    }//GEN-LAST:event_jScrollPane2MouseClicked
+
+    private void jScrollPane2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MousePressed
+            //
+    }//GEN-LAST:event_jScrollPane2MousePressed
+
+    private void tblUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuarioMouseClicked
         String genero, tipo;
         int fila = tblUsuario.getSelectedRow();
         if (fila != -1) {
@@ -340,13 +353,7 @@ public class VerUsuarios extends javax.swing.JFrame {
                 rbtnMasculino.setSelected(false);
             }
         }
-
-
-    }//GEN-LAST:event_jScrollPane2MouseClicked
-
-    private void jScrollPane2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MousePressed
-
-    }//GEN-LAST:event_jScrollPane2MousePressed
+    }//GEN-LAST:event_tblUsuarioMouseClicked
 
     /**
      * @param args the command line arguments
