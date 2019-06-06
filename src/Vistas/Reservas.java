@@ -5,7 +5,12 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import modelo.MesaSQL;
+import modelo.ReservaSQL;
 
 /**
  *
@@ -16,9 +21,12 @@ public class Reservas extends javax.swing.JFrame {
     /**
      * Creates new form Reservas
      */
+    MesaSQL MeSql = new MesaSQL();
+    ReservaSQL ReSql= new ReservaSQL();
     public Reservas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        CargarTabla();
     }
 
     /**
@@ -46,7 +54,11 @@ public class Reservas extends javax.swing.JFrame {
         lblReservas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 700));
+        setMinimumSize(new java.awt.Dimension(900, 700));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(900, 700));
+        setSize(new java.awt.Dimension(900, 700));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,9 +93,14 @@ public class Reservas extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID MESAS", "N MESA", "CAPACIDAD", "ESTADO"
+                "IdMesa", "NumeroMesa", "Capacidad", "EdoMesa"
             }
         ));
+        tblMesas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMesasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblMesas);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 380, 200));
@@ -96,22 +113,26 @@ public class Reservas extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "N RESERVA", "FECHA", "CLIENTE", "N MESA"
+                "IdReserva", "Fecha", "Cliente", "idMESA"
             }
         ));
         jScrollPane1.setViewportView(tblReservas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, 380, 190));
 
+        txtNReservacion.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
         txtNReservacion.setBorder(null);
         jPanel1.add(txtNReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 80, 50));
 
+        txtCliente.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
         txtCliente.setBorder(null);
         jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 350, 180, 50));
 
+        txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
         txtNMesa.setBorder(null);
         jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 450, 80, 50));
 
+        jLabel1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deReservas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
@@ -137,6 +158,11 @@ public class Reservas extends javax.swing.JFrame {
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
         this.setState(JFrame.ICONIFIED); //minimizar la ventana
     }//GEN-LAST:event_lblMinimizarMouseClicked
+
+    private void tblMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMesasMouseClicked
+      
+        
+    }//GEN-LAST:event_tblMesasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -189,4 +215,31 @@ public class Reservas extends javax.swing.JFrame {
     private javax.swing.JTextField txtNMesa;
     private javax.swing.JTextField txtNReservacion;
     // End of variables declaration//GEN-END:variables
+
+    private void CargarTabla() {
+        try {
+            MeSql.MostrarTabla(tblMesas);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            ReSql.SoloTabla(tblReservas);
+            
+//To change body of generated methods, choose Tools | Templates.
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
