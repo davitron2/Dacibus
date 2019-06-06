@@ -197,6 +197,7 @@ if (jDateChooser1.getDate()!=null){
                 Reser.setFecha(fecha);
                 Reser.setIdMesa(Integer.parseInt(txtNMesa.getText()));
                 Reser.setCliente(txtCliente.getText());
+                ReSql.RegistrarReserva(Reser);
                 
                 
 

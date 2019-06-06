@@ -13,6 +13,16 @@ public class Reserva {
     private int IdReserva;
     private String Fecha;
     private String Cliente;
+    public Reserva(){
+    
+    }
+
+    public Reserva(int IdReserva, String Fecha, String Cliente, int IdMesa) {
+        this.IdReserva = IdReserva;
+        this.Fecha = Fecha;
+        this.Cliente = Cliente;
+        this.IdMesa = IdMesa;
+    }
     private int IdMesa;
 
     public int getIdReserva() {

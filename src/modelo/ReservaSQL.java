@@ -19,6 +19,9 @@ import javax.swing.table.DefaultTableModel;
  * @author HP
  */
 public class ReservaSQL extends Conexion {
+    public void RegistrarReserva(Reserva res){
+    
+    }
     
     public JTable SoloTabla(JTable tabla) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
             PreparedStatement ps=null;
