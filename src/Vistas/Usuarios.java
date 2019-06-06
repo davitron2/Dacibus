@@ -100,6 +100,11 @@ public class Usuarios extends javax.swing.JFrame {
 
         txtEdadPersonal.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtEdadPersonal.setBorder(null);
+        txtEdadPersonal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdadPersonalKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtEdadPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(329, 380, 90, 50));
 
         rbtnMasculino.setBackground(new java.awt.Color(255, 255, 255));
@@ -263,6 +268,16 @@ public class Usuarios extends javax.swing.JFrame {
 
 // TODO add your handling code here:
     }//GEN-LAST:event_btnVerUsuariosActionPerformed
+
+    private void txtEdadPersonalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadPersonalKeyTyped
+        int tota=2;
+        if (txtEdadPersonal.getText().length()>=tota) {
+            evt.consume();
+        }
+        char c= evt.getKeyChar();
+        if (c<'0'||c>'9') evt.consume();
+        
+    }//GEN-LAST:event_txtEdadPersonalKeyTyped
 
     /**
      * @param args the command line arguments

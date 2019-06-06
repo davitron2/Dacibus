@@ -174,6 +174,9 @@ public class Productos extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtProductoKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtProductoKeyTyped(evt);
+            }
         });
         jPanel1.add(txtProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 250, 130, 50));
 
@@ -184,6 +187,11 @@ public class Productos extends javax.swing.JFrame {
 
         txtPrecio.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtPrecio.setBorder(null);
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 80, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deProductos.png"))); // NOI18N
@@ -282,7 +290,7 @@ public class Productos extends javax.swing.JFrame {
         String dato;
         //dato=txtProducto.getText();
 
-        dato = JOptionPane.showInputDialog("Introduce el nombre del producto");
+        dato = JOptionPane.showInputDialog(this,"Introduce el nombre del producto");
         try {
             obj.BuscarTabla(tblProductos, dato);
         } catch (ClassNotFoundException ex) {
@@ -421,10 +429,10 @@ public class Productos extends javax.swing.JFrame {
                 produc.setNombreProducto(NomPro);
                 obj.Eliminar(produc);
             }
-            if (borra==1) {
+            if (borra == 1) {
                 JOptionPane.showMessageDialog(this, "El producto no fue eliminado");
             }
-            if (borra==2) {
+            if (borra == 2) {
                 JOptionPane.showMessageDialog(this, "El producto no fue eliminado");
             }
 
@@ -457,6 +465,16 @@ public class Productos extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_txtProductoKeyPressed
+
+    private void txtProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProductoKeyTyped
+        char c = evt.getKeyChar();
+        if((c<'a'|| c>'z')&&(c<'A'||c>'Z')) evt.consume();
+    }//GEN-LAST:event_txtProductoKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        char c = evt.getKeyChar();
+        if((c<'0'|| c>'9')&& c!='.') evt.consume();
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
     /**
      * @param args the command line arguments

@@ -5,20 +5,28 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import modelo.MesaSQL;
 
 /**
  *
  * @author JOCELYNE
  */
 public class Mesas extends javax.swing.JFrame {
-
+    
+    modelo.MesaSQL obj=new MesaSQL();
+    RegistroMesa interMesa=new RegistroMesa();
+    Menu menu;
     /**
      * Creates new form Mesas
      */
     public Mesas() {
         initComponents();
         this.setLocationRelativeTo(null);
+        ActualizarTabla();
     }
 
     /**
@@ -41,17 +49,34 @@ public class Mesas extends javax.swing.JFrame {
         lblMesas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1390, 800));
+        setMinimumSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAgregarMesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnAgregarMesa.png"))); // NOI18N
+        btnAgregarMesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMesaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAgregarMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 200, 50));
 
         btnNvaReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnNuevaReserva.png"))); // NOI18N
+        btnNvaReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNvaReservaActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnNvaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 110, 200, 50));
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 700, 200, 50));
 
         tblMesas.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,14 +124,45 @@ public class Mesas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public final void ActualizarTabla(){
+        try {
+            obj.SoloMesa(tblMesas);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Mesas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Mesas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Mesas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Mesas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
         this.setState(JFrame.ICONIFIED); //minimizar la ventana
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         //cerrar la ventana
+        System.exit(0);
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void btnAgregarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMesaActionPerformed
+        interMesa.show();
+    }//GEN-LAST:event_btnAgregarMesaActionPerformed
+
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+        if (menu == null) {
+            menu = new Menu();
+            menu.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
+
+    private void btnNvaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNvaReservaActionPerformed
+        
+    }//GEN-LAST:event_btnNvaReservaActionPerformed
 
     /**
      * @param args the command line arguments

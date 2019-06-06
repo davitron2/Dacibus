@@ -5,7 +5,16 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Mesa;
+import modelo.MesaSQL;
 
 /**
  *
@@ -13,12 +22,18 @@ import javax.swing.JFrame;
  */
 public class RegistroMesa extends javax.swing.JFrame {
 
+    modelo.MesaSQL obj = new MesaSQL();
+    modelo.Mesa mesa = new Mesa();
+    Menu menu;
+
     /**
      * Creates new form RegistroMesa
      */
     public RegistroMesa() {
         initComponents();
         this.setLocationRelativeTo(null);
+        ActualizarTabla();
+
     }
 
     /**
@@ -48,6 +63,8 @@ public class RegistroMesa extends javax.swing.JFrame {
         lblRegistroMesas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 725));
+        setMinimumSize(new java.awt.Dimension(900, 725));
         setUndecorated(true);
         getContentPane().setLayout(null);
 
@@ -76,12 +93,27 @@ public class RegistroMesa extends javax.swing.JFrame {
         jPanel1.add(lblMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 20, 30));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnEliminar.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 200, 50));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnAgregar.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, 200, 50));
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnModificar.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 180, 200, 50));
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnBuscar.png"))); // NOI18N
@@ -106,20 +138,36 @@ public class RegistroMesa extends javax.swing.JFrame {
                 "ID MESA", "N MESA", "CAPACIDAD", "ESTADO"
             }
         ));
+        tblRegistroMesas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRegistroMesasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblRegistroMesas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 410, 280));
 
+        txtIdMesa.setEditable(false);
         txtIdMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtIdMesa.setBorder(null);
         jPanel1.add(txtIdMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 150, 80, 50));
 
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNMesa.setBorder(null);
+        txtNMesa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNMesaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 250, 80, 50));
 
         txtCapacidad.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtCapacidad.setBorder(null);
+        txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCapacidadKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 350, 80, 50));
 
         cmbEstado.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
@@ -139,18 +187,121 @@ public class RegistroMesa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public final void ActualizarTabla() {
+        try {
+            obj.SoloMesa(tblRegistroMesas);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void lblMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMinimizarMouseClicked
         this.setState(JFrame.ICONIFIED); //minimizar la ventana
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         //cerrar la ventana
-    }//GEN-LAST:event_lblCerrarMouseClicked
+        System.exit(0);
 
+    }//GEN-LAST:event_lblCerrarMouseClicked
+    public void Limpiar(){
+        txtIdMesa.setText("");
+        txtNMesa.setText("");
+        txtCapacidad.setText("");
+        cmbEstado.setSelectedIndex(0);
+    }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        try {
+            int dato =Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el numero de la mesa que busca"));
+            
+            obj.BuscarTabla(tblRegistroMesas, dato);
+            
+        }
+        catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Por Favor solo introduzca numeros ");
+        }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (!"".equals(txtNMesa.getText()) && !"".equals(txtCapacidad.getText()) && cmbEstado.getSelectedIndex() != 0) {
+            try {
+                mesa.setNumeroMesa(Integer.parseInt(txtNMesa.getText()));
+                mesa.setCapacidadMesa(Integer.parseInt(txtCapacidad.getText()));
+                mesa.setEstadoMesa(cmbEstado.getSelectedItem().toString());
+                obj.RegistrarMesa(mesa);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Por Favor introduzca solo numeros en los campos de Numero mesa y Capacidad");
+            }
+
+        }
+        Limpiar();
+        ActualizarTabla();
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        int fila = tblRegistroMesas.getSelectedRow();
+        if (fila!=-1) {
+            int op=JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar la mesa");
+            if (op==0) {
+                int idMesa=(int) tblRegistroMesas.getValueAt(fila, 0);
+                obj.Eliminar(idMesa);
+            }
+            if (op==1) {
+                JOptionPane.showMessageDialog(this, "La mesa no se elimino");
+            }
+            
+            
+        }else{
+            JOptionPane.showMessageDialog(this,"Por Favor Seleccione una Mesa de la Tabla");
+        }
+        ActualizarTabla();
+        Limpiar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblRegistroMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMesasMouseClicked
+        int fila=tblRegistroMesas.getSelectedRow();
+        txtIdMesa.setText(tblRegistroMesas.getValueAt(fila, 0).toString());
+        txtNMesa.setText(tblRegistroMesas.getValueAt(fila, 1).toString());
+        txtCapacidad.setText(tblRegistroMesas.getValueAt(fila, 2).toString());
+        String estado=tblRegistroMesas.getValueAt(fila, 3).toString();
+        cmbEstado.setSelectedItem(estado);
+                
+        
+    }//GEN-LAST:event_tblRegistroMesasMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //BOTON MODIFICAR
+        int fila=tblRegistroMesas.getSelectedRow();
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtNMesaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNMesaKeyTyped
+        char c=evt.getKeyChar();
+        if (c<'0' ||c >'9') evt.consume();
+    }//GEN-LAST:event_txtNMesaKeyTyped
+
+    private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
+        char c=evt.getKeyChar();
+        if(c<'0'|| c>'9') evt.consume();
+    }//GEN-LAST:event_txtCapacidadKeyTyped
     /**
      * @param args the command line arguments
      */
@@ -160,9 +311,9 @@ public class RegistroMesa extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManagelblRegistroMesasstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try {                                                   //javax.swing.UIManagelblRegistroMesasstalledLookAndFeels()
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {          //javax.swing.UIManager.getInstalledLookAndFeels()
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
