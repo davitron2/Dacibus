@@ -205,7 +205,7 @@
         <Component class="javax.swing.JTextField" name="txtNReservacion">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Gill Sans MT Condensed" size="11" style="0"/>
+              <Font name="Gill Sans MT Condensed" size="18" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -220,7 +220,6 @@
         <Component class="javax.swing.JTextField" name="txtCliente">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Gill Sans MT Condensed" size="11" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -232,10 +231,22 @@
             </Constraint>
           </Constraints>
         </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Gill Sans MT Condensed" size="18" style="0"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="200" y="250" width="150" height="50"/>
+            </Constraint>
+          </Constraints>
+        </Component>
         <Component class="javax.swing.JTextField" name="txtNMesa">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Gill Sans MT Condensed" size="11" style="0"/>
+              <Font name="Gill Sans MT Condensed" size="18" style="0"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -268,6 +279,9 @@
               <Image iconType="3" name="/iconos/btnNuevaReserva.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="200" y="580" width="200" height="50"/>

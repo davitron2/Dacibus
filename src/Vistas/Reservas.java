@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.MesaSQL;
+import modelo.Reserva;
 import modelo.ReservaSQL;
 
 /**
@@ -23,6 +25,7 @@ public class Reservas extends javax.swing.JFrame {
      */
     MesaSQL MeSql = new MesaSQL();
     ReservaSQL ReSql= new ReservaSQL();
+    Reserva Reser = new Reserva();
     public Reservas() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -47,6 +50,7 @@ public class Reservas extends javax.swing.JFrame {
         tblReservas = new javax.swing.JTable();
         txtNReservacion = new javax.swing.JTextField();
         txtCliente = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         txtNMesa = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -120,15 +124,18 @@ public class Reservas extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, 380, 190));
 
-        txtNReservacion.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
+        txtNReservacion.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtNReservacion.setBorder(null);
         jPanel1.add(txtNReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 80, 50));
 
-        txtCliente.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
+        txtCliente.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtCliente.setBorder(null);
         jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 350, 180, 50));
 
-        txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
+        jDateChooser1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 150, 50));
+
+        txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtNMesa.setBorder(null);
         jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 450, 80, 50));
 
@@ -137,6 +144,11 @@ public class Reservas extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnNuevaReserva.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 580, 200, 50));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegresar.png"))); // NOI18N
@@ -152,6 +164,7 @@ public class Reservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+this.dispose();
         //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
 
@@ -161,8 +174,37 @@ public class Reservas extends javax.swing.JFrame {
 
     private void tblMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMesasMouseClicked
       
-        
+             if (evt.getButton() == 1) {
+            int fila = tblMesas.getSelectedRow();
+          int NumeroMesa = Integer.parseInt( tblMesas.getValueAt(fila, 1).toString());
+          String Estado= tblMesas.getValueAt(fila, 3).toString();
+                 if (Estado.equals("Reservado")) {
+                     
+                     JOptionPane.showMessageDialog(null,"Esa mesa ya esta reservada");
+                 }else{
+                 
+                 txtNMesa.setText(String.valueOf(NumeroMesa));
+                 
+                 }
+
+        }
     }//GEN-LAST:event_tblMesasMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+if (jDateChooser1.getDate()!=null){    
+                String fecha = jDateChooser1.getDate().toString();
+                String[] partes = fecha.split(" "); 
+                Reser.setFecha(fecha);
+                Reser.setIdMesa(Integer.parseInt(txtNMesa.getText()));
+                Reser.setCliente(txtCliente.getText());
+                
+                
+
+}else{
+JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
+}
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,6 +244,7 @@ public class Reservas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
