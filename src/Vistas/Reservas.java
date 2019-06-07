@@ -143,20 +143,20 @@ public class Reservas extends javax.swing.JFrame {
         });
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 150, 50));
 
-        jButton3.setText("jButton3");
+        jButton3.setText("buscar reservas en esa fecha");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 170, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 190, 30));
 
         txtNMesa.setEditable(false);
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtNMesa.setBorder(null);
         jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 450, 80, 50));
 
-        jButton4.setText("jButton4");
+        jButton4.setText("Ver todas las reservas y mesas");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
