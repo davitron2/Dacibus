@@ -51,11 +51,14 @@ public class Reservas extends javax.swing.JFrame {
         txtNReservacion = new javax.swing.JTextField();
         txtCliente = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton3 = new javax.swing.JButton();
         txtNMesa = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblReservas = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 700));
@@ -133,11 +136,33 @@ public class Reservas extends javax.swing.JFrame {
         jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 350, 180, 50));
 
         jDateChooser1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jDateChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseClicked(evt);
+            }
+        });
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 150, 50));
 
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 170, 30));
+
+        txtNMesa.setEditable(false);
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtNMesa.setBorder(null);
         jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 450, 80, 50));
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deReservas.png"))); // NOI18N
@@ -156,6 +181,9 @@ public class Reservas extends javax.swing.JFrame {
 
         lblReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Reservas.png"))); // NOI18N
         jPanel1.add(lblReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -5, 900, -1));
+
+        jButton2.setText("jButton2");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, -1, -1));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 900, 700);
@@ -192,13 +220,16 @@ this.dispose();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 if (jDateChooser1.getDate()!=null){    
-                String fecha = jDateChooser1.getDate().toString();
+                String fecha = jDateChooser1.getDate().toLocaleString();
                 String[] partes = fecha.split(" "); 
-                Reser.setFecha(fecha);
+                Reser.setFecha(partes[0]);
                 Reser.setIdMesa(Integer.parseInt(txtNMesa.getText()));
                 Reser.setCliente(txtCliente.getText());
                 ReSql.RegistrarReserva(Reser);
                 
+                
+                
+                 CargarTabla();
                 
 
 }else{
@@ -206,6 +237,33 @@ JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
 }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jDateChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseClicked
+      
+    }//GEN-LAST:event_jDateChooser1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+  try {
+            String fecha = jDateChooser1.getDate().toLocaleString();
+            String[] partes = fecha.split(" ");
+            ReSql.BuscarTablaFecha(tblReservas,partes[0]);      
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+
+ CargarTabla();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,6 +303,9 @@ JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
