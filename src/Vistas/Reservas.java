@@ -24,8 +24,9 @@ public class Reservas extends javax.swing.JFrame {
      * Creates new form Reservas
      */
     MesaSQL MeSql = new MesaSQL();
-    ReservaSQL ReSql= new ReservaSQL();
+    ReservaSQL ReSql = new ReservaSQL();
     Reserva Reser = new Reserva();
+
     public Reservas() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -48,7 +49,6 @@ public class Reservas extends javax.swing.JFrame {
         tblMesas = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReservas = new javax.swing.JTable();
-        txtNReservacion = new javax.swing.JTextField();
         txtCliente = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jButton3 = new javax.swing.JButton();
@@ -127,44 +127,82 @@ public class Reservas extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 360, 380, 190));
 
-        txtNReservacion.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        txtNReservacion.setBorder(null);
-        jPanel1.add(txtNReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 80, 50));
-
         txtCliente.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtCliente.setBorder(null);
-        jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 350, 180, 50));
+        jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 180, 47));
 
         jDateChooser1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jDateChooser1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseMoved(evt);
+            }
+        });
+        jDateChooser1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jDateChooser1FocusGained(evt);
+            }
+        });
         jDateChooser1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jDateChooser1MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jDateChooser1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jDateChooser1MousePressed(evt);
+            }
         });
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 150, 50));
+        jDateChooser1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jDateChooser1CaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jDateChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser1PropertyChange(evt);
+            }
+        });
+        jDateChooser1.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jDateChooser1VetoableChange(evt);
+            }
+        });
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 150, 60));
 
-        jButton3.setText("buscar reservas en esa fecha");
+        jButton3.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jButton3.setText("Aceptar Fecha");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, 190, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 150, 30));
 
         txtNMesa.setEditable(false);
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtNMesa.setBorder(null);
-        jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 450, 80, 50));
+        jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 80, 46));
 
+        jButton4.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         jButton4.setText("Ver todas las reservas y mesas");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, -1, -1));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deReservas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
@@ -192,7 +230,7 @@ public class Reservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-this.dispose();
+        this.dispose();
         //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
 
@@ -201,52 +239,65 @@ this.dispose();
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void tblMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMesasMouseClicked
-      
-             if (evt.getButton() == 1) {
+
+        if (evt.getButton() == 1) {
             int fila = tblMesas.getSelectedRow();
-          int NumeroMesa = Integer.parseInt( tblMesas.getValueAt(fila, 1).toString());
-          String Estado= tblMesas.getValueAt(fila, 3).toString();
-                 if (Estado.equals("Reservado")) {
-                     
-                     JOptionPane.showMessageDialog(null,"Esa mesa ya esta reservada");
-                 }else{
-                 
-                 txtNMesa.setText(String.valueOf(NumeroMesa));
-                 
-                 }
+            int NumeroMesa = Integer.parseInt(tblMesas.getValueAt(fila, 1).toString());
+
+            txtNMesa.setText(String.valueOf(NumeroMesa));
 
         }
     }//GEN-LAST:event_tblMesasMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-if (jDateChooser1.getDate()!=null){    
-                String fecha = jDateChooser1.getDate().toLocaleString();
-                String[] partes = fecha.split(" "); 
-                Reser.setFecha(partes[0]);
-                Reser.setIdMesa(Integer.parseInt(txtNMesa.getText()));
-                Reser.setCliente(txtCliente.getText());
-                ReSql.RegistrarReserva(Reser);
-                
-                
-                
-                 CargarTabla();
-                
+        if (jDateChooser1.getDate() != null) {
 
-}else{
-JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
-}
+            if (!txtCliente.getText().equals("")) {
+                if (!txtNMesa.getText().equals("")) {
+                    String fecha = jDateChooser1.getDate().toLocaleString();
+                    String[] partes = fecha.split(" ");
+                    Reser.setFecha(partes[0]);
+                    Reser.setIdMesa(Integer.parseInt(txtNMesa.getText()));
+                    Reser.setCliente(txtCliente.getText());
+                    ReSql.RegistrarReserva(Reser);
+
+                    jDateChooser1.setDate(null);
+                    txtCliente.setText("");
+                    txtNMesa.setText("");
+
+                    CargarTabla();
+                } else {
+                        JOptionPane.showMessageDialog(null, "Seleccione una mesa");
+                }
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Escriba el nombre del cliente");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Por Favor selecciona una fecha");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jDateChooser1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseClicked
-      
+
     }//GEN-LAST:event_jDateChooser1MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-  try {
-            String fecha = jDateChooser1.getDate().toLocaleString();
-            String[] partes = fecha.split(" ");
-            ReSql.BuscarTablaFecha(tblReservas,partes[0]);      
+        try {
+            if (jDateChooser1.getDate() != null) {
+                String fecha = jDateChooser1.getDate().toLocaleString();
+                String[] partes = fecha.split(" ");
+
+                ///////////busca reserva por fecha/
+                /////ReSql.BuscarTablaFecha(tblReservas,partes[0]); 
+                ReSql.TablaMesasDisponibles(tblMesas, partes[0]);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+
+            }
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -255,15 +306,51 @@ JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
             Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
- CargarTabla();
+        CargarTabla();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+
+    }//GEN-LAST:event_jDateChooser1PropertyChange
+
+    private void jDateChooser1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooser1FocusGained
+
+    }//GEN-LAST:event_jDateChooser1FocusGained
+
+    private void jDateChooser1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MousePressed
+
+    }//GEN-LAST:event_jDateChooser1MousePressed
+
+    private void jDateChooser1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser1MouseEntered
+
+    private void jDateChooser1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser1MouseExited
+
+    private void jDateChooser1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jDateChooser1CaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser1CaretPositionChanged
+
+    private void jDateChooser1VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jDateChooser1VetoableChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser1VetoableChange
+
+    private void jDateChooser1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseDragged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser1MouseDragged
+
+    private void jDateChooser1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooser1MouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser1MouseMoved
 
     /**
      * @param args the command line arguments
@@ -318,12 +405,11 @@ JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
     private javax.swing.JTable tblReservas;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtNMesa;
-    private javax.swing.JTextField txtNReservacion;
     // End of variables declaration//GEN-END:variables
 
     private void CargarTabla() {
         try {
-            MeSql.MostrarTabla(tblMesas);
+            MeSql.MostrarTabla(tblMesas, 2);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -335,7 +421,7 @@ JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
         }
         try {
             ReSql.SoloTabla(tblReservas);
-            
+
 //To change body of generated methods, choose Tools | Templates.
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);

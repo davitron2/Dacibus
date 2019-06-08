@@ -88,6 +88,42 @@ public class ReservaSQL extends Conexion {
         return tabla;    
         
         }
+    public JTable TablaMesasDisponibles(JTable tabla, String Dato) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+            PreparedStatement ps=null;
+            Connection con = getConexion();
+            Statement s=con.createStatement();
+                                            //Nombre de la tabla
+            ResultSet rs=s.executeQuery("SELECT IdMesa,NumeroMesa,Capacidad from mesa where mesa.IdMesa not IN (SELECT reserva.IdMesa from mesa,reserva WHERE reserva.IdMesa=mesa.IdMesa and reserva.Fecha='"+Dato+"')");
+            
+            DefaultTableModel modelo=new DefaultTableModel();
+            JTable tab=new JTable(modelo);
+            
+           
+            ResultSetMetaData metaDatos=rs.getMetaData();
+            int NumeroColumnas=metaDatos.getColumnCount();
+            
+            Object[] etiquetas=new Object[NumeroColumnas];
+            
+            for (int i = 0; i < NumeroColumnas; i++) {
+                etiquetas[i]=metaDatos.getColumnLabel(i+1);    
+            }
+            modelo.setColumnIdentifiers(etiquetas);            
+            
+            
+                while(rs.next()){
+                Object[] fila=new Object[modelo.getColumnCount()];
+                
+                for (int i = 0; i < modelo.getColumnCount(); i++) {
+                    fila[i]=rs.getObject(i+1);
+                }
+                modelo.addRow(fila);
+            }
+               rs.close();
+               tabla.setModel(modelo);
+                
+        return tabla;    
+        
+        }
     
      public JTable BuscarTablaFecha(JTable tabla, String dato) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         PreparedStatement ps = null;
