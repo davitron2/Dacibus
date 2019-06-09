@@ -94,6 +94,11 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(btnCubiertos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1155, 620, 200, 100));
 
         btnMesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnMesas.png"))); // NOI18N
+        btnMesas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMesasActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 620, 200, 100));
 
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVentas.png"))); // NOI18N
@@ -261,6 +266,10 @@ if (aten== null) {
             this.dispose();
         }           // TODO add your handling code here:
     }//GEN-LAST:event_btnAtenderActionPerformed
+
+    private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMesasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -125,6 +125,11 @@ public class RegistroMesa extends javax.swing.JFrame {
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 200, 50));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegresar.png"))); // NOI18N
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 610, 200, 50));
 
         tblRegistroMesas.setModel(new javax.swing.table.DefaultTableModel(
@@ -189,7 +194,7 @@ public class RegistroMesa extends javax.swing.JFrame {
 
     public final void ActualizarTabla() {
         try {
-            obj.SoloMesa(tblRegistroMesas);
+            obj.SoloMesa(tblRegistroMesas,1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -206,8 +211,7 @@ public class RegistroMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        //cerrar la ventana
-        System.exit(0);
+ this.dispose();
 
     }//GEN-LAST:event_lblCerrarMouseClicked
     public void Limpiar(){
@@ -302,6 +306,10 @@ public class RegistroMesa extends javax.swing.JFrame {
         char c=evt.getKeyChar();
         if(c<'0'|| c>'9') evt.consume();
     }//GEN-LAST:event_txtCapacidadKeyTyped
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
     /**
      * @param args the command line arguments
      */

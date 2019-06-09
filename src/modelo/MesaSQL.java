@@ -60,13 +60,21 @@ public class MesaSQL extends Conexion {
         }
     }
 
-    public JTable SoloMesa(JTable tabla) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+    public JTable SoloMesa(JTable tabla, int op) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         PreparedStatement ps = null;
         Connection con = getConexion();
         Statement s = con.createStatement();
         //Nombre de la tabla
-        ResultSet rs = s.executeQuery("SELECT * FROM mesa");
-
+        ResultSet rs;
+      
+                                            //Nombre de la tabla
+                                            if(op==1){
+             rs=s.executeQuery("SELECT * FROM mesa");
+                                            }else{
+                             rs=s.executeQuery("SELECT IdMesa,NumeroMesa,Capacidad FROM mesa");
+                                            
+                                            
+                                            }
         DefaultTableModel modelo = new DefaultTableModel();
         JTable tab = new JTable(modelo);
 

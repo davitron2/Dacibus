@@ -51,10 +51,10 @@ public class Reservas extends javax.swing.JFrame {
         tblReservas = new javax.swing.JTable();
         txtCliente = new javax.swing.JTextField();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jButton3 = new javax.swing.JButton();
         txtNMesa = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblReservas = new javax.swing.JLabel();
@@ -129,7 +129,12 @@ public class Reservas extends javax.swing.JFrame {
 
         txtCliente.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtCliente.setBorder(null);
-        jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 180, 47));
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 180, 40));
 
         jDateChooser1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jDateChooser1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -176,7 +181,12 @@ public class Reservas extends javax.swing.JFrame {
                 jDateChooser1VetoableChange(evt);
             }
         });
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 150, 60));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 150, 60));
+
+        txtNMesa.setEditable(false);
+        txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        txtNMesa.setBorder(null);
+        jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 80, 46));
 
         jButton3.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jButton3.setText("Aceptar Fecha");
@@ -185,12 +195,12 @@ public class Reservas extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, 150, 30));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 150, 30));
 
-        txtNMesa.setEditable(false);
-        txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
-        txtNMesa.setBorder(null);
-        jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 80, 46));
+        jLabel1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deReservas.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 400, 320));
 
         jButton4.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         jButton4.setText("Ver todas las reservas y mesas");
@@ -201,11 +211,6 @@ public class Reservas extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 11)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deReservas.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
-
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnNuevaReserva.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +220,11 @@ public class Reservas extends javax.swing.JFrame {
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 580, 200, 50));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegresar.png"))); // NOI18N
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 200, 50));
 
         lblReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Reservas.png"))); // NOI18N
@@ -352,6 +362,14 @@ public class Reservas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jDateChooser1MouseMoved
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -409,7 +427,7 @@ public class Reservas extends javax.swing.JFrame {
 
     private void CargarTabla() {
         try {
-            MeSql.MostrarTabla(tblMesas, 2);
+            MeSql.SoloMesa(tblMesas,2);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
