@@ -153,20 +153,10 @@ public class VerUsuarios extends javax.swing.JFrame {
 
         txtNombrePersonal.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 17)); // NOI18N
         txtNombrePersonal.setBorder(null);
-        txtNombrePersonal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombrePersonalKeyTyped(evt);
-            }
-        });
         jPanel1.add(txtNombrePersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 169, 205, 25));
 
         txtEdadPersonal.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 17)); // NOI18N
         txtEdadPersonal.setBorder(null);
-        txtEdadPersonal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtEdadPersonalKeyTyped(evt);
-            }
-        });
         jPanel1.add(txtEdadPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 238, 65, 25));
 
         rbtnFemenino.setBackground(new java.awt.Color(255, 255, 255));
@@ -364,20 +354,6 @@ public class VerUsuarios extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tblUsuarioMouseClicked
-
-    private void txtEdadPersonalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadPersonalKeyTyped
-        int tama=2;
-        if (txtEdadPersonal.getText().length()>=tama) {
-            evt.consume();
-        }
-        char c=evt.getKeyChar();
-        if (c<'0'|| c>'9') evt.consume();
-    }//GEN-LAST:event_txtEdadPersonalKeyTyped
-
-    private void txtNombrePersonalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombrePersonalKeyTyped
-        char c=evt.getKeyChar();
-        if ((c<'a'||c>'z')&& (c<'A'||c>'Z')) evt.consume();
-    }//GEN-LAST:event_txtNombrePersonalKeyTyped
 
     /**
      * @param args the command line arguments

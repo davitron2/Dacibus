@@ -112,9 +112,6 @@ public class Ventas extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtNVentaKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNVentaKeyTyped(evt);
-            }
         });
         jPanel1.add(txtNVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 80, 50));
 
@@ -242,11 +239,6 @@ public class Ventas extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnVolverMenuActionPerformed
-
-    private void txtNVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNVentaKeyTyped
-        char c=evt.getKeyChar();
-        if(c<'0'||c>'9') evt.consume();
-    }//GEN-LAST:event_txtNVentaKeyTyped
 
     /**
      * @param args the command line arguments
