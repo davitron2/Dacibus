@@ -12,7 +12,10 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.CuentaSQL;
 import modelo.MesaSQL;
+import modelo.OrdenSQL;
 import modelo.ReservaSQL;
 
 /**
@@ -20,18 +23,33 @@ import modelo.ReservaSQL;
  * @author JOCELYNE
  */
 public class Cuenta extends javax.swing.JFrame {
-
+CuentaSQL cuesql = new CuentaSQL();
     
     ReservaSQL resql = new ReservaSQL();
     MesaSQL mesql= new MesaSQL();
+    OrdenSQL ordsql= new OrdenSQL();
     /**
      * Creates new form Cuenta
      */
     
      public Cuenta(String idcuenta) {
-         txtNCuenta.setText(idcuenta);
+         
         initComponents();
         this.setLocationRelativeTo(null);
+        txtNCuenta.setText(idcuenta);
+         txtNOrden.setText(idcuenta);
+    try {
+        cuesql.TablaOrdenId(tblOrden,Integer.parseInt(idcuenta));
+       txtTotal.setText(String.valueOf(ordsql.TotalOrdenId(Integer.parseInt(idcuenta)))); 
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+    }
                  cargartabla();
     }
     public Cuenta() {
@@ -41,7 +59,23 @@ public class Cuenta extends javax.swing.JFrame {
     }
     public void cargartabla(){
         try {
-            mesql.SoloMesa(tblMesas, 2);
+          
+               LocalDate fecha1 = LocalDate.now();
+                String fecha;
+                
+               if(fecha1.getMonthValue()<10){
+               
+                fecha=fecha1.getDayOfMonth()+"/0"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+               }else{
+                fecha= fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+               }
+               
+               
+               
+       
+                
+         
+                resql.TablaMesasDisponibles(tblMesas,fecha);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -76,8 +110,8 @@ public class Cuenta extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMesas = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        tblOrden = new javax.swing.JTable();
+        txtTotal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblPagarCuenta = new javax.swing.JLabel();
 
@@ -121,10 +155,12 @@ public class Cuenta extends javax.swing.JFrame {
         txtNCuenta.setBorder(null);
         jPanel1.add(txtNCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 80, 30));
 
+        txtNMesa.setEditable(false);
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNMesa.setBorder(null);
         jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 80, 50));
 
+        txtNOrden.setEditable(false);
         txtNOrden.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNOrden.setBorder(null);
         jPanel1.add(txtNOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 80, 50));
@@ -163,11 +199,16 @@ public class Cuenta extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblMesas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMesasMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblMesas);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, 430));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblOrden.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -178,21 +219,18 @@ public class Cuenta extends javax.swing.JFrame {
                 "PRODUCTO", "CANTIDAD", "PRECIO", "IMPORTE"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblOrden);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 110, 400, 240));
 
-        jTextField1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 440, 130, 50));
+        txtTotal.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
+        txtTotal.setBorder(null);
+        jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 440, 130, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deTotal.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, -1, 150));
 
         lblPagarCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Cuenta.png"))); // NOI18N
-        lblPagarCuenta.setMaximumSize(new java.awt.Dimension(1390, 800));
-        lblPagarCuenta.setMinimumSize(new java.awt.Dimension(1390, 800));
-        lblPagarCuenta.setPreferredSize(new java.awt.Dimension(1390, 800));
         jPanel1.add(lblPagarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
         getContentPane().add(jPanel1);
@@ -289,6 +327,36 @@ public class Cuenta extends javax.swing.JFrame {
      
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
+    private void tblMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMesasMouseClicked
+if(jComboBox1.getSelectedItem().equals("Libres")){
+        
+        
+        if(tblMesas.getSelectedRow()!=-1){
+txtNMesa.setText(tblMesas.getValueAt(tblMesas.getSelectedRow(), 1).toString());
+
+
+}else{
+
+
+}
+    }
+
+if(jComboBox1.getSelectedItem().equals("Reservadas")){
+        
+        
+        if(tblMesas.getSelectedRow()!=-1){
+txtNMesa.setText(tblMesas.getValueAt(tblMesas.getSelectedRow(), 3).toString());
+
+
+}else{
+
+
+}
+    }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblMesasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -333,14 +401,14 @@ public class Cuenta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblMinimizar;
     private javax.swing.JLabel lblPagarCuenta;
     private javax.swing.JTable tblMesas;
+    private javax.swing.JTable tblOrden;
     private javax.swing.JTextField txtNCuenta;
     private javax.swing.JTextField txtNMesa;
     private javax.swing.JTextField txtNOrden;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

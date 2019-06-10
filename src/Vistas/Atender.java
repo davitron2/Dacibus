@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import modelo.CuentaSQL;
 import modelo.OrdenSQL;
 import modelo.ProductoSQL;
 
@@ -23,6 +24,7 @@ public class Atender extends javax.swing.JFrame {
 Menu menu;
 DefaultTableModel model;
 OrdenSQL ord= new OrdenSQL();
+
     /**
      * Creates new form Atender
      */
@@ -37,6 +39,7 @@ OrdenSQL ord= new OrdenSQL();
 public void cargartabla(){
     try {
         Prosql.SoloTabla(tblProducto);
+        
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
     } catch (InstantiationException ex) {

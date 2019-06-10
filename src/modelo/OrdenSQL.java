@@ -110,7 +110,7 @@ public class OrdenSQL extends Conexion{
             //id,usuario,nombre,edad,genero,tipo
             
          
-            rs = stm.executeQuery("SELECT DISTINCT COUNT(IdOrden) from orden");
+            rs = stm.executeQuery("SELECT COUNT(DISTINCT(IdOrden)) FROM orden");
          // primer fila. (El cursor inicia antes de la primer fila)
      if(rs.next()) {
        //Si hay resultados obtengo el valor. 
@@ -137,7 +137,40 @@ public class OrdenSQL extends Conexion{
     
     
     
-    
+       public double TotalOrdenId(int id){
+           double total=0;
+     PreparedStatement ps = null;
+            Connection con;
+       try {
+           con = getConexion();
+             ResultSet rs = null;
+
+            
+            Statement stm = con.createStatement();
+            //id,usuario,nombre,edad,genero,tipo
+            
+         
+            rs = stm.executeQuery("SELECT SUM(Precio) from orden where IdOrden ="+id+"");
+         // primer fila. (El cursor inicia antes de la primer fila)
+     if(rs.next()) {
+       //Si hay resultados obtengo el valor. 
+       total= rs.getDouble(1);
+       
+          
+             return total;
+     }
+            
+       } catch (SQLException ex) {
+           Logger.getLogger(OrdenSQL.class.getName()).log(Level.SEVERE, null, ex);
+       }
+          
+       
+       
+    return total;
+   
+   
+  
+   }
     
     
     
