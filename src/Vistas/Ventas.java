@@ -52,7 +52,6 @@ public class Ventas extends javax.swing.JFrame {
         lblVentas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);
         setResizable(false);

@@ -61,7 +61,6 @@ public class Usuarios extends javax.swing.JFrame {
         lblUsuarios = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setMaximumSize(new java.awt.Dimension(1390, 800));
         setMinimumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);

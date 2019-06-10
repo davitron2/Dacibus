@@ -18,7 +18,7 @@ import modelo.MesaSQL;
 public class Mesas extends javax.swing.JFrame {
     Reservas Res;
     modelo.MesaSQL obj=new MesaSQL();
-    RegistroMesa interMesa=new RegistroMesa();
+    RegistroMesa interMesa;
     Menu menu;
     /**
      * Creates new form Mesas
@@ -51,6 +51,8 @@ public class Mesas extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1390, 800));
         setMinimumSize(new java.awt.Dimension(1390, 800));
+        setUndecorated(true);
+        setSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

@@ -53,7 +53,6 @@ public class Menu extends javax.swing.JFrame {
         lblInterfaz = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMaximumSize(new java.awt.Dimension(1390, 800));
         setMinimumSize(new java.awt.Dimension(1390, 800));
