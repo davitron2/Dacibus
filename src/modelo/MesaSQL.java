@@ -130,7 +130,7 @@ public class MesaSQL extends Conexion {
 
     }
 
-    public int ActualizarProducto(Mesa mesa, int idMesa) {
+    public int ActualizarMesa(Mesa mesa, int idMesa) {
         try {
             PreparedStatement ps = null;
             Connection con;
