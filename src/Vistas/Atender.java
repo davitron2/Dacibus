@@ -5,7 +5,14 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import modelo.OrdenSQL;
+import modelo.ProductoSQL;
 
 /**
  *
@@ -13,14 +20,35 @@ import javax.swing.JFrame;
  */
 public class Atender extends javax.swing.JFrame {
 Menu menu;
+DefaultTableModel model;
+OrdenSQL ord= new OrdenSQL();
     /**
      * Creates new form Atender
      */
     public Atender() {
         initComponents();
         this.setLocationRelativeTo(null);
+       cargartabla();
+        
+    }
+    ProductoSQL Prosql= new ProductoSQL();
+    Cuenta cuen;
+public void cargartabla(){
+    try {
+        Prosql.SoloTabla(tblProducto);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
     }
 
+
+
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,10 +65,13 @@ Menu menu;
         btnNvaOrden = new javax.swing.JButton();
         btnPagar = new javax.swing.JButton();
         btnVolverMenu = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAtender = new javax.swing.JTable();
         txtNOrden = new javax.swing.JTextField();
         spnCantidad = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProducto = new javax.swing.JTable();
@@ -81,14 +112,29 @@ Menu menu;
 
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnAgregar.png"))); // NOI18N
         btnAgregar.setBorder(null);
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 350, -1, -1));
 
         btnNvaOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnNuevaOrden.png"))); // NOI18N
         btnNvaOrden.setBorder(null);
+        btnNvaOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNvaOrdenActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnNvaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 620, -1, -1));
 
         btnPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnPagar.png"))); // NOI18N
         btnPagar.setBorder(null);
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 620, -1, -1));
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
@@ -98,17 +144,37 @@ Menu menu;
                 btnVolverMenuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 670, -1, -1));
+        jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 680, -1, -1));
+
+        jButton1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jButton1.setText("Ver todos los productos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 65, -1, -1));
+
+        txtBuscar.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        txtBuscar.setBorder(null);
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 70, 130, 18));
 
         tblAtender.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "PRODUCTO", "CANTIDAD", "PRECIO", "TOTAL"
+                "IdProducto", "Nombre", "Precio"
             }
         ));
         jScrollPane1.setViewportView(tblAtender);
@@ -122,6 +188,9 @@ Menu menu;
         spnCantidad.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         spnCantidad.setBorder(null);
         jPanel1.add(spnCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 90, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar3.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, 210, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deAtender_1.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 400, 240));
@@ -139,7 +208,7 @@ Menu menu;
         ));
         jScrollPane2.setViewportView(tblProducto);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 810, 240));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 810, 240));
 
         lblAtender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Atender.png"))); // NOI18N
         lblAtender.setText("jLabel1");
@@ -171,6 +240,82 @@ Menu menu;
             this.dispose();
         }
     }//GEN-LAST:event_btnVolverMenuActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+cargartabla();      
+txtBuscar.setText("");// TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+       
+    try {
+        Prosql.BuscarTabla(tblProducto,txtBuscar.getText());
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+      int cantidad= Integer.parseInt(spnCantidad.getValue().toString());
+        int col =tblProducto.getSelectedRow();
+        for (int i = 0; i < cantidad; i++) {
+            
+        
+ String  []datos= new String[3];
+datos[0]= String.valueOf(tblProducto.getValueAt(col, 0));
+
+datos[1]= String.valueOf(tblProducto.getValueAt(col, 1));
+
+datos[2]= String.valueOf(tblProducto.getValueAt(col, 3));
+  model = (DefaultTableModel) tblAtender.getModel();
+        model.insertRow(model.getRowCount(),datos);
+        tblAtender.setModel(model);
+        }
+        spnCantidad.setValue(0);
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+ 
+        int [] IdsProductos = new int[model.getRowCount()];
+        double[] Precios = new double[model.getRowCount()];
+        for (int i = 0; i <model.getRowCount(); i++) {
+            IdsProductos[i]= Integer.parseInt(tblAtender.getValueAt(i,0).toString());
+            Precios[i]=Double.parseDouble(tblAtender.getValueAt(i,2).toString());
+        }
+      
+        
+        ord.RegistrarOrden(IdsProductos, Precios);
+        
+        
+       /*if (cuen == null) {
+      
+      
+      
+      
+      
+      
+      
+            cuen = new Cuenta();
+            cuen.setVisible(true);
+            this.dispose();
+        }*/
+    }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnNvaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNvaOrdenActionPerformed
+ord.asignarID();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNvaOrdenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,7 +357,9 @@ Menu menu;
     private javax.swing.JButton btnNvaOrden;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnVolverMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -222,6 +369,7 @@ Menu menu;
     private javax.swing.JSpinner spnCantidad;
     private javax.swing.JTable tblAtender;
     private javax.swing.JTable tblProducto;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtNOrden;
     // End of variables declaration//GEN-END:variables
 }

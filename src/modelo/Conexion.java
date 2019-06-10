@@ -13,7 +13,7 @@ public class Conexion {
    
     private final String usuario ="root";
     private final String password ="";                    //basededatosis
-    private final String url ="jdbc:mysql://localhost:3306/basededatosis?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private final String url ="jdbc:mysql://localhost:3306/da2?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private Connection con = null;
     public Connection getConexion() throws SQLException{
         try {
