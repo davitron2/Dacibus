@@ -186,7 +186,7 @@ public class Reservas extends javax.swing.JFrame {
         txtNMesa.setEditable(false);
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtNMesa.setBorder(null);
-        jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 80, 46));
+        jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 80, 40));
 
         jButton3.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jButton3.setText("Aceptar Fecha");

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.OrdenSQL;
@@ -29,7 +30,7 @@ OrdenSQL ord= new OrdenSQL();
         initComponents();
         this.setLocationRelativeTo(null);
        cargartabla();
-        
+        txtNOrden.setText(String.valueOf(ord.asignarID()));
     }
     ProductoSQL Prosql= new ProductoSQL();
     Cuenta cuen;
@@ -62,7 +63,7 @@ public void cargartabla(){
         lblMinimizar = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
-        btnNvaOrden = new javax.swing.JButton();
+        btnCancelaOrden = new javax.swing.JButton();
         btnPagar = new javax.swing.JButton();
         btnVolverMenu = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -70,6 +71,7 @@ public void cargartabla(){
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAtender = new javax.swing.JTable();
         txtNOrden = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         spnCantidad = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -119,14 +121,14 @@ public void cargartabla(){
         });
         jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 350, -1, -1));
 
-        btnNvaOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnNuevaOrden.png"))); // NOI18N
-        btnNvaOrden.setBorder(null);
-        btnNvaOrden.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelaOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cancelaorden.png"))); // NOI18N
+        btnCancelaOrden.setBorder(null);
+        btnCancelaOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNvaOrdenActionPerformed(evt);
+                btnCancelaOrdenActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNvaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 620, -1, -1));
+        jPanel1.add(btnCancelaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 620, -1, -1));
 
         btnPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnPagar.png"))); // NOI18N
         btnPagar.setBorder(null);
@@ -146,7 +148,7 @@ public void cargartabla(){
         });
         jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 680, -1, -1));
 
-        jButton1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 20)); // NOI18N
         jButton1.setText("Ver todos los productos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,9 +183,19 @@ public void cargartabla(){
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 800, 150));
 
+        txtNOrden.setEditable(false);
         txtNOrden.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNOrden.setBorder(null);
         jPanel1.add(txtNOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 80, 40));
+
+        jButton2.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
+        jButton2.setText("Retirar de la orden");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 590, 210, 30));
 
         spnCantidad.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         spnCantidad.setBorder(null);
@@ -287,8 +299,14 @@ datos[2]= String.valueOf(tblProducto.getValueAt(col, 3));
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
- 
-        int [] IdsProductos = new int[model.getRowCount()];
+        if (tblAtender.getRowCount()<1) {
+            JOptionPane.showMessageDialog(null, "Agregue productos a la orden");
+        }else{
+
+int op=JOptionPane.showConfirmDialog(null, "Confirme la creacion de la orden", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+       
+if (op==0) {
+             int [] IdsProductos = new int[model.getRowCount()];
         double[] Precios = new double[model.getRowCount()];
         for (int i = 0; i <model.getRowCount(); i++) {
             IdsProductos[i]= Integer.parseInt(tblAtender.getValueAt(i,0).toString());
@@ -297,7 +315,21 @@ datos[2]= String.valueOf(tblProducto.getValueAt(col, 3));
       
         
         ord.RegistrarOrden(IdsProductos, Precios);
+           if ( cuen == null) {
+            cuen = new Cuenta(txtNOrden.getText());
+            cuen.setVisible(true);
+            this.dispose();
+        }
         
+        }else{
+        
+        
+        
+        
+        }
+        
+        }
+       
         
        /*if (cuen == null) {
       
@@ -313,9 +345,25 @@ datos[2]= String.valueOf(tblProducto.getValueAt(col, 3));
         }*/
     }//GEN-LAST:event_btnPagarActionPerformed
 
-    private void btnNvaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNvaOrdenActionPerformed
-ord.asignarID();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNvaOrdenActionPerformed
+    private void btnCancelaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaOrdenActionPerformed
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.removeRow(i);
+        }
+     tblAtender.setModel(model);
+
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelaOrdenActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (tblAtender.getSelectedRow()!=-1) {
+               model.removeRow(tblAtender.getSelectedRow());
+ tblAtender.setModel(model);
+        }else{
+            JOptionPane.showMessageDialog(null,"Seleccion lo que desea retirar");
+        }
+     
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,10 +402,11 @@ ord.asignarID();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnNvaOrden;
+    private javax.swing.JButton btnCancelaOrden;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnVolverMenu;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

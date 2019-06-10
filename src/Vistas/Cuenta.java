@@ -5,7 +5,15 @@
  */
 package Vistas;
 
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import modelo.MesaSQL;
+import modelo.ReservaSQL;
 
 /**
  *
@@ -13,12 +21,37 @@ import javax.swing.JFrame;
  */
 public class Cuenta extends javax.swing.JFrame {
 
+    
+    ReservaSQL resql = new ReservaSQL();
+    MesaSQL mesql= new MesaSQL();
     /**
      * Creates new form Cuenta
      */
+    
+     public Cuenta(String idcuenta) {
+         txtNCuenta.setText(idcuenta);
+        initComponents();
+        this.setLocationRelativeTo(null);
+                 cargartabla();
+    }
     public Cuenta() {
         initComponents();
         this.setLocationRelativeTo(null);
+         cargartabla();
+    }
+    public void cargartabla(){
+        try {
+            mesql.SoloMesa(tblMesas, 2);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
 
     /**
@@ -39,6 +72,9 @@ public class Cuenta extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnCalcularTotal = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblMesas = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
@@ -46,9 +82,16 @@ public class Cuenta extends javax.swing.JFrame {
         lblPagarCuenta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1390, 800));
+        setMinimumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1390, 800));
+        setSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
 
+        jPanel1.setMaximumSize(new java.awt.Dimension(1390, 800));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1390, 800));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1390, 800));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblMinimizar.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
@@ -60,7 +103,7 @@ public class Cuenta extends javax.swing.JFrame {
                 lblMinimizarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, 20, 30));
+        jPanel1.add(lblMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 10, 20, 30));
 
         lblCerrar.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -71,11 +114,12 @@ public class Cuenta extends javax.swing.JFrame {
                 lblCerrarMouseClicked(evt);
             }
         });
-        jPanel1.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, 20, 30));
+        jPanel1.add(lblCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 10, 20, 30));
 
+        txtNCuenta.setEditable(false);
         txtNCuenta.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNCuenta.setBorder(null);
-        jPanel1.add(txtNCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 80, 50));
+        jPanel1.add(txtNCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 80, 30));
 
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtNMesa.setBorder(null);
@@ -89,10 +133,39 @@ public class Cuenta extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
 
         btnCalcularTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnCalcularTotal.png"))); // NOI18N
-        jPanel1.add(btnCalcularTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, 200, 50));
+        jPanel1.add(btnCalcularTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 730, 200, 50));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegresar.png"))); // NOI18N
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 600, 200, 50));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 630, 200, 50));
+
+        jComboBox1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libres", "Reservadas" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 100, 30));
+
+        tblMesas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tblMesas);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, 430));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,21 +180,23 @@ public class Cuenta extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 400, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 110, 400, 240));
 
         jTextField1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 400, 130, 50));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 440, 130, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deTotal.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 390, -1, 150));
 
-        lblPagarCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Pagar.png"))); // NOI18N
-        lblPagarCuenta.setText("jLabel1");
-        jPanel1.add(lblPagarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 700));
+        lblPagarCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Cuenta.png"))); // NOI18N
+        lblPagarCuenta.setMaximumSize(new java.awt.Dimension(1390, 800));
+        lblPagarCuenta.setMinimumSize(new java.awt.Dimension(1390, 800));
+        lblPagarCuenta.setPreferredSize(new java.awt.Dimension(1390, 800));
+        jPanel1.add(lblPagarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 900, 700);
+        jPanel1.setBounds(0, 0, 1390, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,8 +206,88 @@ public class Cuenta extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+
+
+
+
+
         //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        
+              
+                LocalDate fecha1 = LocalDate.now();
+                String fecha;
+        if(jComboBox1.getSelectedItem().equals("Reservadas")){
+        
+                    try {
+                        if(fecha1.getMonthValue()<10){
+                            
+                            fecha=fecha1.getDayOfMonth()+"/0"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+                        }else{
+                            fecha= fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+                        }
+                        
+                        
+                        resql.BuscarTablaFecha(tblMesas, fecha);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InstantiationException ex) {
+                        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                
+                
+                
+                
+                
+                
+        
+        
+        }
+        if (jComboBox1.getSelectedItem().equals("Libres")) {
+            try {
+                
+                
+               if(fecha1.getMonthValue()<10){
+               
+                fecha=fecha1.getDayOfMonth()+"/0"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+               }else{
+                fecha= fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+               }
+               
+               
+                System.out.println(""+fecha);
+                
+                
+                
+                
+                
+                
+                resql.TablaMesasDisponibles(tblMesas,fecha);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+        
+     
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -172,15 +327,18 @@ public class Cuenta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcularTotal;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblMinimizar;
     private javax.swing.JLabel lblPagarCuenta;
+    private javax.swing.JTable tblMesas;
     private javax.swing.JTextField txtNCuenta;
     private javax.swing.JTextField txtNMesa;
     private javax.swing.JTextField txtNOrden;

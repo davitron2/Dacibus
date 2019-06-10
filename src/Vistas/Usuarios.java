@@ -28,7 +28,13 @@ public class Usuarios extends javax.swing.JFrame {
     Menu men;
     VerUsuarios  VerUs;
 
-    public Usuarios() {
+      public Usuarios() {
+     
+        initComponents();
+        //this.setLocationRelativeTo(null); //centro de la pantalla
+    }
+    public Usuarios(int tipo) {
+        System.out.println(""+tipo);
         initComponents();
         //this.setLocationRelativeTo(null); //centro de la pantalla
     }

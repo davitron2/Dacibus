@@ -198,7 +198,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
         if (usu == null) {
-            usu = new Usuarios();
+            usu = new Usuarios(1);
             usu.setVisible(true);
             this.dispose();
         }        // TODO add your handling code here:
@@ -206,7 +206,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void lblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuariosMouseClicked
         if (usu == null) {
-            usu = new Usuarios();
+            usu = new Usuarios(1);
             usu.setVisible(true);
             this.dispose();
         }
