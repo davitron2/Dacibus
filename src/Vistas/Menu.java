@@ -17,6 +17,7 @@ public class Menu extends javax.swing.JFrame {
   Atender aten;
     Productos produ;
     Ventas vent;
+    Mesas mes;
     /**
      * Creates new form Menu
      */
@@ -38,7 +39,6 @@ public class Menu extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnUsuarios = new javax.swing.JButton();
         btnAtender = new javax.swing.JButton();
-        btnCubiertos = new javax.swing.JButton();
         btnMesas = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         lblMinimizar = new javax.swing.JLabel();
@@ -47,7 +47,6 @@ public class Menu extends javax.swing.JFrame {
         lblUsuarios = new javax.swing.JLabel();
         lblAtender = new javax.swing.JLabel();
         lblProductos = new javax.swing.JLabel();
-        lblCubiertos = new javax.swing.JLabel();
         lblVentas = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblInterfaz = new javax.swing.JLabel();
@@ -71,7 +70,7 @@ public class Menu extends javax.swing.JFrame {
                 btnProductosActionPerformed(evt);
             }
         });
-        jPanel1.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 620, 200, 100));
+        jPanel1.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1035, 620, 200, 100));
 
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnUsuarios.png"))); // NOI18N
         btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +78,7 @@ public class Menu extends javax.swing.JFrame {
                 btnUsuariosActionPerformed(evt);
             }
         });
-        jPanel1.add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 200, 100));
+        jPanel1.add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 620, 200, 100));
 
         btnAtender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnAtender.png"))); // NOI18N
         btnAtender.addActionListener(new java.awt.event.ActionListener() {
@@ -87,10 +86,7 @@ public class Menu extends javax.swing.JFrame {
                 btnAtenderActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAtender, new org.netbeans.lib.awtextra.AbsoluteConstraints(705, 620, 200, 100));
-
-        btnCubiertos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnCubiertos.png"))); // NOI18N
-        jPanel1.add(btnCubiertos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1155, 620, 200, 100));
+        jPanel1.add(btnAtender, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 620, 200, 100));
 
         btnMesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnMesas.png"))); // NOI18N
         btnMesas.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +94,7 @@ public class Menu extends javax.swing.JFrame {
                 btnMesasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 620, 200, 100));
+        jPanel1.add(btnMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 620, 200, 100));
 
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVentas.png"))); // NOI18N
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +102,7 @@ public class Menu extends javax.swing.JFrame {
                 btnVentasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 620, 200, 100));
+        jPanel1.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 620, 200, 100));
 
         lblMinimizar.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblMinimizar.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,6 +129,11 @@ public class Menu extends javax.swing.JFrame {
         lblMesas.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblMesas.setForeground(new java.awt.Color(255, 255, 255));
         lblMesas.setText("Mesas");
+        lblMesas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMesasMouseClicked(evt);
+            }
+        });
         jPanel1.add(lblMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 60, -1));
 
         lblUsuarios.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
@@ -164,11 +165,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(lblProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 0, 110, -1));
-
-        lblCubiertos.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
-        lblCubiertos.setForeground(new java.awt.Color(255, 255, 255));
-        lblCubiertos.setText("Cubiertos");
-        jPanel1.add(lblCubiertos, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 100, -1));
 
         lblVentas.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblVentas.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,8 +263,21 @@ if (aten== null) {
     }//GEN-LAST:event_btnAtenderActionPerformed
 
     private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
+if (mes== null) {
+            mes = new Mesas();
+            mes.setVisible(true);
+            this.dispose();
+        } 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMesasActionPerformed
+
+    private void lblMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMesasMouseClicked
+     if (mes== null) {
+            mes = new Mesas();
+            mes.setVisible(true);
+            this.dispose();
+        } 
+    }//GEN-LAST:event_lblMesasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -307,7 +316,6 @@ if (aten== null) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtender;
-    private javax.swing.JButton btnCubiertos;
     private javax.swing.JButton btnMesas;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnUsuarios;
@@ -316,7 +324,6 @@ if (aten== null) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAtender;
     private javax.swing.JLabel lblCerrar;
-    private javax.swing.JLabel lblCubiertos;
     private javax.swing.JLabel lblInterfaz;
     private javax.swing.JLabel lblMesas;
     private javax.swing.JLabel lblMinimizar;
