@@ -293,7 +293,39 @@ public class RegistroMesa extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //BOTON MODIFICAR
         int fila=tblRegistroMesas.getSelectedRow();
-        
+        int idmesa=0;
+        try {
+            if (fila != -1) {
+                idmesa=Integer.parseInt(txtIdMesa.getText());
+                
+                if (txtNMesa.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por Favor introduzca el numero de la mesa");
+                }else{
+                    mesa.setNumeroMesa(Integer.parseInt(txtNMesa.getText()));
+                }
+                if (txtCapacidad.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Por Favor Introduzca la capacidad de la mesa");
+                }else{
+                    mesa.setCapacidadMesa(Integer.parseInt(txtCapacidad.getText()));
+                }
+                if (cmbEstado.getSelectedIndex()==0) {
+                    JOptionPane.showMessageDialog(this, "Por Favor seleccione un estado de la mesa");
+                }else{
+                    mesa.setEstadoMesa(cmbEstado.getSelectedItem().toString());
+                }
+                
+                if (obj.ActualizarMesa(mesa, idmesa) == 10) {
+                //Se debe enviar unas "comillas" o se envia un null para limpiar
+                ActualizarTabla();
+                Limpiar();
+                }
+                
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Por Favor Seleccione un Campo de la Tabla");
+            }
+        } catch (Exception e) {
+        }
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
