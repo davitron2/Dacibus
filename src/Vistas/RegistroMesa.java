@@ -194,7 +194,7 @@ public class RegistroMesa extends javax.swing.JFrame {
 
     public final void ActualizarTabla() {
         try {
-            obj.SoloMesa(tblRegistroMesas,1);
+            obj.SoloMesa(tblRegistroMesas, 1);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -211,10 +211,10 @@ public class RegistroMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
- this.dispose();
+        this.dispose();
 
     }//GEN-LAST:event_lblCerrarMouseClicked
-    public void Limpiar(){
+    public void Limpiar() {
         txtIdMesa.setText("");
         txtNMesa.setText("");
         txtCapacidad.setText("");
@@ -222,15 +222,13 @@ public class RegistroMesa extends javax.swing.JFrame {
     }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
-            int dato =Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el numero de la mesa que busca"));
-            
+            int dato = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el numero de la mesa que busca"));
+
             obj.BuscarTabla(tblRegistroMesas, dato);
-            
-        }
-        catch(NumberFormatException ex){
+
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Por Favor solo introduzca numeros ");
-        }
-        catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             Logger.getLogger(RegistroMesa.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,88 +257,90 @@ public class RegistroMesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         int fila = tblRegistroMesas.getSelectedRow();
-        if (fila!=-1) {
-            int op=JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar la mesa");
-            if (op==0) {
-                int idMesa=(int) tblRegistroMesas.getValueAt(fila, 0);
+        if (fila != -1) {
+            int op = JOptionPane.showConfirmDialog(this, "Seguro que desea eliminar la mesa");
+            if (op == 0) {
+                int idMesa = (int) tblRegistroMesas.getValueAt(fila, 0);
                 obj.Eliminar(idMesa);
             }
-            if (op==1) {
+            if (op == 1) {
                 JOptionPane.showMessageDialog(this, "La mesa no se elimino");
             }
-            
-            
-        }else{
-            JOptionPane.showMessageDialog(this,"Por Favor Seleccione una Mesa de la Tabla");
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Por Favor Seleccione una Mesa de la Tabla");
         }
         ActualizarTabla();
         Limpiar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tblRegistroMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRegistroMesasMouseClicked
-        int fila=tblRegistroMesas.getSelectedRow();
+        int fila = tblRegistroMesas.getSelectedRow();
         txtIdMesa.setText(tblRegistroMesas.getValueAt(fila, 0).toString());
         txtNMesa.setText(tblRegistroMesas.getValueAt(fila, 1).toString());
         txtCapacidad.setText(tblRegistroMesas.getValueAt(fila, 2).toString());
-        String estado=tblRegistroMesas.getValueAt(fila, 3).toString();
+        String estado = tblRegistroMesas.getValueAt(fila, 3).toString();
         cmbEstado.setSelectedItem(estado);
-                
-        
+
+
     }//GEN-LAST:event_tblRegistroMesasMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         //BOTON MODIFICAR
-        int fila=tblRegistroMesas.getSelectedRow();
-        int idmesa=0;
+        int fila = tblRegistroMesas.getSelectedRow();
+        int idmesa = 0;
         try {
             if (fila != -1) {
-                idmesa=Integer.parseInt(txtIdMesa.getText());
-                
+                idmesa = Integer.parseInt(txtIdMesa.getText());
+
                 if (txtNMesa.getText().equals("")) {
                     JOptionPane.showMessageDialog(this, "Por Favor introduzca el numero de la mesa");
-                }else{
+                } else {
                     mesa.setNumeroMesa(Integer.parseInt(txtNMesa.getText()));
                 }
                 if (txtCapacidad.getText().equals("")) {
                     JOptionPane.showMessageDialog(this, "Por Favor Introduzca la capacidad de la mesa");
-                }else{
+                } else {
                     mesa.setCapacidadMesa(Integer.parseInt(txtCapacidad.getText()));
                 }
-                if (cmbEstado.getSelectedIndex()==0) {
+                if (cmbEstado.getSelectedIndex() == 0) {
                     JOptionPane.showMessageDialog(this, "Por Favor seleccione un estado de la mesa");
-                }else{
+                } else {
                     mesa.setEstadoMesa(cmbEstado.getSelectedItem().toString());
                 }
-                
+
                 if (obj.ActualizarMesa(mesa, idmesa) == 10) {
-                //Se debe enviar unas "comillas" o se envia un null para limpiar
-                ActualizarTabla();
-                Limpiar();
+                    //Se debe enviar unas "comillas" o se envia un null para limpiar
+                    ActualizarTabla();
+                    Limpiar();
                 }
-                
-                
+
             } else {
                 JOptionPane.showMessageDialog(this, "Por Favor Seleccione un Campo de la Tabla");
             }
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtNMesaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNMesaKeyTyped
-        char c=evt.getKeyChar();
-        if (c<'0' ||c >'9') evt.consume();
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNMesaKeyTyped
 
     private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
-        char c=evt.getKeyChar();
-        if(c<'0'|| c>'9') evt.consume();
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCapacidadKeyTyped
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-this.dispose();        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
     /**
      * @param args the command line arguments

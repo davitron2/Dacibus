@@ -134,6 +134,11 @@ public class Reservas extends javax.swing.JFrame {
                 txtClienteActionPerformed(evt);
             }
         });
+        txtCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtClienteKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 180, 40));
 
         jDateChooser1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
@@ -186,6 +191,11 @@ public class Reservas extends javax.swing.JFrame {
         txtNMesa.setEditable(false);
         txtNMesa.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         txtNMesa.setBorder(null);
+        txtNMesa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNMesaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 80, 40));
 
         jButton3.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
@@ -363,12 +373,21 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_jDateChooser1MouseMoved
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-this.dispose();        // TODO add your handling code here:
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void txtClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClienteKeyTyped
+        char c=evt.getKeyChar();
+        if((c<'a'||c>'z')&&(c<'A'||c>'Z')) evt.consume();
+    }//GEN-LAST:event_txtClienteKeyTyped
+
+    private void txtNMesaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNMesaKeyTyped
+        
+    }//GEN-LAST:event_txtNMesaKeyTyped
 
     /**
      * @param args the command line arguments
