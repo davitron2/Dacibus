@@ -17,6 +17,7 @@ import modelo.CuentaSQL;
 import modelo.MesaSQL;
 import modelo.OrdenSQL;
 import modelo.ReservaSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -24,17 +25,18 @@ import modelo.ReservaSQL;
  */
 public class Cuenta extends javax.swing.JFrame {
 CuentaSQL cuesql = new CuentaSQL();
-    
+    modelo.Cuenta Cue = new modelo.Cuenta();
     ReservaSQL resql = new ReservaSQL();
     MesaSQL mesql= new MesaSQL();
     OrdenSQL ordsql= new OrdenSQL();
     /**
      * Creates new form Cuenta
      */
-    
+   // Usuario usr;
      public Cuenta(String idcuenta) {
          
         initComponents();
+       // usr=us;
         this.setLocationRelativeTo(null);
         txtNCuenta.setText(idcuenta);
          txtNOrden.setText(idcuenta);
@@ -168,11 +170,16 @@ CuentaSQL cuesql = new CuentaSQL();
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/dePagarCuenta.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, -1));
 
-        btnCalcularTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnCalcularTotal.png"))); // NOI18N
-        jPanel1.add(btnCalcularTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 730, 200, 50));
+        btnCalcularTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/crearcuenta.png"))); // NOI18N
+        btnCalcularTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularTotalActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCalcularTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 200, 50));
 
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegresar.png"))); // NOI18N
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 630, 200, 50));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 630, 200, 50));
 
         jComboBox1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libres", "Reservadas" }));
@@ -356,6 +363,44 @@ txtNMesa.setText(tblMesas.getValueAt(tblMesas.getSelectedRow(), 3).toString());
 
         // TODO add your handling code here:
     }//GEN-LAST:event_tblMesasMouseClicked
+
+    private void btnCalcularTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTotalActionPerformed
+if(!txtNCuenta.getText().equals("") && !txtNMesa.getText().equals("")){
+    Cue.setIdCuenta(Integer.parseInt(txtNCuenta.getText()));
+    Cue.setCostoTotal(Double.parseDouble(txtTotal.getText()));
+     Cue.setIdMesa(Integer.parseInt(txtNMesa.getText()));
+     Cue.setIdOrden(Integer.parseInt(txtNOrden.getText()));
+     //Cue.setIdUsuario(usr.getIdUsuario());
+             
+     
+     LocalDate fecha1 = LocalDate.now();
+                String fecha;
+                  if(fecha1.getMonthValue()<10){
+               
+                fecha=fecha1.getDayOfMonth()+"/0"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+               }else{
+                fecha= fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear();
+               }
+               System.out.println(""+fecha);
+     Cue.setFecha("10/06/219");
+     Cue.setEstado("Activa");
+    
+     
+     
+cuesql.RegistrarCuenta(Cue);
+
+
+}else{
+
+JOptionPane.showMessageDialog(null, "seleccione una mesa");
+
+}
+
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCalcularTotalActionPerformed
 
     /**
      * @param args the command line arguments

@@ -11,6 +11,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,7 +28,7 @@ public class CuentaSQL  extends Conexion{
             Connection con = getConexion();
             Statement s=con.createStatement();
                                             //Nombre de la tabla
-            ResultSet rs=s.executeQuery("SELECT * FROM orden where IdOrden="+id+"");
+            ResultSet rs=s.executeQuery("SELECT  orden.IdOrden, orden.IdProducto,producto.Nombre, orden.Cant, orden.Precio from orden,producto where orden.IdProducto=producto.IdProducto AND orden.IdOrden="+id+"");
             
             DefaultTableModel modelo=new DefaultTableModel();
             JTable tab=new JTable(modelo);
@@ -56,4 +59,40 @@ public class CuentaSQL  extends Conexion{
         return tabla;    
         
         }
+    
+       public int RegistrarCuenta(Cuenta Cue) {
+
+        try {
+            PreparedStatement ps = null;
+            Connection con = getConexion();
+            ResultSet rs = null;
+
+            String sql;
+          
+                    
+               sql = "call RegistrarCuenta(?,?,?,?,?,?,?)";
+             
+               
+                ps = con.prepareCall(sql);
+                ps.setInt(1, Cue.getIdCuenta());
+                ps.setDouble(2, Cue.getCostoTotal());
+                ps.setInt(3, Cue.getIdMesa());
+                ps.setInt(4, Cue.getIdOrden());
+                ps.setInt(5, Cue.getIdUsuario());
+                ps.setString(6,Cue.getFecha());
+                ps.setString(7,Cue.getEstado());
+              
+                  
+                 ps.executeQuery();
+                JOptionPane.showMessageDialog(null, "Cuenta Registrada");
+                return 1;
+
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioSQL.class.getName()).log(Level.SEVERE, null, ex);
+            return 33;
+        }
+
+    }
 }

@@ -133,14 +133,14 @@ public void cargartabla(){
         });
         jPanel1.add(btnCancelaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 620, -1, -1));
 
-        btnPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnPagar.png"))); // NOI18N
+        btnPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/crearorden.png"))); // NOI18N
         btnPagar.setBorder(null);
         btnPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPagarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 620, -1, -1));
+        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 620, -1, -1));
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
         btnVolverMenu.setBorder(null);
@@ -149,7 +149,7 @@ public void cargartabla(){
                 btnVolverMenuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 680, -1, -1));
+        jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 680, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 20)); // NOI18N
         jButton1.setText("Ver todos los productos");

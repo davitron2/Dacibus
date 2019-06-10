@@ -12,31 +12,41 @@ import javafx.scene.chart.PieChart;
  * @author Cesar
  */
 public class Cuenta {
-    
-    int costoTotal;
-    int idMesa;
-    int idUsuario;
-    String fecha;
+     private int IdCuenta;
+    private double costoTotal;
+    private int idMesa;
+    private int IdOrden;
+    private int idUsuario;
+    private String fecha;
+    private String estado;
 
+    public Cuenta(int IdCuenta, double costoTotal, int idMesa, int IdOrden, int idUsuario, String fecha, String estado) {
+        this.IdCuenta = IdCuenta;
+        this.costoTotal = costoTotal;
+        this.idMesa = idMesa;
+        this.IdOrden = IdOrden;
+        this.idUsuario = idUsuario;
+        this.fecha = fecha;
+        this.estado = estado;
+    }
     
     public Cuenta(){
         
     }
-    
-    
-    
-    public Cuenta(int costoTotal, int idMesa, int idUsuario, String fecha) {
-        this.costoTotal = costoTotal;
-        this.idMesa = idMesa;
-        this.idUsuario = idUsuario;
-        this.fecha = fecha;
+
+    public int getIdCuenta() {
+        return IdCuenta;
     }
 
-    public int getCostoTotal() {
+    public void setIdCuenta(int IdCuenta) {
+        this.IdCuenta = IdCuenta;
+    }
+
+    public double getCostoTotal() {
         return costoTotal;
     }
 
-    public void setCostoTotal(int costoTotal) {
+    public void setCostoTotal(double costoTotal) {
         this.costoTotal = costoTotal;
     }
 
@@ -46,6 +56,14 @@ public class Cuenta {
 
     public void setIdMesa(int idMesa) {
         this.idMesa = idMesa;
+    }
+
+    public int getIdOrden() {
+        return IdOrden;
+    }
+
+    public void setIdOrden(int IdOrden) {
+        this.IdOrden = IdOrden;
     }
 
     public int getIdUsuario() {
@@ -62,6 +80,14 @@ public class Cuenta {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
     
     
