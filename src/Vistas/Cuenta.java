@@ -370,6 +370,11 @@ txtNMesa.setText(tblMesas.getValueAt(tblMesas.getSelectedRow(), 3).toString());
     }//GEN-LAST:event_tblMesasMouseClicked
 
     private void btnCalcularTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularTotalActionPerformed
+int op=JOptionPane.showConfirmDialog(null, "Confirme la creacion de la cuenta", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+     if(op==0){
+
+
+
 if(!txtNCuenta.getText().equals("") && !txtNMesa.getText().equals("")){
     Cue.setIdCuenta(Integer.parseInt(txtNCuenta.getText()));
     Cue.setCostoTotal(Double.parseDouble(txtTotal.getText()));
@@ -401,7 +406,11 @@ JOptionPane.showMessageDialog(null, "seleccione una mesa");
 
 }
 
-
+     }
+     else{
+     
+     
+     }
 
 
         // TODO add your handling code here:
