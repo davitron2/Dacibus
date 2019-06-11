@@ -18,22 +18,26 @@ import modelo.Usuario;
  */
 public class MenuAtender extends javax.swing.JFrame {
 
-   Usuario user;
-    public MenuAtender(Usuario us) {
-        initComponents();
-        user=us;
-         System.out.println("MENU ATENDER "+user.getTipoUsuario());
-        Cargartabla();
-    }
-    public MenuAtender() {
-        initComponents();
-        Cargartabla();
-    }
-   Atender aten;
+    Atender aten;
     OrdenarMas ordmas;
     CuentaSQL cuesql = new CuentaSQL();
     Menu men;
     Cobrar cob;
+
+    Usuario user;
+
+    public MenuAtender(Usuario us) {
+        initComponents();
+
+        Cargartabla();
+        user = us;
+        System.out.println("MENU ATENDER " + user.getTipoUsuario());
+    }
+
+    public MenuAtender() {
+        initComponents();
+        Cargartabla();
+    }
 
     public void Cargartabla() {
         try {
@@ -184,9 +188,6 @@ public class MenuAtender extends javax.swing.JFrame {
         jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(935, 480, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/MenuAtender.png"))); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(1390, 800));
-        jLabel1.setMinimumSize(new java.awt.Dimension(1390, 800));
-        jLabel1.setPreferredSize(new java.awt.Dimension(1390, 800));
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
@@ -195,12 +196,12 @@ public class MenuAtender extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-     if (men == null) {
+        if (men == null) {
 
-                men = new Menu(user);
-                men.setVisible(true);
-                this.dispose();
-            }
+            men = new Menu(user);
+            men.setVisible(true);
+            this.dispose();
+        }
         //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
 
@@ -231,53 +232,55 @@ public class MenuAtender extends javax.swing.JFrame {
     }//GEN-LAST:event_tblCuentasMouseClicked
 
     private void btnNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaOrdenActionPerformed
-                 if (aten == null) {
+        System.out.println("previa atender " + user.getTipoUsuario());
 
-                aten = new Atender(user);
-                aten.setVisible(true);
-                this.dispose();
-            } //
+        if (aten == null) {
+
+            aten = new Atender(user);
+            aten.setVisible(true);
+            this.dispose();
+        } //
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-     if (tblCuentas.getSelectedRow() != -1) {
-               String id= (tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
-               String idme= String.valueOf(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 2));
+        if (tblCuentas.getSelectedRow() != -1) {
+            String id = (tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
+            String idme = String.valueOf(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 2));
             if (cob == null) {
-                System.out.println(""+idme);
-                cob = new Cobrar(id,idme,user);
+                System.out.println("" + idme);
+                cob = new Cobrar(id, idme, user);
                 cob.setVisible(true);
                 this.dispose();
             } // TODO add your handling code here:
         } else {
-                JOptionPane.showMessageDialog(null,"Seleccione una cuenta");
+            JOptionPane.showMessageDialog(null, "Seleccione una cuenta");
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnOrdenarMas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarMas1ActionPerformed
-         if (tblCuentas.getSelectedRow() != -1) {
-               int id= Integer.parseInt(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
+        if (tblCuentas.getSelectedRow() != -1) {
+            int id = Integer.parseInt(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
             if (ordmas == null) {
 
-                ordmas = new OrdenarMas(id,user);
+                ordmas = new OrdenarMas(id, user);
                 ordmas.setVisible(true);
                 this.dispose();
             } // TODO add your handling code here:
         } else {
-                JOptionPane.showMessageDialog(null,"Seleccione una cuenta");
+            JOptionPane.showMessageDialog(null, "Seleccione una cuenta");
         }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOrdenarMas1ActionPerformed
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-if (men == null) {
+        if (men == null) {
 
-                men = new Menu(user);
-                men.setVisible(true);
-                this.dispose();
-            }        // TODO add your handling code here:
+            men = new Menu(user);
+            men.setVisible(true);
+            this.dispose();
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     /**

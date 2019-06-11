@@ -36,11 +36,13 @@ int idord;
 Usuario user;
 public OrdenarMas(int id,Usuario us) {
         initComponents();
-        user=us;
+       
         idord=id;
         this.setLocationRelativeTo(null);
        cargartabla();
         txtNOrden.setText(String.valueOf(id));
+         user=us;
+         System.out.println("ordenmas" +user.getTipoUsuario());
     }
     public OrdenarMas() {
         initComponents();
@@ -361,10 +363,7 @@ if (op==0) {
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnCancelaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaOrdenActionPerformed
-        for (int i = 0; i < model.getRowCount(); i++) {
-            model.removeRow(i);
-        }
-     tblAtender.setModel(model);
+  
    if ( menu == null) {
             menu = new MenuAtender(user);
             menu.setVisible(true);

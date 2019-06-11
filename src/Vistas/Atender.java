@@ -22,50 +22,51 @@ import modelo.Usuario;
  * @author JOCELYNE
  */
 public class Atender extends javax.swing.JFrame {
-MenuAtender menu;
-DefaultTableModel model;
-OrdenSQL ord= new OrdenSQL();
 
-    /**
-     * Creates new form Atender
-     */int idord;
-     Usuario user;
-      public Atender(Usuario us) {
+    MenuAtender men;
+    DefaultTableModel model;
+    OrdenSQL ord = new OrdenSQL();
+    int idord;
+   Usuario user = new Usuario();
+ ProductoSQL Prosql = new ProductoSQL();
+    Cuenta cuen;
+    
+    public Atender(Usuario us) {
         initComponents();
-     
+
         this.setLocationRelativeTo(null);
-       cargartabla();
-       idord=ord.asignarID();
+        cargartabla();
+        idord = ord.asignarID();
         txtNOrden.setText(String.valueOf(idord));
-          user=us;
-          System.out.println("atender "+user.getTipoUsuario());
+        user = us;
+        System.out.println("atender " + user.getTipoUsuario());
     }
+
     public Atender() {
         initComponents();
         this.setLocationRelativeTo(null);
-       cargartabla();
-       idord=ord.asignarID();
+        cargartabla();
+        idord = ord.asignarID();
         txtNOrden.setText(String.valueOf(idord));
     }
-    ProductoSQL Prosql= new ProductoSQL();
-    Cuenta cuen;
-public void cargartabla(){
-    try {
-        Prosql.SoloTabla(tblProducto);
-        
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+   
+
+    public void cargartabla() {
+        try {
+            Prosql.SoloTabla(tblProducto);
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
-
-
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -254,41 +255,43 @@ public void cargartabla(){
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        if (menu == null) {
-            menu = new MenuAtender();
-            menu.setVisible(true);
+ if (men == null) {
+            men = new MenuAtender(user);
+            men.setVisible(true);
             this.dispose();
-        }
+        }      
+      
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
-          if (menu == null) {
-            menu = new MenuAtender();
-            menu.setVisible(true);
+ if (men == null) {
+            men = new MenuAtender(user);
+            men.setVisible(true);
             this.dispose();
-        }
+        }      
+       
     }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-cargartabla();      
-txtBuscar.setText("");// TODO add your handling code here:
+        cargartabla();
+        txtBuscar.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
-       
-    try {
-        Prosql.BuscarTabla(tblProducto,txtBuscar.getText());
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-        
+
+        try {
+            Prosql.BuscarTabla(tblProducto, txtBuscar.getText());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
@@ -296,58 +299,52 @@ txtBuscar.setText("");// TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-      int cantidad= Integer.parseInt(spnCantidad.getValue().toString());
-        int col =tblProducto.getSelectedRow();
+        int cantidad = Integer.parseInt(spnCantidad.getValue().toString());
+        int col = tblProducto.getSelectedRow();
         for (int i = 0; i < cantidad; i++) {
-            
-        
- String  []datos= new String[3];
-datos[0]= String.valueOf(tblProducto.getValueAt(col, 0));
 
-datos[1]= String.valueOf(tblProducto.getValueAt(col, 1));
+            String[] datos = new String[3];
+            datos[0] = String.valueOf(tblProducto.getValueAt(col, 0));
 
-datos[2]= String.valueOf(tblProducto.getValueAt(col, 3));
-  model = (DefaultTableModel) tblAtender.getModel();
-        model.insertRow(model.getRowCount(),datos);
-        tblAtender.setModel(model);
+            datos[1] = String.valueOf(tblProducto.getValueAt(col, 1));
+
+            datos[2] = String.valueOf(tblProducto.getValueAt(col, 3));
+            model = (DefaultTableModel) tblAtender.getModel();
+            model.insertRow(model.getRowCount(), datos);
+            tblAtender.setModel(model);
         }
         spnCantidad.setValue(0);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-        if (tblAtender.getRowCount()<1) {
+        if (tblAtender.getRowCount() < 1) {
             JOptionPane.showMessageDialog(null, "Agregue productos a la orden");
-        }else{
+        } else {
 
-int op=JOptionPane.showConfirmDialog(null, "Confirme la creacion de la orden", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-       
-if (op==0) {
-             int [] IdsProductos = new int[model.getRowCount()];
-        double[] Precios = new double[model.getRowCount()];
-        for (int i = 0; i <model.getRowCount(); i++) {
-            IdsProductos[i]= Integer.parseInt(tblAtender.getValueAt(i,0).toString());
-            Precios[i]=Double.parseDouble(tblAtender.getValueAt(i,2).toString());
+            int op = JOptionPane.showConfirmDialog(null, "Confirme la creacion de la orden", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (op == 0) {
+                int[] IdsProductos = new int[model.getRowCount()];
+                double[] Precios = new double[model.getRowCount()];
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    IdsProductos[i] = Integer.parseInt(tblAtender.getValueAt(i, 0).toString());
+                    Precios[i] = Double.parseDouble(tblAtender.getValueAt(i, 2).toString());
+                }
+
+                ord.RegistrarOrden(idord, IdsProductos, Precios);
+                if (cuen == null) {
+                    cuen = new Cuenta(txtNOrden.getText(), user);
+                    cuen.setVisible(true);
+                    this.dispose();
+                }
+
+            } else {
+
+            }
+
         }
-      
-        
-        ord.RegistrarOrden(idord,IdsProductos, Precios);
-           if ( cuen == null) {
-            cuen = new Cuenta(txtNOrden.getText(),user);
-            cuen.setVisible(true);
-            this.dispose();
-        }
-        
-        }else{
-        
-        
-        
-        
-        }
-        
-        }
-       
-        
-       /*if (cuen == null) {
+
+        /*if (cuen == null) {
       
       
       
@@ -362,24 +359,23 @@ if (op==0) {
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnCancelaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaOrdenActionPerformed
-       
-        if (menu == null) {
-            menu = new MenuAtender();
-            menu.setVisible(true);
+  if (men == null) {
+            men = new MenuAtender(user);
+            men.setVisible(true);
             this.dispose();
-        }
+        }      
 
 // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelaOrdenActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (tblAtender.getSelectedRow()!=-1) {
-               model.removeRow(tblAtender.getSelectedRow());
- tblAtender.setModel(model);
-        }else{
-            JOptionPane.showMessageDialog(null,"Seleccione lo que desea retirar");
+        if (tblAtender.getSelectedRow() != -1) {
+            model.removeRow(tblAtender.getSelectedRow());
+            tblAtender.setModel(model);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione lo que desea retirar");
         }
-     
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
