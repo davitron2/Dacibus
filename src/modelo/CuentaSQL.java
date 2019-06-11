@@ -123,6 +123,34 @@ public class CuentaSQL  extends Conexion{
    
   
    }
+       public void Pagar(int id){
+           //double total=0;
+     PreparedStatement ps = null;
+            Connection con;
+       try {
+           con = getConexion();
+             ResultSet rs = null;
+
+            
+            Statement stm = con.createStatement();
+            //id,usuario,nombre,edad,genero,tipo
+            
+         
+            stm.execute("update cuenta SET cuenta.Estado='Inactiva' where cuenta.IdCuenta="+id);
+         // primer fila. (El cursor inicia antes de la primer fila)
+     
+            
+       } catch (SQLException ex) {
+           Logger.getLogger(OrdenSQL.class.getName()).log(Level.SEVERE, null, ex);
+       }
+          
+       
+       
+  
+   
+   
+  
+   }
        public int RegistrarCuenta(Cuenta Cue) {
 
         try {

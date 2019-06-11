@@ -8,6 +8,7 @@ package Vistas;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.CuentaSQL;
 
 /**
@@ -27,6 +28,7 @@ public class MenuAtender extends javax.swing.JFrame {
     OrdenarMas ordmas;
     CuentaSQL cuesql = new CuentaSQL();
     Menu men;
+    Cobrar cob;
 
     public void Cargartabla() {
         try {
@@ -233,7 +235,18 @@ public class MenuAtender extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaOrdenActionPerformed
 
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
-
+     if (tblCuentas.getSelectedRow() != -1) {
+               String id= (tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
+               String idme= String.valueOf(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 2));
+            if (cob == null) {
+                System.out.println(""+idme);
+                cob = new Cobrar(id,idme);
+                cob.setVisible(true);
+                this.dispose();
+            } // TODO add your handling code here:
+        } else {
+                JOptionPane.showMessageDialog(null,"Seleccione una cuenta");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_btnPagarActionPerformed
 
@@ -247,7 +260,7 @@ public class MenuAtender extends javax.swing.JFrame {
                 this.dispose();
             } // TODO add your handling code here:
         } else {
-
+                JOptionPane.showMessageDialog(null,"Seleccione una cuenta");
         }
 
         // TODO add your handling code here:

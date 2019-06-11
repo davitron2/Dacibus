@@ -129,7 +129,7 @@ public class Mesas extends javax.swing.JFrame {
     
     public final void ActualizarTabla(){
         try {
-            obj.SoloMesa(tblMesas,1);
+            obj.SoloMesa(tblMesas,2);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Mesas.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

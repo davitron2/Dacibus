@@ -25,7 +25,7 @@ public class VentaSQL extends Conexion {
         Connection con = getConexion();
         Statement s = con.createStatement();
         //Nombre de la tabla
-        ResultSet rs = s.executeQuery("SELECT * FROM cuenta");
+        ResultSet rs = s.executeQuery("SELECT * FROM cuenta  WHERE Estado ='Inactiva'");
 
         DefaultTableModel modelo = new DefaultTableModel();
         JTable tab = new JTable(modelo);
@@ -60,7 +60,7 @@ public class VentaSQL extends Conexion {
         Connection con = getConexion();
         Statement s = con.createStatement();
         //Nombre de la tabla
-        ResultSet rs = s.executeQuery("SELECT * FROM cuenta WHERE IdCuenta LIKE '%" + dato + "%'");
+        ResultSet rs = s.executeQuery("SELECT * FROM cuenta  WHERE Estado ='Inactiva' and IdCuenta = '" + dato + "'");
 
         DefaultTableModel modelo = new DefaultTableModel();
         JTable tab = new JTable(modelo);
@@ -96,7 +96,7 @@ public class VentaSQL extends Conexion {
         Connection con = getConexion();
         Statement s = con.createStatement();
         //Nombre de la tabla
-        ResultSet rs = s.executeQuery("SELECT * FROM cuenta WHERE Fecha LIKE '" + dato + "'");
+        ResultSet rs = s.executeQuery("SELECT * FROM cuenta WHERE Estado ='Inactiva' and Fecha LIKE '" + dato + "'");
 
         DefaultTableModel modelo = new DefaultTableModel();
         JTable tab = new JTable(modelo);

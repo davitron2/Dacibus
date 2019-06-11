@@ -228,6 +228,7 @@ CuentaSQL cuesql = new CuentaSQL();
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 110, 400, 240));
 
+        txtTotal.setEditable(false);
         txtTotal.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         txtTotal.setBorder(null);
         jPanel1.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 440, 130, 50));
@@ -285,7 +286,7 @@ CuentaSQL cuesql = new CuentaSQL();
                         }
                         System.out.println("reservadas"+fecha);
                         
-                        resql.BuscarTablaFecha(tblMesas, fecha);
+                        resql.ReservasDisponibles(tblMesas, fecha);
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Cuenta.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (InstantiationException ex) {

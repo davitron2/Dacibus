@@ -26,6 +26,7 @@ public class Reservas extends javax.swing.JFrame {
     MesaSQL MeSql = new MesaSQL();
     ReservaSQL ReSql = new ReservaSQL();
     Reserva Reser = new Reserva();
+    
 
     public Reservas() {
         initComponents();
@@ -54,11 +55,11 @@ public class Reservas extends javax.swing.JFrame {
         txtNMesa = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblReservas = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(900, 700));
@@ -212,15 +213,6 @@ public class Reservas extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deReservas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 400, 320));
 
-        jButton4.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
-        jButton4.setText("Ver todas las reservas y mesas");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, -1, -1));
-
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnNuevaReserva.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +234,15 @@ public class Reservas extends javax.swing.JFrame {
 
         jButton2.setText("jButton2");
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, -1, -1));
+
+        jButton4.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
+        jButton4.setText("Ver todas las reservas y mesas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, -1, -1));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 900, 700);
@@ -314,7 +315,7 @@ public class Reservas extends javax.swing.JFrame {
                 /////ReSql.BuscarTablaFecha(tblReservas,partes[0]); 
                 ReSql.TablaMesasDisponibles(tblMesas, partes[0]);
             } else {
-                JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+                JOptionPane.showMessageDialog(null, "Seleccione la fecha que desea reservar");
 
             }
 
@@ -346,7 +347,7 @@ public class Reservas extends javax.swing.JFrame {
                 /////ReSql.BuscarTablaFecha(tblReservas,partes[0]); 
                 ReSql.TablaMesasDisponibles(tblMesas, partes[0]);
             } else {
-                JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+                JOptionPane.showMessageDialog(null, "Seleccione la fecha que desea reservar");
 
             }
 
@@ -394,7 +395,7 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_jDateChooser1MouseMoved
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        this.dispose();        // TODO add your handling code here:
+this.dispose();              // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed

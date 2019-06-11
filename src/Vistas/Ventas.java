@@ -46,6 +46,7 @@ public class Ventas extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         txtNVenta = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblMinimizar = new javax.swing.JLabel();
         lblCerrar = new javax.swing.JLabel();
@@ -116,6 +117,15 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(txtNVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 80, 50));
+
+        jButton1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
+        jButton1.setText("Ver todas las ventas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 680, 210, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deVentas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 300, -1));
@@ -252,6 +262,20 @@ public class Ventas extends javax.swing.JFrame {
         if((c<'0'||c>'9')) evt.consume();
     }//GEN-LAST:event_txtNVentaKeyTyped
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            obj.SoloTabla(tblVentas)  ;      // TODO add your handling code here:
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -290,6 +314,7 @@ public class Ventas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnVolverMenu;
+    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

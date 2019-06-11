@@ -350,10 +350,7 @@ if (op==0) {
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnCancelaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelaOrdenActionPerformed
-        for (int i = 0; i < model.getRowCount(); i++) {
-            model.removeRow(i);
-        }
-     tblAtender.setModel(model);
+       
         if (menu == null) {
             menu = new MenuAtender();
             menu.setVisible(true);
