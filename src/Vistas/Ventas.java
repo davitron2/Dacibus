@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.CuentaSQL;
 import modelo.Usuario;
 import modelo.VentaSQL;
 
@@ -18,7 +19,7 @@ import modelo.VentaSQL;
  * @author JOCELYNE
  */
 public class Ventas extends javax.swing.JFrame {
-
+CuentaSQL cuesql = new CuentaSQL();
     modelo.VentaSQL obj = new VentaSQL();
     Menu menu;
 
@@ -54,6 +55,8 @@ public class Ventas extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         txtNVenta = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblorden = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblMinimizar = new javax.swing.JLabel();
@@ -80,9 +83,14 @@ public class Ventas extends javax.swing.JFrame {
                 "IdCuenta", "CostoTotal", "IdMesa", "IdOrden", "IdUsuario", "Fecha"
             }
         ));
+        tblVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVentasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblVentas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 890, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 580, 310));
 
         btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
         btnVolverMenu.setBorder(null);
@@ -126,6 +134,26 @@ public class Ventas extends javax.swing.JFrame {
         });
         jPanel1.add(txtNVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 80, 50));
 
+        tblorden.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "IdOrden", "IdProducto", "Nombre", "Cant", "Precio"
+            }
+        ));
+        tblorden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblordenMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblorden);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, -1, 310));
+
         jButton1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 24)); // NOI18N
         jButton1.setText("Ver todas las ventas");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +161,7 @@ public class Ventas extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 680, 210, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 680, 210, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deVentas.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 300, -1));
@@ -284,6 +312,29 @@ public class Ventas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void tblordenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblordenMouseClicked
+  
+    }//GEN-LAST:event_tblordenMouseClicked
+
+    private void tblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVentasMouseClicked
+      
+    try {
+        int IdOrden = Integer.parseInt(tblVentas.getValueAt(tblVentas.getSelectedRow(), 3).toString());
+        
+        
+        cuesql.TablaOrdenId(tblorden, IdOrden);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+    }
+       
+    }//GEN-LAST:event_tblVentasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -327,10 +378,12 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblMinimizar;
     private javax.swing.JLabel lblVentas;
     private javax.swing.JTable tblVentas;
+    private javax.swing.JTable tblorden;
     private javax.swing.JTextField txtNVenta;
     // End of variables declaration//GEN-END:variables
 }
