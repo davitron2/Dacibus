@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Usuario;
 import modelo.VentaSQL;
 
 /**
@@ -24,6 +25,13 @@ public class Ventas extends javax.swing.JFrame {
     /**
      * Creates new form Ventas
      */
+    Usuario user;
+    public Ventas(Usuario us) {
+        user=us;
+        initComponents();
+        this.setLocationRelativeTo(null);
+        Tabla();
+    }
     public Ventas() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -182,7 +190,7 @@ public class Ventas extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         if (menu == null) {
-            menu = new Menu();
+            menu = new Menu(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -251,7 +259,7 @@ public class Ventas extends javax.swing.JFrame {
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
       if (menu == null) {
-            menu = new Menu();
+            menu = new Menu(user);
             menu.setVisible(true);
             this.dispose();
         }

@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import modelo.MesaSQL;
 import modelo.Reserva;
 import modelo.ReservaSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -27,11 +28,18 @@ public class Reservas extends javax.swing.JFrame {
     ReservaSQL ReSql = new ReservaSQL();
     Reserva Reser = new Reserva();
     
-
-    public Reservas() {
+Usuario user;
+    public Reservas(Usuario us) {
         initComponents();
         this.setLocationRelativeTo(null);
         CargarTabla();
+        user=us;
+    }
+       public Reservas() {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        CargarTabla();
+        
     }
 
     /**

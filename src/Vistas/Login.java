@@ -149,10 +149,11 @@ public class Login extends javax.swing.JFrame {
                 //pusible cambio a switch en lugar de if para no repetir evaluacion e imprimir tiple
                 ///o almacenar resultado del metodo en una variable int
                 if(SqlU.Login(usuario)==1){
-                 
+                  
+                  Usuario user=  SqlU.IdTipo(txtUsuario.getText());
                     
                     if (men==null) {
-                        men = new Menu();
+                        men = new Menu(user);
                         men.setVisible(true);
                         this.dispose();
                     }

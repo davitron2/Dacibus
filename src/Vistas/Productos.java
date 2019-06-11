@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import modelo.Producto;
 import modelo.ProductoSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -27,6 +28,15 @@ public class Productos extends javax.swing.JFrame {
     /**
      * Creates new form Productos
      */
+    
+    
+    Usuario user;
+       public Productos(Usuario us) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        cargarTabla();
+        user=us;
+    }
     public Productos() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -211,7 +221,7 @@ public class Productos extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         if (menu == null) {
-            menu = new Menu();
+            menu = new Menu(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -444,7 +454,7 @@ public class Productos extends javax.swing.JFrame {
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
         if (menu == null) {
-            menu = new Menu();
+            menu = new Menu(user);
             menu.setVisible(true);
             this.dispose();
         }

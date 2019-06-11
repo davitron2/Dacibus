@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.CuentaSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -17,9 +18,13 @@ import modelo.CuentaSQL;
  */
 public class MenuAtender extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuAtender
-     */
+   Usuario user;
+    public MenuAtender(Usuario us) {
+        initComponents();
+        user=us;
+         System.out.println("MENU ATENDER "+user.getTipoUsuario());
+        Cargartabla();
+    }
     public MenuAtender() {
         initComponents();
         Cargartabla();
@@ -192,7 +197,7 @@ public class MenuAtender extends javax.swing.JFrame {
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
      if (men == null) {
 
-                men = new Menu();
+                men = new Menu(user);
                 men.setVisible(true);
                 this.dispose();
             }
@@ -228,7 +233,7 @@ public class MenuAtender extends javax.swing.JFrame {
     private void btnNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaOrdenActionPerformed
                  if (aten == null) {
 
-                aten = new Atender();
+                aten = new Atender(user);
                 aten.setVisible(true);
                 this.dispose();
             } //
@@ -240,7 +245,7 @@ public class MenuAtender extends javax.swing.JFrame {
                String idme= String.valueOf(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 2));
             if (cob == null) {
                 System.out.println(""+idme);
-                cob = new Cobrar(id,idme);
+                cob = new Cobrar(id,idme,user);
                 cob.setVisible(true);
                 this.dispose();
             } // TODO add your handling code here:
@@ -255,7 +260,7 @@ public class MenuAtender extends javax.swing.JFrame {
                int id= Integer.parseInt(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
             if (ordmas == null) {
 
-                ordmas = new OrdenarMas(id);
+                ordmas = new OrdenarMas(id,user);
                 ordmas.setVisible(true);
                 this.dispose();
             } // TODO add your handling code here:
@@ -269,7 +274,7 @@ public class MenuAtender extends javax.swing.JFrame {
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
 if (men == null) {
 
-                men = new Menu();
+                men = new Menu(user);
                 men.setVisible(true);
                 this.dispose();
             }        // TODO add your handling code here:

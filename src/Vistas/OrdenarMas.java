@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.CuentaSQL;
 import modelo.OrdenSQL;
 import modelo.ProductoSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -32,8 +33,10 @@ ProductoSQL Prosql= new ProductoSQL();
      * Creates new form Atender
      */
 int idord;
-public OrdenarMas(int id) {
+Usuario user;
+public OrdenarMas(int id,Usuario us) {
         initComponents();
+        user=us;
         idord=id;
         this.setLocationRelativeTo(null);
        cargartabla();
@@ -250,7 +253,7 @@ public void cargartabla(){
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
       if (menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -258,7 +261,7 @@ public void cargartabla(){
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
           if (menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -328,7 +331,7 @@ if (op==0) {
         ord.RegistrarOrden(idord,IdsProductos, Precios);
         cuesql.ActualizarTotalCuentaId(idord);
            if ( menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -363,7 +366,7 @@ if (op==0) {
         }
      tblAtender.setModel(model);
    if ( menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
         }

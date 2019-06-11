@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import modelo.MesaSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -23,6 +25,15 @@ public class Mesas extends javax.swing.JFrame {
     /**
      * Creates new form Mesas
      */
+    
+    Usuario user;
+        public Mesas(Usuario us) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        ActualizarTabla();
+        user=us;
+    }
+
     public Mesas() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -147,23 +158,30 @@ public class Mesas extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
            if (menu == null) {
-            menu = new Menu();
+            menu = new Menu(user);
             menu.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnAgregarMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMesaActionPerformed
-         if (interMesa == null) {
-            interMesa= new RegistroMesa();
+        if (user.getTipoUsuario().equals("Administrador")) {
+            
+        
+        
+        if (interMesa == null) {
+             
+            interMesa= new RegistroMesa(user);
             interMesa.setVisible(true);
           
-        }
+        }}
+        else{
+        JOptionPane.showMessageDialog(null, "No puedes entrar");}
     }//GEN-LAST:event_btnAgregarMesaActionPerformed
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
         if (menu == null) {
-            menu = new Menu();
+            menu = new Menu(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -171,7 +189,7 @@ public class Mesas extends javax.swing.JFrame {
 
     private void btnNvaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNvaReservaActionPerformed
    if (Res == null) {
-            Res = new Reservas();
+            Res = new Reservas(user);
             Res.setVisible(true);
         
         }    

@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Mesa;
 import modelo.MesaSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -29,6 +30,17 @@ public class RegistroMesa extends javax.swing.JFrame {
     /**
      * Creates new form RegistroMesa
      */
+    
+    
+    
+    Usuario user;
+     public RegistroMesa(Usuario us) {
+        initComponents();
+        user=us;
+        this.setLocationRelativeTo(null);
+        ActualizarTabla();
+
+    }
     public RegistroMesa() {
         initComponents();
         this.setLocationRelativeTo(null);

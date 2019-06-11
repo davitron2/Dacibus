@@ -33,9 +33,11 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         //this.setLocationRelativeTo(null); //centro de la pantalla
     }
-    public Usuarios(int tipo) {
-        System.out.println(""+tipo);
+      Usuario user;
+    public Usuarios(Usuario us) {
+        
         initComponents();
+        user=us;
         //this.setLocationRelativeTo(null); //centro de la pantalla
     }
 
@@ -185,7 +187,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         lblUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Usuarios.png"))); // NOI18N
         lblUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1390, 800));
+        jPanel1.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1390, 800);
@@ -199,7 +201,7 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         if (men == null) {
-            men = new Menu();
+            men = new Menu(user);
             men.setVisible(true);
             this.dispose();
         }
@@ -208,7 +210,7 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
         if (men == null) {
-            men = new Menu();
+            men = new Menu(user);
             men.setVisible(true);
             this.dispose();
         }
@@ -270,7 +272,7 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void btnVerUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerUsuariosActionPerformed
            if (VerUs == null) {
-            VerUs = new VerUsuarios();
+            VerUs = new VerUsuarios(user);
             VerUs.setVisible(true);
             this.dispose();
         }

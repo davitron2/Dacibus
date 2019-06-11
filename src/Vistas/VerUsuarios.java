@@ -23,10 +23,16 @@ public class VerUsuarios extends javax.swing.JFrame {
     Usuarios us;
     modelo.UsuarioSQL obj = new UsuarioSQL();
     modelo.Usuario user = new Usuario();
-
+Usuario user2;
     /**
      * Creates new form VerUsuarios
      */
+public VerUsuarios(Usuario us2) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        user2=us2;
+        ActualizarTabla();
+    }
     public VerUsuarios() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -311,7 +317,7 @@ public class VerUsuarios extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         if (us == null) {
-            us = new Usuarios();
+            us = new Usuarios(user2);
             us.setVisible(true);
             this.dispose();
         }
@@ -319,7 +325,7 @@ public class VerUsuarios extends javax.swing.JFrame {
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
         if (us == null) {
-            us = new Usuarios();
+            us = new Usuarios(user2);
             us.setVisible(true);
             this.dispose();
         }

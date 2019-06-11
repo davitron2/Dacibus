@@ -35,17 +35,18 @@ CuentaSQL cuesql = new CuentaSQL();
      */
    // Usuario usr;
     String idCue,IdMe;
-
-     public Cobrar(String idcuenta,String idmesa) {
+Usuario user;
+     public Cobrar(String idcuenta,String idmesa,Usuario us) {
          
         initComponents();
-       // usr=us;
+      
         this.setLocationRelativeTo(null);
         txtNCuenta.setText(idcuenta);
         txtNMesa.setText(idmesa);
         idCue=idcuenta;
         IdMe=idmesa;
-        
+        user=us;
+         System.out.println("cobrar " +user.getTipoUsuario());
         
     try {
         cuesql.TablaOrdenId(tblOrden,Integer.parseInt(idcuenta));
@@ -225,7 +226,7 @@ CuentaSQL cuesql = new CuentaSQL();
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
       if (menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -253,7 +254,7 @@ double efectivo= Double.parseDouble(txtEfectivo.getText());
                 cuesql.Pagar(Integer.parseInt(idCue));
                 resql.EliminarReserva(fecha,Integer.parseInt(IdMe));
                       if (menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
         }
@@ -292,7 +293,7 @@ txtCambio.setText(String.valueOf(cambio));
 
     private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
         if (menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
         }

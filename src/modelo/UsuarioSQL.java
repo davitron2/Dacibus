@@ -111,6 +111,41 @@ public class UsuarioSQL extends Conexion {
         }
 
     }
+     public Usuario IdTipo(String Usuario){
+           Usuario us= new Usuario();
+     PreparedStatement ps = null;
+            Connection con;
+       try {
+           con = getConexion();
+             ResultSet rs = null;
+
+            
+            Statement stm = con.createStatement();
+            //id,usuario,nombre,edad,genero,tipo
+            
+         
+            rs = stm.executeQuery("SELECT usuario.IdUsuario, usuario.TipoUsuario from usuario WHERE usuario.Usuario='"+Usuario+"'");
+         // primer fila. (El cursor inicia antes de la primer fila)
+     if(rs.next()) {
+       //Si hay resultados obtengo el valor. 
+       us.setIdUsuario(rs.getInt(1));
+       us.setTipoUsuario(rs.getString(2));
+       
+          
+             return us;
+     }
+            
+       } catch (SQLException ex) {
+           Logger.getLogger(OrdenSQL.class.getName()).log(Level.SEVERE, null, ex);
+       }
+          
+       
+       
+    return us;
+   
+   
+  
+   }
 
     public int Login(Usuario usr) {
         try {

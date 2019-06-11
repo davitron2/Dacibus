@@ -6,6 +6,8 @@
 package Vistas;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
 
 /**
  *
@@ -21,6 +23,13 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    Usuario user;
+     public Menu(Usuario us) {
+         
+        initComponents();
+        user=us;
+         System.out.println(""+user.getTipoUsuario());
+    }
     public Menu() {
         initComponents();
 
@@ -197,16 +206,24 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        if (user.getTipoUsuario().equals("Administrador")) {
+            
+        
         if (usu == null) {
-            usu = new Usuarios(1);
+            usu = new Usuarios(user);
             usu.setVisible(true);
             this.dispose();
-        }        // TODO add your handling code here:
+        }      
+        }else{
+        JOptionPane.showMessageDialog(null, "No toenes permiso para entrar");
+        
+        
+        }
     }//GEN-LAST:event_btnUsuariosActionPerformed
 
     private void lblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsuariosMouseClicked
         if (usu == null) {
-            usu = new Usuarios(1);
+            usu = new Usuarios(user);
             usu.setVisible(true);
             this.dispose();
         }
@@ -216,7 +233,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
              if (vent == null) {
-            vent = new Ventas();
+            vent = new Ventas(user);
             vent.setVisible(true);
             this.dispose();
         }    
@@ -224,23 +241,30 @@ public class Menu extends javax.swing.JFrame {
 
     private void lblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVentasMouseClicked
             if (vent == null) {
-            vent = new Ventas();
+            vent = new Ventas(user);
             vent.setVisible(true);
             this.dispose();
         }    
     }//GEN-LAST:event_lblVentasMouseClicked
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-     if (produ == null) {
-            produ = new Productos();
+        if (user.getTipoUsuario().equals("Administrador")) {
+            
+        
+        
+        if (produ == null) {
+            produ = new Productos(user);
             produ.setVisible(true);
             this.dispose();
-        }            // TODO add your handling code here:
+        }       
+        }else{
+            JOptionPane.showMessageDialog(null, "no puedes entrar");
+        }// TODO add your handling code here:
     }//GEN-LAST:event_btnProductosActionPerformed
 
     private void lblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblProductosMouseClicked
 if (produ == null) {
-            produ = new Productos();
+            produ = new Productos(user);
             produ.setVisible(true);
             this.dispose();
         }             // TODO add your handling code here:
@@ -248,7 +272,7 @@ if (produ == null) {
 
     private void lblAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtenderMouseClicked
 if (aten== null) {
-            aten = new  MenuAtender();
+            aten = new  MenuAtender(user);
             aten.setVisible(true);
             this.dispose();
         }             // TODO add your handling code here:
@@ -256,7 +280,8 @@ if (aten== null) {
 
     private void btnAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtenderActionPerformed
 if (aten== null) {
-            aten = new  MenuAtender();
+     System.out.println("MENU ATNDER PREVIO"+user.getTipoUsuario());
+            aten = new  MenuAtender(user);
             aten.setVisible(true);
             this.dispose();
         }           // TODO add your handling code here:
@@ -264,7 +289,7 @@ if (aten== null) {
 
     private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
 if (mes== null) {
-            mes = new Mesas();
+            mes = new Mesas(user);
             mes.setVisible(true);
             this.dispose();
         } 
@@ -273,7 +298,7 @@ if (mes== null) {
 
     private void lblMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMesasMouseClicked
      if (mes== null) {
-            mes = new Mesas();
+            mes = new Mesas(user);
             mes.setVisible(true);
             this.dispose();
         } 

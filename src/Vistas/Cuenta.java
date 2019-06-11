@@ -34,13 +34,17 @@ CuentaSQL cuesql = new CuentaSQL();
      * Creates new form Cuenta
      */
    // Usuario usr;
-     public Cuenta(String idcuenta) {
+    Usuario user;
+     public Cuenta(String idcuenta,Usuario us) {
          
         initComponents();
+        
        // usr=us;
         this.setLocationRelativeTo(null);
         txtNCuenta.setText(idcuenta);
          txtNOrden.setText(idcuenta);
+         user=us;
+         System.out.println("cuenta" +user.getTipoUsuario());
     try {
         cuesql.TablaOrdenId(tblOrden,Integer.parseInt(idcuenta));
        txtTotal.setText(String.valueOf(ordsql.TotalOrdenId(Integer.parseInt(idcuenta)))); 
@@ -398,10 +402,10 @@ if(!txtNCuenta.getText().equals("") && !txtNMesa.getText().equals("")){
      Cue.setEstado("Activa");
     
      
-     
+     Cue.setIdUsuario(user.getIdUsuario());
 cuesql.RegistrarCuenta(Cue);
  if ( menu == null) {
-            menu = new MenuAtender();
+            menu = new MenuAtender(user);
             menu.setVisible(true);
             this.dispose();
  }

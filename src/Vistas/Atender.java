@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.CuentaSQL;
 import modelo.OrdenSQL;
 import modelo.ProductoSQL;
+import modelo.Usuario;
 
 /**
  *
@@ -28,6 +29,17 @@ OrdenSQL ord= new OrdenSQL();
     /**
      * Creates new form Atender
      */int idord;
+     Usuario user;
+      public Atender(Usuario us) {
+        initComponents();
+     
+        this.setLocationRelativeTo(null);
+       cargartabla();
+       idord=ord.asignarID();
+        txtNOrden.setText(String.valueOf(idord));
+          user=us;
+          System.out.println("atender "+user.getTipoUsuario());
+    }
     public Atender() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -320,7 +332,7 @@ if (op==0) {
         
         ord.RegistrarOrden(idord,IdsProductos, Precios);
            if ( cuen == null) {
-            cuen = new Cuenta(txtNOrden.getText());
+            cuen = new Cuenta(txtNOrden.getText(),user);
             cuen.setVisible(true);
             this.dispose();
         }
