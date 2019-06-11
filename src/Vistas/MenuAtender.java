@@ -23,8 +23,12 @@ public class MenuAtender extends javax.swing.JFrame {
         initComponents();
         Cargartabla();
     }
-    CuentaSQL cuesql= new CuentaSQL();
-    public void Cargartabla(){
+   Atender aten;
+    OrdenarMas ordmas;
+    CuentaSQL cuesql = new CuentaSQL();
+    Menu men;
+
+    public void Cargartabla() {
         try {
             cuesql.SoloTablaActivas(tblCuentas);
         } catch (ClassNotFoundException ex) {
@@ -36,10 +40,8 @@ public class MenuAtender extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(MenuAtender.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,8 +57,12 @@ public class MenuAtender extends javax.swing.JFrame {
         tblOrden = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCuentas = new javax.swing.JTable();
+        btnNuevaOrden = new javax.swing.JButton();
+        btnOrdenarMas1 = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
         lblCerrar = new javax.swing.JLabel();
         lblMinimizar = new javax.swing.JLabel();
+        btnVolverMenu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,6 +114,36 @@ public class MenuAtender extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 650, 300));
 
+        btnNuevaOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnNuevaOrden.png"))); // NOI18N
+        btnNuevaOrden.setBorder(null);
+        btnNuevaOrden.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnNuevaOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaOrdenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnNuevaOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 480, 200, 50));
+
+        btnOrdenarMas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/OrdenarMas.png"))); // NOI18N
+        btnOrdenarMas1.setBorder(null);
+        btnOrdenarMas1.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnOrdenarMas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenarMas1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnOrdenarMas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 480, 200, 50));
+
+        btnPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnPagar.png"))); // NOI18N
+        btnPagar.setBorder(null);
+        btnPagar.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(715, 480, -1, -1));
+
         lblCerrar.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 36)); // NOI18N
         lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
         lblCerrar.setText("X");
@@ -130,6 +166,16 @@ public class MenuAtender extends javax.swing.JFrame {
         });
         jPanel1.add(lblMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 10, 20, 30));
 
+        btnVolverMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnVolverMenu.png"))); // NOI18N
+        btnVolverMenu.setBorder(null);
+        btnVolverMenu.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverMenuActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolverMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(935, 480, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/MenuAtender.png"))); // NOI18N
         jLabel1.setMaximumSize(new java.awt.Dimension(1390, 800));
         jLabel1.setMinimumSize(new java.awt.Dimension(1390, 800));
@@ -142,7 +188,12 @@ public class MenuAtender extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+     if (men == null) {
 
+                men = new Menu();
+                men.setVisible(true);
+                this.dispose();
+            }
         //cerrar la ventana
     }//GEN-LAST:event_lblCerrarMouseClicked
 
@@ -151,19 +202,15 @@ public class MenuAtender extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void tblOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrdenMouseClicked
-        
+
     }//GEN-LAST:event_tblOrdenMouseClicked
 
     private void tblCuentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCuentasMouseClicked
-     try {
-            int IdOrden= Integer.parseInt(tblCuentas.getValueAt(tblCuentas.getSelectedRow(),3).toString());
-            
+        try {
+            int IdOrden = Integer.parseInt(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
+
             cuesql.TablaOrdenId(tblOrden, IdOrden);
-            
-            
-            
-            
-            
+
             // TODO add your handling code here:
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(MenuAtender.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,6 +222,45 @@ public class MenuAtender extends javax.swing.JFrame {
             Logger.getLogger(MenuAtender.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tblCuentasMouseClicked
+
+    private void btnNuevaOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaOrdenActionPerformed
+                 if (aten == null) {
+
+                aten = new Atender();
+                aten.setVisible(true);
+                this.dispose();
+            } //
+    }//GEN-LAST:event_btnNuevaOrdenActionPerformed
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnOrdenarMas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarMas1ActionPerformed
+         if (tblCuentas.getSelectedRow() != -1) {
+               int id= Integer.parseInt(tblCuentas.getValueAt(tblCuentas.getSelectedRow(), 3).toString());
+            if (ordmas == null) {
+
+                ordmas = new OrdenarMas(id);
+                ordmas.setVisible(true);
+                this.dispose();
+            } // TODO add your handling code here:
+        } else {
+
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOrdenarMas1ActionPerformed
+
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+if (men == null) {
+
+                men = new Menu();
+                men.setVisible(true);
+                this.dispose();
+            }        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +298,10 @@ public class MenuAtender extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNuevaOrden;
+    private javax.swing.JButton btnOrdenarMas1;
+    private javax.swing.JButton btnPagar;
+    private javax.swing.JButton btnVolverMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

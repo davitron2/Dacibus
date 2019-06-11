@@ -235,7 +235,7 @@ public class Reservas extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 200, 50));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, 200, 50));
 
         lblReservas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Reservas.png"))); // NOI18N
         jPanel1.add(lblReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, -5, 900, -1));
@@ -337,7 +337,28 @@ public class Reservas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser1PropertyChange
+   try {
+            if (jDateChooser1.getDate() != null) {
+                String fecha = jDateChooser1.getDate().toLocaleString();
+                String[] partes = fecha.split(" ");
 
+                ///////////busca reserva por fecha/
+                /////ReSql.BuscarTablaFecha(tblReservas,partes[0]); 
+                ReSql.TablaMesasDisponibles(tblMesas, partes[0]);
+            } else {
+                JOptionPane.showMessageDialog(null, "Seleccione una fecha");
+
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Reservas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jDateChooser1PropertyChange
 
     private void jDateChooser1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jDateChooser1FocusGained

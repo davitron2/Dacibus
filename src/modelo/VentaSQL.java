@@ -90,12 +90,13 @@ public class VentaSQL extends Conexion {
 
     }
     
-    public JTable BuscarTablaFecha(JTable tabla, String dato) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
+   
+     public JTable BuscarTablaFecha(JTable tabla, String dato) throws ClassNotFoundException, InstantiationException, IllegalAccessException, SQLException {
         PreparedStatement ps = null;
         Connection con = getConexion();
         Statement s = con.createStatement();
         //Nombre de la tabla
-        ResultSet rs = s.executeQuery("SELECT * FROM cuenta WHERE Fecha LIKE '%" + dato + "%'");
+        ResultSet rs = s.executeQuery("SELECT * FROM cuenta WHERE Fecha LIKE '" + dato + "'");
 
         DefaultTableModel modelo = new DefaultTableModel();
         JTable tab = new JTable(modelo);

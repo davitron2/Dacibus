@@ -60,7 +60,7 @@ public class OrdenSQL extends Conexion{
         return tabla;    
         
         }
-      public int RegistrarOrden(int[] ids, double[] precios) {
+      public int RegistrarOrden(int id,int[] ids, double[] precios) {
 
         try {
             PreparedStatement ps = null;
@@ -68,7 +68,7 @@ public class OrdenSQL extends Conexion{
             ResultSet rs = null;
 
             String sql;
-           int id= asignarID();
+           
             for (int i = 0; i < ids.length; i++) {
                 
             

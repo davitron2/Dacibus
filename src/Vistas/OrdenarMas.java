@@ -20,35 +20,44 @@ import modelo.ProductoSQL;
  *
  * @author JOCELYNE
  */
-public class Atender extends javax.swing.JFrame {
+public class OrdenarMas extends javax.swing.JFrame {
 MenuAtender menu;
 DefaultTableModel model;
 OrdenSQL ord= new OrdenSQL();
-
+CuentaSQL cuesql = new CuentaSQL();
+ProductoSQL Prosql= new ProductoSQL();
+   
+    
     /**
      * Creates new form Atender
-     */int idord;
-    public Atender() {
+     */
+int idord;
+public OrdenarMas(int id) {
+        initComponents();
+        idord=id;
+        this.setLocationRelativeTo(null);
+       cargartabla();
+        txtNOrden.setText(String.valueOf(id));
+    }
+    public OrdenarMas() {
         initComponents();
         this.setLocationRelativeTo(null);
        cargartabla();
-       idord=ord.asignarID();
-        txtNOrden.setText(String.valueOf(idord));
+       
     }
-    ProductoSQL Prosql= new ProductoSQL();
-    Cuenta cuen;
+    
 public void cargartabla(){
     try {
         Prosql.SoloTabla(tblProducto);
         
     } catch (ClassNotFoundException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     } catch (InstantiationException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     } catch (IllegalAccessException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     } catch (SQLException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     }
 
 
@@ -84,10 +93,8 @@ public void cargartabla(){
         lblAtender = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1390, 800));
         setMinimumSize(new java.awt.Dimension(1390, 800));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1390, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1390, 800));
         getContentPane().setLayout(null);
@@ -208,7 +215,7 @@ public void cargartabla(){
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar3.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, 210, 60));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/deAtender_1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/OrdenarmasCuenta.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 400, 240));
 
         tblProducto.setModel(new javax.swing.table.DefaultTableModel(
@@ -242,7 +249,7 @@ public void cargartabla(){
     }//GEN-LAST:event_lblMinimizarMouseClicked
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
-        if (menu == null) {
+      if (menu == null) {
             menu = new MenuAtender();
             menu.setVisible(true);
             this.dispose();
@@ -267,13 +274,13 @@ txtBuscar.setText("");// TODO add your handling code here:
     try {
         Prosql.BuscarTabla(tblProducto,txtBuscar.getText());
     } catch (ClassNotFoundException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     } catch (InstantiationException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     } catch (IllegalAccessException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     } catch (SQLException ex) {
-        Logger.getLogger(Atender.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(OrdenarMas.class.getName()).log(Level.SEVERE, null, ex);
     }
         
         
@@ -319,9 +326,10 @@ if (op==0) {
       
         
         ord.RegistrarOrden(idord,IdsProductos, Precios);
-           if ( cuen == null) {
-            cuen = new Cuenta(txtNOrden.getText());
-            cuen.setVisible(true);
+        cuesql.ActualizarTotalCuentaId(idord);
+           if ( menu == null) {
+            menu = new MenuAtender();
+            menu.setVisible(true);
             this.dispose();
         }
         
@@ -354,12 +362,11 @@ if (op==0) {
             model.removeRow(i);
         }
      tblAtender.setModel(model);
-        if (menu == null) {
+   if ( menu == null) {
             menu = new MenuAtender();
             menu.setVisible(true);
             this.dispose();
         }
-
 // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelaOrdenActionPerformed
 
@@ -391,20 +398,21 @@ if (op==0) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Atender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrdenarMas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Atender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrdenarMas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Atender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrdenarMas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Atender.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(OrdenarMas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Atender().setVisible(true);
+                new OrdenarMas().setVisible(true);
             }
         });
     }

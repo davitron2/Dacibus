@@ -209,21 +209,26 @@ public class Ventas extends javax.swing.JFrame {
             }
         }
         if (x == 1) {
-            if (jDateChooser1.getDate()!=null){    
-                String fecha = jDateChooser1.getDate().toLocaleString();
-                String[] partes = fecha.split(" ");    
-                try {
-                    obj.BuscarTablaFecha(tblVentas, partes[0]);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InstantiationException ex) {
-                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }else{
+             if (jDateChooser1.getDate() != null) {
+               
+
+                 try {
+                      String fecha = jDateChooser1.getDate().toLocaleString();
+                String[] partes = fecha.split(" ");
+                     ///////////busca reserva por fecha/
+                     /////ReSql.BuscarTablaFecha(tblReservas,partes[0]);
+                     System.out.println(""+partes[0]);
+                     obj.BuscarTablaFecha(tblVentas, partes[0]);
+                 } catch (ClassNotFoundException ex) {
+                     Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                 } catch (InstantiationException ex) {
+                     Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                 } catch (IllegalAccessException ex) {
+                     Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                 } catch (SQLException ex) {
+                     Logger.getLogger(Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+            } else{
                 JOptionPane.showMessageDialog(this,"Por Favor selecciona una fecha");
             }
         }

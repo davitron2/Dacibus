@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 public class Menu extends javax.swing.JFrame {
 
     Usuarios usu;
-  Atender aten;
+  MenuAtender aten;
     Productos produ;
     Ventas vent;
     Mesas mes;
@@ -248,7 +248,7 @@ if (produ == null) {
 
     private void lblAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtenderMouseClicked
 if (aten== null) {
-            aten = new Atender();
+            aten = new  MenuAtender();
             aten.setVisible(true);
             this.dispose();
         }             // TODO add your handling code here:
@@ -256,7 +256,7 @@ if (aten== null) {
 
     private void btnAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtenderActionPerformed
 if (aten== null) {
-            aten = new Atender();
+            aten = new  MenuAtender();
             aten.setVisible(true);
             this.dispose();
         }           // TODO add your handling code here:

@@ -29,6 +29,7 @@ CuentaSQL cuesql = new CuentaSQL();
     ReservaSQL resql = new ReservaSQL();
     MesaSQL mesql= new MesaSQL();
     OrdenSQL ordsql= new OrdenSQL();
+    MenuAtender menu;
     /**
      * Creates new form Cuenta
      */
@@ -107,7 +108,6 @@ CuentaSQL cuesql = new CuentaSQL();
         txtNOrden = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btnCalcularTotal = new javax.swing.JButton();
-        btnRegresar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblMesas = new javax.swing.JTable();
@@ -116,6 +116,7 @@ CuentaSQL cuesql = new CuentaSQL();
         txtTotal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblPagarCuenta = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1390, 800));
@@ -176,15 +177,7 @@ CuentaSQL cuesql = new CuentaSQL();
                 btnCalcularTotalActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCalcularTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 200, 50));
-
-        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegresar.png"))); // NOI18N
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 630, 200, 50));
+        jPanel1.add(btnCalcularTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 630, 200, 50));
 
         jComboBox1.setFont(new java.awt.Font("Gill Sans MT Condensed", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libres", "Reservadas" }));
@@ -245,6 +238,14 @@ CuentaSQL cuesql = new CuentaSQL();
         lblPagarCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Cuenta.png"))); // NOI18N
         jPanel1.add(lblPagarCuenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1390, 800));
 
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/btnRegresar.png"))); // NOI18N
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 630, 200, 50));
+
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 1390, 800);
 
@@ -282,7 +283,7 @@ CuentaSQL cuesql = new CuentaSQL();
                         }else{
                             fecha= fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear();
                         }
-                        
+                        System.out.println("reservadas"+fecha);
                         
                         resql.BuscarTablaFecha(tblMesas, fecha);
                     } catch (ClassNotFoundException ex) {
@@ -315,7 +316,7 @@ CuentaSQL cuesql = new CuentaSQL();
                }
                
                
-                System.out.println(""+fecha);
+                System.out.println("libres"+fecha);
                 
                 
                 
@@ -391,14 +392,18 @@ if(!txtNCuenta.getText().equals("") && !txtNMesa.getText().equals("")){
                }else{
                 fecha= fecha1.getDayOfMonth()+"/"+fecha1.getMonthValue()+"/"+fecha1.getYear();
                }
-               System.out.println(""+fecha);
-     Cue.setFecha("10/06/219");
+               System.out.println("registro "+fecha);
+     Cue.setFecha(fecha);
      Cue.setEstado("Activa");
     
      
      
 cuesql.RegistrarCuenta(Cue);
-
+ if ( menu == null) {
+            menu = new MenuAtender();
+            menu.setVisible(true);
+            this.dispose();
+ }
 
 }else{
 
