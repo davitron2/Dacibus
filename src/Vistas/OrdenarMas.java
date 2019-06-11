@@ -33,7 +33,7 @@ ProductoSQL Prosql= new ProductoSQL();
      * Creates new form Atender
      */
 int idord;
-Usuario user;
+Usuario user = new Usuario();
 public OrdenarMas(int id,Usuario us) {
         initComponents();
        
